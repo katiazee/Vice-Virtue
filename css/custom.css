@@ -1,0 +1,13 @@
+body {
+    padding-top: 20px;
+    /*padding-bottom: 20px;*/
+}
+
+span.glyphicon-piggy-bank {
+    font-size: 3em;
+}
+
+.habit-title {
+    font-size:22px;
+    margin-top: -5px;
+}
