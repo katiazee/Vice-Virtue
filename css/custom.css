@@ -1,13 +1,145 @@
 body {
-    padding-top: 20px;
+    /*padding-top: 20px;*/
     /*padding-bottom: 20px;*/
 }
 
-span.glyphicon-piggy-bank {
-    font-size: 3em;
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+.clearfix:after {
+  clear: both;
 }
 
-.habit-title {
-    font-size:22px;
-    margin-top: -5px;
+/* Reset */
+h1, h2, h3, h4, h5, h6 {
+    margin:0px;
+}
+
+.navbar {
+    font-family: 'Lato';
+    height:80px;
+}
+
+.navbar-header {
+    float:left;
+    font-size: 24px;
+    margin-left: 40px;
+}
+
+.navbar-header h3 {
+    line-height: 60px;
+    height: inherit;
+}
+
+.navbar-right {
+    float: right !important;
+    font-size: 16px;
+}
+
+.navbar-list {
+    float:left;
+    padding:0px;
+    list-style: none;
+}
+
+.navbar-list li {
+    float: left;
+    display: inline-block;
+    padding:15px;
+}
+
+.navbar-list li a {
+    text-decoration: none;
+}
+
+/* Habit list */
+.habitcontainer {
+    margin:0px auto;
+    height:150px;
+    max-width: 400px;
+}
+
+/* Main habit box */
+.habitbox{
+    /*width:100%;*/
+    padding:30px;
+    border:1px solid black;
+    border-radius:.4em;
+    margin:10px;
+}
+
+h1.text{
+    font-size:20px;
+}
+
+img.icon{
+    width:70px;
+    height:70px;
+}
+img.check{
+    width:50px;
+    height:50px;
+}
+img.fail{
+    width:50px;
+    height:50px;
+}
+span.dropdown {
+    font-size:1em;
+    float: right;
+    margin-top: -23px;
+}
+
+.habit-core {
+    height:80px;
+}
+
+.habit-core .left {
+    float:left;
+    /*padding:0px;*/
+    /*list-style: none;*/
+}
+
+.habit-core .right {
+    float:right;
+    /*padding:0px;*/
+    /*list-style: none;*/
+}
+
+.habit-options {
+    list-style: none;
+}
+
+.habit-options li {
+    float:left;
+}
+
+.option {
+    float:right;
+}
+
+
+
+
+
+/* Success version */
+.habit-progress {
+    background: #DDD;
+    border-radius: 20px;
+    height: 5px;
+    width: 100%;
+    padding: 0px;
+    margin-top: 20px;
+    float:right;
+}
+
+.habit-progress:after {
+    content: '';
+    display: block;
+    background: green;
+    width: 50%;
+    height: 100%;
+    border-radius: 20px;
 }
