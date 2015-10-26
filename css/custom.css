@@ -1,7 +1,4 @@
-body {
-    /*padding-top: 20px;*/
-    /*padding-bottom: 20px;*/
-}
+
 
 .clearfix:before,
 .clearfix:after {
@@ -13,7 +10,7 @@ body {
 }
 
 /* Reset */
-h1, h2, h3, h4, h5, h6 {
+p, h1, h2, h3, h4, h5, h6 {
     margin:0px;
 }
 
@@ -117,14 +114,26 @@ span.dropdown {
     float:left;
 }
 
+
+
 .option {
     float:right;
 }
 
-.frequency-description {
-    margin:10px 0px 0px 0px;
+.habitbox .below-core {
+    margin-top: 10px;
+    margin-bottom: 10px;
     font-family: 'Lato';
 }
+
+.streak {
+    float:right;
+}
+
+.frequency-description {
+    float:left;
+}
+
 
 
 
