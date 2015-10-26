@@ -75,6 +75,14 @@ h1.text{
     font-family: 'Lato';
 }
 
+h4.percent {
+    float: right;
+    font-size: 40px;
+    margin-left: 60px;
+    margin-top: 20px;
+    font-family: 'Lato';
+}
+
 img.icon{
     width:70px;
     height:70px;
