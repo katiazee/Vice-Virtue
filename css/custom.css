@@ -141,7 +141,7 @@ fieldset {
   width: 80%;
   margin-bottom: 10%;
   border-style: solid;
-  border-width: 50%;
+  border-width: 2px;
   position: relative;
   margin: auto;
   border-radius: 2em;
