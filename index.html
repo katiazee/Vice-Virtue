@@ -7,18 +7,28 @@
 	<title> Vice and Virtue </title>
 </head>
 <body>
+	<div class="nav">
+	    <ul>
+			<li class="logo"><span id="virtue">virtue</span>/<span id="vice">vice</span></li>
+			<li class="placeholder"> </li>
+			<li><span class="pagetitle">my habits</span></li>
+			<li class="register"><a href="#">Register</a></li>
+			<li class="login"><a href="#">Login</a></li>
+	    </ul>
+	 </div>
 	<div class="container">
         
 
 		<div class="habitcontainer">
 			<div class="habitbox">
 				<h1 class="text">Spend Less $$$</h1>
-				<span class="dropdown">
-					<select>
-						<option>Edit</option>
-						<option>Delete</option>
-					</select>
-				</span>
+				<div class="dropdown">
+				    <button>&#9660;</button>
+				    <ul class="dropdown-menu">
+				        <li><a href="#">Edit</a></li>
+				        <li><a href="#">Delete</a></li>
+				    </ul>
+				</div>
 				<div class="habit-core clearfix">
 					<div class="left">
 						<img class="icon" src="piggybank.jpg">
@@ -37,12 +47,13 @@
 
 			<div class="habitbox">
 				<h1 class="text">Workout</h1>
-				<span class="dropdown">
-					<select>
-						<option>Edit</option>
-						<option>Delete</option>
-					</select>
-				</span>
+				<div class="dropdown">
+				    <button>&#9660;</button>
+				    <ul class="dropdown-menu">
+				        <li><a href="#">Edit</a></li>
+				        <li><a href="#">Delete</a></li>
+				    </ul>
+				</div>
 				<div class="habit-core clearfix">
 					<div class="left">
 						<img class="icon" src="weightlifter3.png">
@@ -61,5 +72,8 @@
 			</div>
 		</div>
 	</div>
+	<div class="addButton">
+    	<a class="floating-button" href="#"><i>+</i></a>
+    </div>
 </body>
 </html>
