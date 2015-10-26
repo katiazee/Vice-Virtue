@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Main habit box */
-.habitbox{
+.habitbox {
     /*width:100%;*/
     padding:30px;
     border:1px solid black;
@@ -72,6 +72,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1.text{
     font-size:20px;
+    font-family: 'Lato';
 }
 
 img.icon{
@@ -120,6 +121,10 @@ span.dropdown {
     float:right;
 }
 
+.frequency-description {
+    margin:10px 0px 0px 0px;
+    font-family: 'Lato';
+}
 
 
 
