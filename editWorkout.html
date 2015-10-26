@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>
+	<link href='https://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+	<link href='css/custom.css' rel='stylesheet' type='text/css'>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> Vice and Virtue </title>
+
+</head>
+<body>
+
+<div class="nav">
+    <ul>
+      <li class="logo"><span id="virtue">virtue</span>/<span id="vice">vice</span></li>
+      <li class="placeholder"> </li>
+      <li><span class="pagetitle">edit habit</span></li>
+      <li class="register"><a href="#">Register</a></li>
+      <li class="login"><a href="#">Login</a></li>
+    </ul>
+  </div>
+  <div class="content">
+  </div>
+<div class="box">
+<fieldset>
+<form class="input">
+	<div class="boxWidth">
+          <h2 class="second">Label:</h2>
+          <input type="text" id="name" name="user_title" placeholder="Title" value="Workout">
+          <br>
+          <textarea id="bio" name="description" placeholder="Description">Go to the gym and get SWOL!</textarea>
+
+          <h2 class="second">Choose Icon:</h2>
+				<img class="img-circle" src="weightlifter3.png" alt="">
+				<div id="buttons">
+					<a class="butt icon">Upload</a>
+				</div> 
+	</div>			
+
+</form>
+<br>
+
+<h3 class="third"> Set your desired frequency: </h3>
+
+
+<div class="frequency_button_numbers">
+	<button class="round-button">1</button>
+	<button class="round-button">2</button>
+	<button class="round-button active">3</button>
+	<button class="round-button">4</button>
+	<button class="round-button">5</button>
+	<button class="round-button">6</button>
+</div>
+
+
+<div class="frequency_button_time">
+	<button class="round-button-time">day</button>
+	<button class="round-button-time active">week</button>
+	<button class="round-button-time">month</button>
+	<button class="round-button-time">year</button>
+</div>
+
+ <br>
+
+<div id="gobackbutton">
+	<a href="home.html" class="btn blue">Submit</a>
+</div> 
+
+<div id="submitbutton">
+	<a href="home.html" class="back blue">Go Back</a>
+</div> 
+
+
+</fieldset>
+</div>
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+<script>
+	$(".round-button-time").click(function() {
+   		$(".round-button-time").removeClass("active");
+    	$(this).addClass("active");
+	});
+	$(".round-button").click(function() {
+   		$(".round-button").removeClass("active");
+    	$(this).addClass("active");
+	});
+</script>
+
+
+
+</body>
+
+
+</html>
+
+
+
+
+
