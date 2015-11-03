@@ -1,0 +1,192 @@
+html {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+  font-family: 'Helvetica', sans-serif;
+  background: -webkit-linear-gradient(left top, #BBDEFB, #B0C4DE); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right,#BBDEFB, #B0C4DE); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #BBDEFB, #B0C4DE); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right,  #BBDEFB, #B0C4DE); /* Standard syntax */
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.login {
+	position: relative;
+	margin: 0 auto;
+  top: 15%;
+  width: 500px;
+  /*
+  left: 50%;
+
+  -webkit-transform: translateY(-75%);
+  -moz-transform: translateY(-75%);
+  -ms-transform: translateY(-75%);
+  transform: translate(-50%, -75%); */
+}
+
+@media (max-width: 450px) {
+  .login {
+  	width: auto;
+  	margin: 0 20px;
+  }
+}
+
+.login h1 {
+  font-size: 3.5em;
+  text-align: center;
+  color: #808080;
+}
+
+.login h1 i {
+  color: #333;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+}
+
+.login .loginForm {
+	font-size: 1.5em;
+	width: 100%;
+}
+
+.login .loginForm table {
+	/*margin: 0 auto; */
+	width: 100%;
+	padding-bottom: 25px;
+	padding-top: 25px;
+	padding-left: 15px;
+	padding-right: 20px;
+	margin-bottom: 15px;
+	background-color: white;
+  -webkit-border-radius: 5px; /*For Safari, etc. */
+  -moz-border-radius: 5px; /* For Mozilla, etc. */
+  border-radius: 5px; /* CSS3 Feature */
+}
+
+.login .loginForm input {
+	font-size: 1.0em;
+	font-family: 'Helvetica', sans-serif;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.login .loginForm .textInput {
+	text-align: left;
+	padding: 5px;
+}
+
+.login .loginForm label {
+	position: relative;
+	float:right;
+	height: 50px;
+	width: 50px;
+}
+
+.login .loginForm .svgTd {
+	height: 50px;
+	width: 50px;
+}
+
+.login .loginForm .emailIcon {
+	display: inline-block;
+	width: 30px;
+	top: 50%;
+  left: 50%;
+  -webkit-transform: translateY(-75%);
+  -moz-transform: translateY(-75%);
+  -ms-transform: translateY(-75%);
+  transform: translate(-50%, -50%);
+}
+
+.login .loginForm p {
+	display: none;
+	text-align: center;
+	color: #333;
+}
+
+.login .loginForm .buttons {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	padding-left: 2px;
+	-webkit-transition: bottom 1s, height 0.5s;
+	transition: bottom 1s, height 0.5s;
+  -webkit-appearance:none;
+}
+
+.login .loginForm .loginButton {
+  -webkit-appearance:none;
+	width: 49%;
+	display: inline-block;
+	margin: 0;
+	padding: 15px;
+	background:none;
+	background-color: #214864;
+  border:none;
+  color:white;
+  -webkit-border-radius: 5px; /*For Safari, etc. */
+  -moz-border-radius: 5px; /* For Mozilla, etc. */
+  border-radius: 5px; /* CSS3 Feature */
+  opacity: 1.0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.login .loginForm .loginButton:hover {
+	opacity: 0.75;
+	cursor: pointer;
+}
+
+
+.login .loginForm .signUpButton {
+  -webkit-appearance:none;
+	width: 49%;
+	display: inline-block;
+	margin: 0;
+	padding: 15px;
+	background: none;
+  border: none;
+  color: white;
+  background-color: #48BA87;
+  -webkit-border-radius: 5px; /*For Safari, etc. */
+  -moz-border-radius: 5px; /* For Mozilla, etc. */
+  border-radius: 5px; /* CSS3 Feature */
+  opacity: 1.0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@media (max-width: 380px) {
+  .login {
+    top: 7%;
+  }
+
+  .login .loginForm .loginButton {
+    width: 48%;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .login .loginForm .signUpButton {
+    width: 48%;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+.login .loginForm .signUpButton:hover {
+	opacity: 0.75;
+	cursor: pointer;
+}
+
+

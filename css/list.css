@@ -1,0 +1,64 @@
+/* basic structure & layout */
+html{height: 100%;}
+h1{color:#888;text-align: center;}
+body{
+    height:100%;   
+    background: -webkit-linear-gradient(left top, #BBDEFB, #B0C4DE) fixed; /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(bottom right,#BBDEFB, #B0C4DE) fixed; /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(bottom right, #BBDEFB, #B0C4DE) fixed; /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to bottom right,  #BBDEFB, #B0C4DE) fixed; /* Standard syntax */
+    font-family: Helvetica, san-sarif;
+}
+
+#habit-list{list-style: none; padding:0;}
+#habit-list>li{position:relative; height: 240px;padding:5%; background:rgba(255,255,255,1); border:1px solid rgba(255, 255, 255, 0.3); border-radius:5px; margin:5px; padding:0;}
+
+/* habit info */
+.habit-info{padding:0;margin-left:20px;}
+.habit-info>li{list-style:none; height:100%; padding:0; margin-right:5px; vertical-align: center;}
+.habit-name{margin:0; padding:0; height:100%; display:inline-block; vertical-align: middle; line-height:60px;color:#888;font-size: 24px;}
+.habit-icon{margin:0; border-radius:5px;width:100px; height:100px;}
+
+.message{position:absolute; display:inline-block; visibility: hidden; text-align:center; color:#888;}
+.message-total{visibility: visible;}
+.message-total>svg{margin: 15px auto;}
+
+/* operations (for a existing habit) */
+.habit-op{position:absolute; right:5px;display:inline-block; height: 100%; line-height: 60px;width:100%;text-align:center;top:170px;margin:0 auto;}
+.habit-op img{height: 90%;}
+.op{width:60px; height:60px;margin-right:5px;border-radius: 50%; box-shadow: 0 0 3px gray; padding: 5px; vertical-align: middle;}
+.op:hover{box-shadow: 0 0 5px gray;}
+.op:active{box-shadow: 0 0 10px gray;}
+.op:focus{outline-style:none;}
+
+.op-done{background:rgba(0, 177, 106, 0.8); border:2px solid rgba(0, 128, 0, 0.3);}
+.op-done:hover{background:#00B16A;}
+.op-done:active{background:#00B16A; border:2px solid green;}
+
+.op-edit{background:rgba(247, 202, 24, 0.8); border:2px solid rgba(255, 255, 0, 0.3);}
+.op-edit:hover{background:#F7CA18;}
+.op-edit:active{background:#F7CA18; border:2px solid yellow;}
+
+.op-del{background:rgba(242, 38, 19, 0.7); border:2px solid rgba(255,0,0,0.3);}
+.op-del:hover{background:#F22613;}
+.op-del:active{background:#F22613; border:2px solid red;}
+
+/* add habit */
+#addHabit{position:fixed; bottom: 40px; right:20px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
+#addHabit:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
+#addHabit:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
+#addHabit:focus{outline-style:none;}
+
+/* phone */
+@media only screen
+    and (max-width: 500px) {
+        section{width:350px;margin: 0 auto;}
+        .message{right:5px;bottom:80px;font-size: small;}
+}
+
+/* desktop, tablet */
+@media only screen
+    and (min-width: 500px) {
+    section{width:500px;margin: 0 auto;}
+    .message{right:60px;bottom:80px;}
+}
