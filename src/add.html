@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Add a habit</title>
 		<link rel="stylesheet" href="../css/forms.css">
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 	</head>
 	<body>
@@ -21,21 +22,21 @@
 				<img id="icon4" class="icon" src="../img/add.png" alt="find a image"/>
 				<p><label>Weekly Frequency</label></p>
 				<div id="ck-button">
-					<label> <input type="checkbox" name="date" value="sunday"><span>Sun</span></label>
-					<label> <input type="checkbox" name="date" value="monday"><span>Mon</span></label>
-					<label> <input type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
-					<label> <input type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
-					<label> <input type="checkbox" name="date" value="thursday"><span>Thur</span></label>
-					<label> <input type="checkbox" name="date" value="friday"><span>Fri</span></label>
-					<label> <input type="checkbox" name="date" value="saturday"><span>Sat</span></label>
+					<label> <input id="isSun" type="checkbox" name="date" value="sunday"><span>Sun</span></label>
+					<label> <input id="isMon" type="checkbox" name="date" value="monday"><span>Mon</span></label>
+					<label> <input id="isTues" type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
+					<label> <input id="isWed" type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
+					<label> <input id="isThurs" type="checkbox" name="date" value="thursday"><span>Thur</span></label>
+					<label> <input id="isFri" type="checkbox" name="date" value="friday"><span>Fri</span></label>
+					<label> <input id="isSat" type="checkbox" name="date" value="saturday"><span>Sat</span></label>
 				</div>
 		
 		
 				<p><label>Daily Frequency</label></p>
 				<div id="daily-button">
-					<label> <input type="checkbox" name="day" value="one"><span>1</span></label>
-					<label> <input type="checkbox" name="day" value="two"><span>2</span></label>
-					<label> <input type="checkbox" name="day" value="three"><span>3</span></label>
+					<label> <input id="once" type="radio" name="day" value="one"><span>1</span></label>
+					<label> <input id="twice" type="radio" name="day" value="two"><span>2</span></label>
+					<label> <input id="thrice" type="radio" name="day" value="three"><span>3</span></label>
 					<span id="times">times</span>
 				</div>
 				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
@@ -44,15 +45,10 @@
 			</form>
 
 		</div>
+
 		<script type="text/javascript">
 			Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
 			var Habit = Parse.Object.extend("Habit");
-
-			/* var TestObject = Parse.Object.extend("TestObject");
-			var testObject = new TestObject();
-			testObject.save({foo: "bar"}).then(function(object) {
-  				alert("yay! it worked");
-			}); */
 
 			function selectImage(name) {
 				//Clear all the other effects
@@ -63,15 +59,50 @@
 				image.style.border = "5px solid #42A5F5";
 			}
 
-			// function addHabit() {
-			// 	var habitToAdd = new Habit();
-			// 	habitToAdd.set("username", "smarties");
-			// 	habitToAdd.set("name", document.getElementById("title"));
-			// 	// habitToAdd.set("icon", ???);
-			// 	if (document.forms[0].help_text.checked) {
-			// 	habitToAdd.set("currStreak", 0);
-			// 	habitToAdd.set("bestStreak", 0);
-			// }
+			function addHabit() {
+				var habitToAdd = new Habit();
+
+				habitToAdd.set("username", "smarties");
+				habitToAdd.set("name", document.getElementById("title").value);
+				// habitToAdd.set("icon", ???);
+				habitToAdd.set("onSunday", document.getElementById('isSun').checked);
+				habitToAdd.set("onMonday", document.getElementById('isMon').checked);
+				habitToAdd.set("onTuesday", document.getElementById('isTues').checked);
+				habitToAdd.set("onWednesday", document.getElementById('isWed').checked);
+				habitToAdd.set("onThursday", document.getElementById('isThurs').checked);
+				habitToAdd.set("onFriday", document.getElementById('isFri').checked);
+				habitToAdd.set("onSaturday", document.getElementById('isSat').checked);
+				habitToAdd.set("currStreak", 0);
+				habitToAdd.set("bestStreak", 0);
+
+				var otherFrequency = document.getElementById('others').value;
+				var frequency;
+
+				if(!(otherFrequency == null || otherFrequency == "")) {
+					frequency = Number(otherFrequency);
+				} else if(document.getElementById('once').checked) {
+					frequency = 1;
+				} else if(document.getElementById('twice').checked) {
+					frequency = 2;
+				} else if(document.getElementById('thrice').checked) {
+					frequency = 3;
+				} else {
+					// DISABLE SAVE FORM OR SOMETHING???
+				}
+				habitToAdd.set("frequency", frequency);
+
+				habitToAdd.save(null, {
+					success: function(habitToAdd) {
+						// Execute any logic that should take place after the object is saved.
+						// alert('New object created with objectId: ' + habitToAdd.id);
+					},
+					error: function(habitToAdd, error) {
+						// Execute any logic that should take place if the save fails.
+						// error is a Parse.Error with an error code and message.
+						// alert('Failed to create new object, with error code: ' + error.message);
+					}
+				});
+			}
 		</script>
 	</body>
 </html>
