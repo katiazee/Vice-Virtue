@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Add a habit</title>
 		<link rel="stylesheet" href="../css/forms.css">
+		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 	</head>
 	<body>
 
@@ -38,12 +39,21 @@
 					<span id="times">times</span>
 				</div>
 				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
-				<p id="save_p"><input id="save" type="button" value="Save It" onclick="location.href='list.html'"></p>
+				<p id="save_p"><input id="save" type="button" value="Save It" onclick="addHabit();"></p> <!-- onclick ="location.href='list.html'" -->
 				
 			</form>
 
 		</div>
-		<script>
+		<script type="text/javascript">
+			Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
+			var Habit = Parse.Object.extend("Habit");
+
+			/* var TestObject = Parse.Object.extend("TestObject");
+			var testObject = new TestObject();
+			testObject.save({foo: "bar"}).then(function(object) {
+  				alert("yay! it worked");
+			}); */
+
 			function selectImage(name) {
 				//Clear all the other effects
 				document.getElementById('icon1').style.border = "none";
@@ -52,6 +62,16 @@
 				var image = document.getElementById(name);
 				image.style.border = "5px solid #42A5F5";
 			}
+
+			// function addHabit() {
+			// 	var habitToAdd = new Habit();
+			// 	habitToAdd.set("username", "smarties");
+			// 	habitToAdd.set("name", document.getElementById("title"));
+			// 	// habitToAdd.set("icon", ???);
+			// 	if (document.forms[0].help_text.checked) {
+			// 	habitToAdd.set("currStreak", 0);
+			// 	habitToAdd.set("bestStreak", 0);
+			// }
 		</script>
 	</body>
 </html>
