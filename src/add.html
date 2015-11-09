@@ -5,104 +5,167 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Add a habit</title>
 		<link rel="stylesheet" href="../css/forms.css">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+
+<style>
+.myFile input[type="file"] {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+}
+
+.hide {
+	display: none;
+}
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+</script>
 	</head>
 	<body>
 
+
+<div style="height:0px;overflow:hidden">
+
+	<input type="file" id="myFile" multiple size="50" onchange="uploadIcon()">
+
+</div>
+
 		<div class="forms">
 			<h2>Add A Habit</h2>
-			<form>
+			<form id ="form">
 				<p><label><span id="title_text">Habit Title</span></label></p>
-				<p><input id="title" type="text" name="fullname" placeholder="Exercise 30 minutes"></p>
+				<p><input id="title" type="text" name="fullname" placeholder="Exercise 30 minutes" value=""></p>
 				<p><label>Habit Icon</label></p>
 				<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/sleep.jpg" alt="sleep image"/>
 				<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/salad.jpg" alt="eat image"/>
 				<img id="icon3" class="icon" onclick="selectImage('icon3');" src="../img/run.jpg" alt="run image"/>
-				<img id="icon4" class="icon" src="../img/add.png" alt="find a image"/>
+
+				<label class="myFile">
+  					<img id="icon4" class="icon" onchange="uploadIcon()" src="../img/add.png" alt="find a image" />
+ 					 <input type="file" />
+				</label>
+
+				<div class="hide">
+					<img id="myImg" class = "icon" onclick="selectImage('iconUpload');" src="#" alt=""/>
+				</div>
+
 				<p><label>Weekly Frequency</label></p>
 				<div id="ck-button">
-					<label> <input id="isSun" type="checkbox" name="date" value="sunday"><span>Sun</span></label>
-					<label> <input id="isMon" type="checkbox" name="date" value="monday"><span>Mon</span></label>
-					<label> <input id="isTues" type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
-					<label> <input id="isWed" type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
-					<label> <input id="isThurs" type="checkbox" name="date" value="thursday"><span>Thur</span></label>
-					<label> <input id="isFri" type="checkbox" name="date" value="friday"><span>Fri</span></label>
-					<label> <input id="isSat" type="checkbox" name="date" value="saturday"><span>Sat</span></label>
+					<label> <input type="checkbox" name="date" value="sunday"><span>Sun</span></label>
+					<label> <input type="checkbox" name="date" value="monday"><span>Mon</span></label>
+					<label> <input type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
+					<label> <input type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
+					<label> <input type="checkbox" name="date" value="thursday"><span>Thur</span></label>
+					<label> <input type="checkbox" name="date" value="friday"><span>Fri</span></label>
+					<label> <input type="checkbox" name="date" value="saturday"><span>Sat</span></label>
 				</div>
 		
 		
 				<p><label>Daily Frequency</label></p>
 				<div id="daily-button">
-					<label> <input id="once" type="radio" name="day" value="one"><span>1</span></label>
-					<label> <input id="twice" type="radio" name="day" value="two"><span>2</span></label>
-					<label> <input id="thrice" type="radio" name="day" value="three"><span>3</span></label>
+					<label> <input type="checkbox" name="day" value="one"><span>1</span></label>
+					<label> <input type="checkbox" name="day" value="two"><span>2</span></label>
+					<label> <input type="checkbox" name="day" value="three"><span>3</span></label>
 					<span id="times">times</span>
 				</div>
 				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
-				<p id="save_p"><input id="save" type="button" value="Save It" onclick="addHabit();"></p> <!-- onclick ="location.href='list.html'" -->
+				<p id="save_p"><input id="save" type="button" value="Save It" onclick="prac()"></p>
 				
 			</form>
 
 		</div>
 
-		<script type="text/javascript">
-			Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
-			var Habit = Parse.Object.extend("Habit");
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 
-			function selectImage(name) {
+
+
+		<script>
+				Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
+
+
+			var Habit = Parse.Object.extend("Habit");
+			var habit = new Habit();
+			var fileName;
+
+		function selectImage(name) {
 				//Clear all the other effects
 				document.getElementById('icon1').style.border = "none";
 				document.getElementById('icon2').style.border = "none";
 				document.getElementById('icon3').style.border = "none";
+				document.getElementById('uploadIcon').style.border = "none";
 				var image = document.getElementById(name);
 				image.style.border = "5px solid #42A5F5";
+
+				fileName = name;
 			}
 
-			function addHabit() {
-				var habitToAdd = new Habit();
 
-				habitToAdd.set("username", "smarties");
-				habitToAdd.set("name", document.getElementById("title").value);
-				// habitToAdd.set("icon", ???);
-				habitToAdd.set("onSunday", document.getElementById('isSun').checked);
-				habitToAdd.set("onMonday", document.getElementById('isMon').checked);
-				habitToAdd.set("onTuesday", document.getElementById('isTues').checked);
-				habitToAdd.set("onWednesday", document.getElementById('isWed').checked);
-				habitToAdd.set("onThursday", document.getElementById('isThurs').checked);
-				habitToAdd.set("onFriday", document.getElementById('isFri').checked);
-				habitToAdd.set("onSaturday", document.getElementById('isSat').checked);
-				habitToAdd.set("currStreak", 0);
-				habitToAdd.set("bestStreak", 0);
+		function uploadIcon(){
+    		var x = document.getElementById("myFile");
+    		var txt = "";
+    		if ('files' in x) {
+        		if (x.files.length == 0) {
+            		txt = "Select one or more files.";
+        		} else {
+            		for (var i = 0; i < x.files.length; i++) {
+                	txt += "<br><strong>" + (i+1) + ". file</strong><br>";
+                	var file = x.files[i];
+               	 	if ('name' in file) {
+                    txt += "name: " + file.name + "<br>";
+                }
+                if ('size' in file) {
+                    txt += "size: " + file.size + " bytes <br>";
+                }
+            }
+        }
 
-				var otherFrequency = document.getElementById('others').value;
-				var frequency;
+    } 
+    		else 
+        	if (x.value == "") {
+            	txt += "Select one or more files.";
+        	} else {
+            	txt += "The files property is not supported by your browser!";
+            	txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+        	}
+    	}
 
-				if(!(otherFrequency == null || otherFrequency == "")) {
-					frequency = Number(otherFrequency);
-				} else if(document.getElementById('once').checked) {
-					frequency = 1;
-				} else if(document.getElementById('twice').checked) {
-					frequency = 2;
-				} else if(document.getElementById('thrice').checked) {
-					frequency = 3;
-				} else {
-					// DISABLE SAVE FORM OR SOMETHING???
-				}
-				habitToAdd.set("frequency", frequency);
 
-				habitToAdd.save(null, {
-					success: function(habitToAdd) {
-						// Execute any logic that should take place after the object is saved.
-						// alert('New object created with objectId: ' + habitToAdd.id);
-					},
-					error: function(habitToAdd, error) {
-						// Execute any logic that should take place if the save fails.
-						// error is a Parse.Error with an error code and message.
-						// alert('Failed to create new object, with error code: ' + error.message);
-					}
+$(function () {
+    $(":file").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = imageIsLoaded;
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+});
+
+function imageIsLoaded(e) {
+
+	$('.hide').css('display','block');
+    $('#myImg').attr('src', e.target.result);
+};
+
+
+
+			function prac() {
+
+				var name = document.getElementById("form").elements.namedItem("fullname").value;
+				var icon = document.getElementById(fileName).src;
+				var bytes = [ 0xBE, 0xEF, 0xCA, 0xFE ];
+				var file = new Parse.File(icon, bytes);
+				//alert(file);
+				habit.set("icon", icon);
+				habit.set("name", name);
+				habit.save({foo: "bar"}).then(function(object) {
+
 				});
-			}
+
+		}
+
 		</script>
 	</body>
 </html>
