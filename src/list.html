@@ -19,7 +19,7 @@
                     </ul>
                     <div class="message">
                         <span class="message-total">
-                            <strong>2</strong> days in a row! Best Record: <strong>5</strong><br>
+                            <strong class="currStreak">2</strong> days in a row! Best Record: <strong class="bestStreak">5</strong><br>
                             <svg height="25" width="150">
                                 <line x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
                                 <line x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
@@ -94,6 +94,8 @@
             clone.firstElementChild.setAttribute("data-id", habit.id)
             // clone.setAttribute("id", "yolo")
             clone.querySelector(".habit-name").textContent = habit.get('name')
+            clone.querySelector(".currStreak").textContent = habit.get('currStreak')
+            clone.querySelector(".bestStreak").textContent = habit.get('bestStreak')
 
             var habitIcon = habit.get("icon");
             if (habitIcon) {
@@ -131,7 +133,7 @@
               // Let's check whether notification permissions have already been granted
               else if (Notification.permission === "granted") {
                 // If it's okay let's create a notification
-                var notification = new Notification("Test notification");
+                spawnNotification("Vice/Virtue", "home slice")
               }
 
               // Otherwise, we need to ask the user for permission
@@ -155,6 +157,14 @@
               }
           // At last, if the user has denied notifications, and you
           // want to be respectful there is no need to bother them any more.
+        }
+
+        function spawnNotification(theTitle, theBody) {
+            var options = {
+                body: theBody,
+                icon: "logo.png"
+            }
+            var n = new Notification(theTitle,options);
         }
     </script>
 </body>
