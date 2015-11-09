@@ -25,7 +25,7 @@
 	</head>
 	<body>
 
-		<div style="height:0px;overflow:hidden">
+		<div style="height:0px; overflow:hidden">
 			<input type="file" id="myFile" multiple size="50" onchange="uploadIcon()">
 		</div>
 
@@ -41,7 +41,7 @@
 
 				<label class="myFile">
 					<img id="icon4" class="icon" onchange="uploadIcon()" src="../img/add.png" alt="find a image" />
-					<input type="file" />
+					<input type="file" id="iconFileUpload" />
 				</label>
 
 				<div class="hide">
@@ -92,12 +92,55 @@
 				fileName = name;
 			}
 
+			/* function getFileBlob(url, cb) {
+		        var xhr = new XMLHttpRequest();
+		        xhr.open("GET", url);
+		        xhr.responseType = "blob";
+		        xhr.addEventListener('load', function() {
+		            cb(xhr.response);
+		        });
+		        xhr.send();
+			}
+
+			function blobToFile(blob, name) {
+		        blob.lastModifiedDate = new Date();
+		        blob.name = name;
+		        return blob;
+			}
+
+			function getFileObject(filePathOrUrl, cb) {
+		       getFileBlob(filePathOrUrl, function (blob) {
+		          cb(blobToFile(blob, 'test.jpg'));
+		       });
+			} */
+
 			function addHabit() {
 				var habitToAdd = new Habit();
 
 				habitToAdd.set("username", "smarties");
 				habitToAdd.set("name", document.getElementById("title").value);
-				// habitToAdd.set("icon", ???);
+
+				// Image upload
+				var fileUploadControl = $("#iconFileUpload")[0];
+				if (fileUploadControl.files.length > 0) {
+					var file = fileUploadControl.files[0];
+					var name = "icon.jpg";
+
+					var parseFile = new Parse.File(name, file);
+				}
+
+				parseFile.save().then(function() {
+					// The file has been saved to Parse.
+				}, function(error) {
+					// The file either could not be read, or could not be saved to Parse.
+				});
+				habitToAdd.set("icon", parseFile);
+
+				/* getFileObject('../img/sleep.jpg', function (fileObject) {
+					console.log('selecting image works??');
+     				console.log(fileObject);
+				}); */
+
 				habitToAdd.set("onSunday", document.getElementById('isSun').checked);
 				habitToAdd.set("onMonday", document.getElementById('isMon').checked);
 				habitToAdd.set("onTuesday", document.getElementById('isTues').checked);
