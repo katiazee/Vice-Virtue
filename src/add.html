@@ -5,7 +5,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Add a habit</title>
 		<link rel="stylesheet" href="../css/forms.css">
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 	</head>
 	<body>
@@ -40,7 +39,7 @@
 					<span id="times">times</span>
 				</div>
 				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
-				<p id="save_p"><input id="save" type="button" value="Save It" onclick="addHabit();"></p> <!-- onclick ="location.href='list.html'" -->
+				<p id="save_p"><input id="save" type="button" value="Save It" onclick="addHabit();"></p>
 				
 			</form>
 
@@ -95,11 +94,13 @@
 					success: function(habitToAdd) {
 						// Execute any logic that should take place after the object is saved.
 						// alert('New object created with objectId: ' + habitToAdd.id);
+						console.log('new object created with objectId: ' + habitToAdd.id);
+						window.location.replace('list.html');
 					},
 					error: function(habitToAdd, error) {
 						// Execute any logic that should take place if the save fails.
 						// error is a Parse.Error with an error code and message.
-						// alert('Failed to create new object, with error code: ' + error.message);
+						alert('Failed to create new object, with error code: ' + error.message);
 					}
 				});
 			}

@@ -5,12 +5,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Edit a habit</title>
 		<link rel="stylesheet" href="../css/forms.css">
+		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 	</head>
 	<body>
 		<script>
 			function onStart() {
             	document.getElementById("icon3").style.border="5px solid #42A5F5";
 
+            	// declare and load Parse Habit object using objectid
 			}
 			window.onload = onStart;
 		</script>
@@ -50,6 +52,8 @@
 
 		</div>
 		<script>
+			Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
+
 			function selectImage(name) {
 				//Clear all the other effects
 				document.getElementById('icon1').style.border = "none";
