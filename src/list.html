@@ -47,6 +47,9 @@
     <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
 
     <script type="text/javascript">
+        Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
+        var Habit = Parse.Object.extend("Habit");
+
         function showMsg(element){
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
             // alert(msgElement.innerHTML);
@@ -56,26 +59,61 @@
         function deleteHabit(element){
             var child = element.parentNode.parentNode;
             var parent = child.parentNode;
-            parent.removeChild(child);
+
+            var query = new Parse.Query(Habit);
+            console.log("Element to delete: " + child.getAttribute("data-id"))
+            query.get(child.getAttribute("data-id"), {
+                success: function(habit) {
+                    // The object was retrieved successfully.
+                    habit.destroy({
+                        success: function(habit) {
+                            // The object was deleted from the Parse Cloud.
+                            parent.removeChild(child);
+                        },
+                        error: function(habit, error) {
+                            // The delete failed.
+                            // error is a Parse.Error with an error code and message.
+                            console.log("error here 2")
+                        }
+                    });
+                },
+                error: function(object, error) {
+                    // The object was not retrieved successfully.
+                    // error is a Parse.Error with an error code and message.
+                    console.log("error here1")
+                    console.log(error)
+                }
+            });
         }
 
         function addHabitToList(habit) {
             var list = document.getElementById("habit-list");
             var template = document.querySelector("#habit-template")
             var clone = document.importNode(template.content, true);
-            console.log(clone.childNodes.item("#habit-name"))
+            // console.log(clone.childNodes.item("#habit-name"))
+
+            clone.firstElementChild.setAttribute("data-id", habit.id)
+            // clone.setAttribute("id", "yolo")
             clone.querySelector(".habit-name").textContent = habit.get('name')
-            list.appendChild(clone);
+
+            var habitIcon = habit.get("icon");
+            if (habitIcon) {
+                clone.querySelector(".habit-icon").src = habitIcon.url();
+            }
+
+            var res = list.appendChild(clone);
+
         }
 
-        Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
-        var Habit = Parse.Object.extend("Habit");
+
         var query = new Parse.Query(Habit);
         query.find({
           success: function(results) {
             // Do something with the returned Parse.Object values
             for (var i = 0; i < results.length; i++) {
                 addHabitToList(results[i])
+                console.log(results[i])
+                console.log(results[i].id)
             }
           },
           error: function(error) {
