@@ -30,8 +30,8 @@
 					<label> <input id="isFri" type="checkbox" name="date" value="friday"><span>Fri</span></label>
 					<label> <input id="isSat" type="checkbox" name="date" value="saturday"><span>Sat</span></label>
 				</div>
-		
-		
+
+
 				<p><label>Daily Frequency</label></p>
 				<div id="daily-button">
 					<label> <input id="once" type="radio" name="day" value="one"><span>1</span></label>
@@ -41,7 +41,7 @@
 				</div>
 				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
 				<p id="save_p"><input id="save" type="button" value="Save It" onclick="addHabit();"></p> <!-- onclick ="location.href='list.html'" -->
-				
+
 			</form>
 
 		</div>
@@ -95,6 +95,7 @@
 					success: function(habitToAdd) {
 						// Execute any logic that should take place after the object is saved.
 						// alert('New object created with objectId: ' + habitToAdd.id);
+						location = "list.html"
 					},
 					error: function(habitToAdd, error) {
 						// Execute any logic that should take place if the save fails.
