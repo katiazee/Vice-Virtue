@@ -224,4 +224,7 @@ span#times{
     cursor: pointer;
 }
 
+.selectedIcon {
+	border: 5px solid #42A5F5;
+}
 

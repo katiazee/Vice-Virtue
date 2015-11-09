@@ -82,37 +82,19 @@
 
 			function selectImage(name) {
 				//Clear all the other effects
-				document.getElementById('icon1').style.border = "none";
-				document.getElementById('icon2').style.border = "none";
-				document.getElementById('icon3').style.border = "none";
-				document.getElementById('icon4').style.border = "none";
+				document.getElementById('icon1').className = "icon";
+				document.getElementById('icon2').className = "icon";
+				document.getElementById('icon3').className = "icon";
+				document.getElementById('myImg').className = "icon";
 				var image = document.getElementById(name);
-				image.style.border = "5px solid #42A5F5";
+				image.className = image.className + " selectedIcon";
 
 				fileName = name;
 			}
 
-			/* function getFileBlob(url, cb) {
-		        var xhr = new XMLHttpRequest();
-		        xhr.open("GET", url);
-		        xhr.responseType = "blob";
-		        xhr.addEventListener('load', function() {
-		            cb(xhr.response);
-		        });
-		        xhr.send();
+			function hasClass(element, cls) {
+			    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 			}
-
-			function blobToFile(blob, name) {
-		        blob.lastModifiedDate = new Date();
-		        blob.name = name;
-		        return blob;
-			}
-
-			function getFileObject(filePathOrUrl, cb) {
-		       getFileBlob(filePathOrUrl, function (blob) {
-		          cb(blobToFile(blob, 'test.jpg'));
-		       });
-			} */
 
 			function addHabit() {
 				var habitToAdd = new Habit();
@@ -121,25 +103,35 @@
 				habitToAdd.set("name", document.getElementById("title").value);
 
 				// Image upload
-				var fileUploadControl = $("#iconFileUpload")[0];
-				if (fileUploadControl.files.length > 0) {
-					var file = fileUploadControl.files[0];
-					var name = "icon.jpg";
+				var default1 = document.getElementById('icon1');
+				var default2 = document.getElementById('icon2');
 
-					var parseFile = new Parse.File(name, file);
+				if (hasClass(document.getElementById('icon1'), "selectedIcon")) {
+					habitToAdd.set("defaultIconID", "0JrjvKGnbG");
 				}
+				else if (hasClass(document.getElementById('icon2'), "selectedIcon")) {
+					habitToAdd.set("defaultIconID", "zgGDtotXrU");
+				}
+				else if (hasClass(document.getElementById('icon3'), "selectedIcon")) {
+					habitToAdd.set("defaultIconID", "qww3v520kk");
+				}
+				// If uploaded image was selected
+				else {
+					var fileUploadControl = $("#iconFileUpload")[0];
+					if (fileUploadControl.files.length > 0) {
+						var file = fileUploadControl.files[0];
+						var name = "icon.jpg";
 
-				parseFile.save().then(function() {
-					// The file has been saved to Parse.
-				}, function(error) {
-					// The file either could not be read, or could not be saved to Parse.
-				});
-				habitToAdd.set("icon", parseFile);
+						var parseFile = new Parse.File(name, file);
+					}
 
-				/* getFileObject('../img/sleep.jpg', function (fileObject) {
-					console.log('selecting image works??');
-     				console.log(fileObject);
-				}); */
+					parseFile.save().then(function() {
+						// The file has been saved to Parse.
+					}, function(error) {
+						// The file either could not be read, or could not be saved to Parse.
+					});
+					habitToAdd.set("icon", parseFile);
+				}
 
 				habitToAdd.set("onSunday", document.getElementById('isSun').checked);
 				habitToAdd.set("onMonday", document.getElementById('isMon').checked);
@@ -162,9 +154,9 @@
 					frequency = 2;
 				} else if(document.getElementById('thrice').checked) {
 					frequency = 3;
-				} else {
+				} /* else {
 					// DISABLE SAVE FORM OR SOMETHING???
-				}
+				} */
 				habitToAdd.set("frequency", frequency);
 
 				habitToAdd.save(null, {
@@ -226,8 +218,9 @@
 			});
 
 			function imageIsLoaded(e) {
-				$('.hide').css('display','block');
+				$('.hide').css('display','inline-block');
 			    $('#myImg').attr('src', e.target.result);
+			    selectImage('myImg');
 			};
 
 		</script>
