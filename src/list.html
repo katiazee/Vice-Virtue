@@ -31,7 +31,7 @@
                         <button type="button" class="op op-done" onclick="showMsg(this);" title="done">
                             <img src="../img/done.svg" alt="Done">
                         </button>
-                        <button type="button" class="op op-edit" onclick="location.href='edit.html'" title="edit habit">
+                        <button type="button" class="op op-edit" onclick="editHabit(this);" title="edit habit">
                             <img src="../img/edit.svg" alt="Edit">
                         </button>
                         <button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit">
@@ -53,6 +53,11 @@
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
             // alert(msgElement.innerHTML);
             msgElement.style.visibility="visible";
+        }
+
+        function editHabit(element) {
+            localStorage.setItem("toEdit", element.parentNode.parentNode.getAttribute("data-id"));
+            location = "edit.html?id=" + element.parentNode.parentNode.getAttribute("data-id");
         }
 
         function deleteHabit(element){

@@ -7,20 +7,6 @@
 		<link rel="stylesheet" href="../css/forms.css">
 		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 
-		<style type="text/css">
-			.myFile input[type="file"] {
-			  display: block;
-			  position: absolute;
-			  top: 0;
-			  right: 0;
-			  opacity: 0;
-			}
-
-			.hide {
-				display: none;
-			}
-		</style>
-
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	</head>
 	<body>
@@ -68,6 +54,274 @@
 					<span id="times">times</span>
 				</div>
 				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
+
+				<p><label>Notifications</label></p>
+				<div class="onoffswitch" >
+   					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked onclick="incCounter();">
+    				<label class="onoffswitch-label" for="myonoffswitch">
+        			<span class="onoffswitch-inner"></span>
+        			<span class="onoffswitch-switch"></span>
+    				</label>
+				</div>
+
+				<div class="notifications1">
+				<p id="alarm">Alarm 1</p>
+					<select id="hr1">
+	  					<option value="1">1</option>
+	 					<option value="2">2</option>
+	  					<option value="3">3</option>
+					  	<option value="4">4</option>
+	  					<option value="5">5</option>
+	 					<option value="6">6</option>
+	  					<option value="7">7</option>
+					  	<option value="8">8</option>
+	  					<option value="9">9</option>
+	 					<option value="10">10</option>
+	  					<option value="11">11</option>
+					  	<option value="12">12</option>
+					</select>
+
+					<select id="min1">
+	  					<option value="00">:00</option>
+	 					<option value="01">:01</option>
+	  					<option value="02">:02</option>
+					  	<option value="03">:03</option>
+	  					<option value="04">:04</option>
+	 					<option value="05">:05</option>
+	 					<option value="06">:06</option>
+	  					<option value="07">:07</option>
+					  	<option value="08">:08</option>
+	  					<option value="09">:09</option>
+	 					<option value="10">:10</option>
+	  					<option value="11">:11</option>
+					  	<option value="12">:12</option>
+					  	<option value="13">:13</option>
+	  					<option value="14">:14</option>
+	 					<option value="15">:15</option>
+	 					<option value="16">:16</option>
+	  					<option value="17">:17</option>
+					  	<option value="18">:18</option>
+	  					<option value="19">:19</option>
+	 					<option value="20">:20</option>
+	  					<option value="21">:21</option>
+					  	<option value="22">:22</option>
+					  	<option value="23">:23</option>
+	  					<option value="24">:24</option>
+	 					<option value="25">:25</option>
+	 					<option value="26">:26</option>
+	  					<option value="27">:27</option>
+					  	<option value="28">:28</option>
+	  					<option value="29">:29</option>
+	 					<option value="30">:30</option>
+	  					<option value="31">:31</option>
+					  	<option value="32">:32</option>
+					  	<option value="33">:33</option>
+	  					<option value="34">:34</option>
+	 					<option value="35">:35</option>
+	 					<option value="36">:36</option>
+	  					<option value="37">:37</option>
+					  	<option value="38">:38</option>
+	  					<option value="39">:39</option>
+	  					<option value="40">:40</option>
+	  					<option value="41">:41</option>
+					  	<option value="42">:42</option>
+					  	<option value="43">:43</option>
+	  					<option value="44">:44</option>
+	 					<option value="45">:45</option>
+	 					<option value="46">:46</option>
+	  					<option value="47">:47</option>
+					  	<option value="48">:48</option>
+	  					<option value="49">:49</option>
+	 					<option value="50">:50</option>
+	  					<option value="51">:51</option>
+					  	<option value="52">:52</option>
+					  	<option value="53">:53</option>
+	  					<option value="54">:54</option>
+	 					<option value="55">:55</option>
+	 					<option value="56">:56</option>
+	  					<option value="57">:57</option>
+					  	<option value="58">:58</option>
+	  					<option value="59">:59</option>
+					</select>
+
+					<select id="am1">
+	  					<option value="am">am</option>
+	 					<option value="pm">pm</option>
+					</select>
+				</div>	
+
+			<div class="notifications2">
+				<p id="alarm">Alarm 2</p>
+					<select id="hr2">
+	  					<option value="1">1</option>
+	 					<option value="2">2</option>
+	  					<option value="3">3</option>
+					  	<option value="4">4</option>
+	  					<option value="5">5</option>
+	 					<option value="6">6</option>
+	  					<option value="7">7</option>
+					  	<option value="8">8</option>
+	  					<option value="9">9</option>
+	 					<option value="10">10</option>
+	  					<option value="11">11</option>
+					  	<option value="12">12</option>
+					</select>
+
+					<select id="min2">
+	  					<option value="00">:00</option>
+	 					<option value="01">:01</option>
+	  					<option value="02">:02</option>
+					  	<option value="03">:03</option>
+	  					<option value="04">:04</option>
+	 					<option value="05">:05</option>
+	 					<option value="06">:06</option>
+	  					<option value="07">:07</option>
+					  	<option value="08">:08</option>
+	  					<option value="09">:09</option>
+	 					<option value="10">:10</option>
+	  					<option value="11">:11</option>
+					  	<option value="12">:12</option>
+					  	<option value="13">:13</option>
+	  					<option value="14">:14</option>
+	 					<option value="15">:15</option>
+	 					<option value="16">:16</option>
+	  					<option value="17">:17</option>
+					  	<option value="18">:18</option>
+	  					<option value="19">:19</option>
+	 					<option value="20">:20</option>
+	  					<option value="21">:21</option>
+					  	<option value="22">:22</option>
+					  	<option value="23">:23</option>
+	  					<option value="24">:24</option>
+	 					<option value="25">:25</option>
+	 					<option value="26">:26</option>
+	  					<option value="27">:27</option>
+					  	<option value="28">:28</option>
+	  					<option value="29">:29</option>
+	 					<option value="30">:30</option>
+	  					<option value="31">:31</option>
+					  	<option value="32">:32</option>
+					  	<option value="33">:33</option>
+	  					<option value="34">:34</option>
+	 					<option value="35">:35</option>
+	 					<option value="36">:36</option>
+	  					<option value="37">:37</option>
+					  	<option value="38">:38</option>
+	  					<option value="39">:39</option>
+	  					<option value="40">:40</option>
+	  					<option value="41">:41</option>
+					  	<option value="42">:42</option>
+					  	<option value="43">:43</option>
+	  					<option value="44">:44</option>
+	 					<option value="45">:45</option>
+	 					<option value="46">:46</option>
+	  					<option value="47">:47</option>
+					  	<option value="48">:48</option>
+	  					<option value="49">:49</option>
+	 					<option value="50">:50</option>
+	  					<option value="51">:51</option>
+					  	<option value="52">:52</option>
+					  	<option value="53">:53</option>
+	  					<option value="54">:54</option>
+	 					<option value="55">:55</option>
+	 					<option value="56">:56</option>
+	  					<option value="57">:57</option>
+					  	<option value="58">:58</option>
+	  					<option value="59">:59</option>
+					</select>
+
+					<select id="am2">
+	  					<option value="am">am</option>
+	 					<option value="pm">pm</option>
+					</select>
+				</div>	
+
+				<div class="notifications3">
+					<p id="alarm">Alarm 3</p>
+					<select id="hr3">
+	  					<option value="1">1</option>
+	 					<option value="2">2</option>
+	  					<option value="3">3</option>
+					  	<option value="4">4</option>
+	  					<option value="5">5</option>
+	 					<option value="6">6</option>
+	  					<option value="7">7</option>
+					  	<option value="8">8</option>
+	  					<option value="9">9</option>
+	 					<option value="10">10</option>
+	  					<option value="11">11</option>
+					  	<option value="12">12</option>
+					</select>
+
+					<select id="min3">
+	  					<option value="00">:00</option>
+	 					<option value="01">:01</option>
+	  					<option value="02">:02</option>
+					  	<option value="03">:03</option>
+	  					<option value="04">:04</option>
+	 					<option value="05">:05</option>
+	 					<option value="06">:06</option>
+	  					<option value="07">:07</option>
+					  	<option value="08">:08</option>
+	  					<option value="09">:09</option>
+	 					<option value="10">:10</option>
+	  					<option value="11">:11</option>
+					  	<option value="12">:12</option>
+					  	<option value="13">:13</option>
+	  					<option value="14">:14</option>
+	 					<option value="15">:15</option>
+	 					<option value="16">:16</option>
+	  					<option value="17">:17</option>
+					  	<option value="18">:18</option>
+	  					<option value="19">:19</option>
+	 					<option value="20">:20</option>
+	  					<option value="21">:21</option>
+					  	<option value="22">:22</option>
+					  	<option value="23">:23</option>
+	  					<option value="24">:24</option>
+	 					<option value="25">:25</option>
+	 					<option value="26">:26</option>
+	  					<option value="27">:27</option>
+					  	<option value="28">:28</option>
+	  					<option value="29">:29</option>
+	 					<option value="30">:30</option>
+	  					<option value="31">:31</option>
+					  	<option value="32">:32</option>
+					  	<option value="33">:33</option>
+	  					<option value="34">:34</option>
+	 					<option value="35">:35</option>
+	 					<option value="36">:36</option>
+	  					<option value="37">:37</option>
+					  	<option value="38">:38</option>
+	  					<option value="39">:39</option>
+	  					<option value="40">:40</option>
+	  					<option value="41">:41</option>
+					  	<option value="42">:42</option>
+					  	<option value="43">:43</option>
+	  					<option value="44">:44</option>
+	 					<option value="45">:45</option>
+	 					<option value="46">:46</option>
+	  					<option value="47">:47</option>
+					  	<option value="48">:48</option>
+	  					<option value="49">:49</option>
+	 					<option value="50">:50</option>
+	  					<option value="51">:51</option>
+					  	<option value="52">:52</option>
+					  	<option value="53">:53</option>
+	  					<option value="54">:54</option>
+	 					<option value="55">:55</option>
+	 					<option value="56">:56</option>
+	  					<option value="57">:57</option>
+					  	<option value="58">:58</option>
+	  					<option value="59">:59</option>
+					</select>
+
+					<select id="am3">
+	  					<option value="am">am</option>
+	 					<option value="pm">pm</option>
+					</select>
+				</div>
+
 				<p id="save_p"><input id="save" type="button" value="Save It" onclick="addHabit();"></p> <!-- onclick ="location.href='list.html'" -->
 			</form>
 
@@ -78,7 +332,7 @@
 
 			var Habit = Parse.Object.extend("Habit");
 			var defaultImage = Parse.Object.extend("DefaultImages");
-			var fileName;
+			var counter = 0;
 
 			function selectImage(name) {
 				//Clear all the other effects
@@ -94,6 +348,40 @@
 
 			function hasClass(element, cls) {
 			    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+			}
+
+			function notify() {
+				if( counter % 2 == 1) {
+					$('.notifications1').css('display','none');
+					$('.notifications2').css('display','none');
+					$('.notifications3').css('display','none');
+				} else {
+					switch ($("input[name='day']:checked").val()) {
+						case "one":
+							$('.notifications1').css('display','block');
+							$('.notifications2').css('display','none');
+							$('.notifications3').css('display','none');		
+							break;
+						case "two":
+							$('.notifications1').css('display','block');
+							$('.notifications2').css('display','block');	
+							$('.notifications3').css('display','none');
+							break;
+						case "three":
+							$('.notifications1').css('display','block');
+							$('.notifications2').css('display','block');
+							$('.notifications3').css('display','block');
+							break;
+						default: 
+							$('.notifications1').css('display','block');	
+					}
+
+				}
+			}
+
+			function incCounter() {
+				counter ++;
+				notify();
 			}
 
 			function addHabit() {
@@ -128,7 +416,89 @@
 				habitToAdd.set("frequency", frequency);
 
 				// Image upload
+				var iconID;
+				var defaultIconID;
 				if (hasClass(document.getElementById('icon1'), "selectedIcon")) {
+					iconID = 'icon1';
+					defaultIconID = "0JrjvKGnbG";
+				}
+				else if (hasClass(document.getElementById('icon2'), "selectedIcon")) {
+					iconID = 'icon2';
+					defaultIconID = "zgGDtotXrU";
+				}
+				else if (hasClass(document.getElementById('icon3'), "selectedIcon")) {
+					iconID = 'icon3';
+					defaultIconID = "qww3v520kk";
+				}
+				else if (hasClass(document.getElementById('myImg'), "selectedIcon")) {
+					iconID = 'userUpload';
+					// defaultIconID = "none";
+				}
+
+				// If one of the default images is selected
+				if (iconID == 'icon1' || iconID == 'icon2' || iconID == 'icon3') {
+					habitToAdd.set("defaultIconID", defaultIconID);
+					var query = new Parse.Query(defaultImage);
+					query.get(defaultIconID, {
+					    success: function(defaultIcon) {
+					        habitToAdd.set("icon", defaultIcon.get("icon"));
+
+					        habitToAdd.save(null, {
+								success: function(habitToAdd) {
+									// Execute any logic that should take place after the object is saved.
+									// alert('New object created with objectId: ' + habitToAdd.id);
+
+									console.log('new object created with objectId: ' + habitToAdd.id);
+									location = "list.html"
+								},
+								error: function(habitToAdd, error) {
+									// Execute any logic that should take place if the save fails.
+									// error is a Parse.Error with an error code and message.
+									alert('Failed to create new object, with error code: ' + error.message);
+								}
+							});
+					    },
+					    error: function(object, error) {
+					        // The object was not retrieved successfully.
+					        // error is a Parse.Error with an error code and message.
+					    }
+					});
+				}
+				// If user selects uploaded image
+				else if (iconID == 'userUpload') {
+					var fileUploadControl = $("#iconFileUpload")[0];
+					if (fileUploadControl.files.length > 0) {
+						var file = fileUploadControl.files[0];
+						var name = "icon.jpg";
+
+						var parseFile = new Parse.File(name, file);
+					}
+
+					parseFile.save().then(function() {
+						// The file has been saved to Parse.
+					}, function(error) {
+						// The file either could not be read, or could not be saved to Parse.
+					});
+					habitToAdd.set("icon", parseFile);
+
+					habitToAdd.save(null, {
+						success: function(habitToAdd) {
+							// Execute any logic that should take place after the object is saved.
+							// alert('New object created with objectId: ' + habitToAdd.id);
+
+							console.log('new object created with objectId: ' + habitToAdd.id);
+							location = "list.html"
+						},
+						error: function(habitToAdd, error) {
+							// Execute any logic that should take place if the save fails.
+							// error is a Parse.Error with an error code and message.
+							alert('Failed to create new object, with error code: ' + error.message);
+						}
+					});
+				}
+
+
+				/* if (hasClass(document.getElementById('icon1'), "selectedIcon")) {
 					var query = new Parse.Query(defaultImage);
 					query.get("0JrjvKGnbG", {
 					    success: function(defaultIcon) {
@@ -242,11 +612,11 @@
 						},
 						error: function(habitToAdd, error) {
 							// Execute any logic that should take place if the save fails.
-							// error is a Parse.Error with an error code and message.
+						a	// error is a Parse.Error with an error code and message.
 							alert('Failed to create new object, with error code: ' + error.message);
 						}
 					});
-				}
+				} */
 
 				/* habitToAdd.save(null, {
 					success: function(habitToAdd) {
