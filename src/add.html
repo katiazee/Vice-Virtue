@@ -62,9 +62,9 @@
 
 				<p><label>Daily Frequency</label></p>
 				<div id="daily-button">
-					<label> <input id="once" type="radio" name="day" value="one" onclick="notify();"><span>1</span></label>
-					<label> <input id="twice" type="radio" name="day" value="two" onclick="notify();"><span>2</span></label>
-					<label> <input id="thrice" type="radio" name="day" value="three" onclick="notify();"><span>3</span></label>
+					<label> <input id="once" type="radio" name="day" value="one" onchange="notify();"><span>1</span></label>
+					<label> <input id="twice" type="radio" name="day" value="two" onchange="notify();"><span>2</span></label>
+					<label> <input id="thrice" type="radio" name="day" value="three" onchange="notify();"><span>3</span></label>
 					<span id="times">times</span>
 				</div>
 
@@ -365,10 +365,13 @@
 					switch ($("input[name='day']:checked").val()) {
 						case "one":
 							$('.notifications1').css('display','block');
+							$('.notifications2').css('display','none');
+							$('.notifications3').css('display','none');		
 							break;
 						case "two":
 							$('.notifications1').css('display','block');
 							$('.notifications2').css('display','block');	
+							$('.notifications3').css('display','none');
 							break;
 						case "three":
 							$('.notifications1').css('display','block');
