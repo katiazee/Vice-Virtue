@@ -48,9 +48,9 @@
 
 				<p><label>Daily Frequency</label></p>
 				<div id="daily-button">
-					<label> <input id="once" type="radio" name="day" value="one"><span>1</span></label>
-					<label> <input id="twice" type="radio" name="day" value="two"><span>2</span></label>
-					<label> <input id="thrice" type="radio" name="day" value="three"><span>3</span></label>
+					<label> <input id="once" type="radio" name="day" value="one" onclick="notify();"><span>1</span></label>
+					<label> <input id="twice" type="radio" name="day" value="two" onclick="notify();"><span>2</span></label>
+					<label> <input id="thrice" type="radio" name="day" value="three" onclick="notify();"><span>3</span></label>
 					<span id="times">times</span>
 				</div>
 				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
@@ -432,12 +432,12 @@
 				}
 				else if (hasClass(document.getElementById('myImg'), "selectedIcon")) {
 					iconID = 'userUpload';
-					// defaultIconID = "none";
+					defaultIconID = "none";
 				}
+				habitToAdd.set("defaultIconID", defaultIconID);
 
 				// If one of the default images is selected
 				if (iconID == 'icon1' || iconID == 'icon2' || iconID == 'icon3') {
-					habitToAdd.set("defaultIconID", defaultIconID);
 					var query = new Parse.Query(defaultImage);
 					query.get(defaultIconID, {
 					    success: function(defaultIcon) {

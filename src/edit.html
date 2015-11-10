@@ -13,6 +13,8 @@
 			Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
 			var Habit = Parse.Object.extend("Habit");
 			var defaultImage = Parse.Object.extend("DefaultImages");
+			var hasImageChanged = false;
+			var hasUploaded = false;
 
 			function getParameterByName(name) {
 			    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -26,6 +28,16 @@
 			}
 
 			function selectImage(name) {
+				// Check if different image was selected
+				if (name == "myImg" && !hasUploaded) {
+					// If selecting previously uploaded image, then no change
+					hasImageChanged = false;
+				}
+				else {
+					// If selecting a default icon or upload a new image, then there is a change
+					hasImageChanged = true;
+				}
+
 				//Clear all the other effects
 				document.getElementById('icon1').className = "icon";
 				document.getElementById('icon2').className = "icon";
@@ -79,6 +91,7 @@
 			function imageIsLoaded(e) {
 				$('.hide').css('display','inline-block');
 			    $('#myImg').attr('src', e.target.result);
+			    hasUploaded = true;
 			    selectImage('myImg');
 			};
 
@@ -86,8 +99,15 @@
             	// declare and load Parse Habit object using objectid
             	// console.log(localStorage.getItem("toEdit"));
 				var query = new Parse.Query(Habit);
+
+				// Redirect user to home page if no habit object to edit
+				editHabitID = getParameterByName("id");
+				if (editHabitID == null || editHabitID == "") {
+					location = "list.html";
+				}
+
 				// query.get(localStorage.getItem("toEdit"), {
-				query.get(getParameterByName("id"), {
+				query.get(editHabitID, {
 					success: function(habit) {
 						// The object was retrieved successfully.
 						document.getElementById("title").value = habit.get("name");
@@ -119,23 +139,28 @@
 							document.getElementById("others").value = "" + frequencyPerDay;
 						}
 
-						// Set selected default image
-						if (habit.get("defaultIconID") != "none") {
-							switch (habit.get("defaultIconID")) {
-								case "0JrjvKGnbG":
-									selectImage("icon1");
-									break;
-								case "zgGDtotXrU":
-									selectImage("icon2");
-									break;
-								case "qww3v520kk":
-									selectImage("icon3");
-									break;
-								default:
-							}
-						}
-						else {
-							// Select uploaded image somehow???
+						// Upload user uploaded image if it exists
+						var habitIcon = habit.get("icon");
+			            if (habitIcon) {
+			                document.getElementById("myImg").src = habitIcon.url();
+			            }
+
+						// Set selected default image or uploaded image
+						switch (habit.get("defaultIconID")) {
+							case "0JrjvKGnbG":
+								selectImage("icon1");
+								break;
+							case "zgGDtotXrU":
+								selectImage("icon2");
+								break;
+							case "qww3v520kk":
+								selectImage("icon3");
+								break;
+							case "none":
+								$('.hide').css('display','inline-block');
+								selectImage("myImg");
+								break;
+							default:
 						}
 					},
 					error: function(object, error) {
@@ -226,8 +251,8 @@
 							    }
 							});
 						}
-						// If user selects uploaded image
-						else if (iconID == 'userUpload') {
+						// If user uploaded a new image
+						else if (hasImageChanged && iconID == 'userUpload') {
 							var fileUploadControl = $("#iconFileUpload")[0];
 							if (fileUploadControl.files.length > 0) {
 								var file = fileUploadControl.files[0];
@@ -254,6 +279,11 @@
 									alert('Failed to update object, with error code: ' + error.message);
 								}
 							});
+						}
+						else {
+							// Don't upload new image, just save changes
+							habitToEdit.save();
+							location = "list.html";
 						}
 					},
 					error: function(object, error) {
