@@ -245,7 +245,17 @@ p#alarm {
 	font-size: 15px;
 }
 
+.myFile input[type="file"] {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: 0;
+}
 
+.hide {
+	display: none;
+}
 
 
 
