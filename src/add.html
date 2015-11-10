@@ -54,6 +54,8 @@
 					<span id="times">times</span>
 				</div>
 
+				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
+
 				<p><label>Notifications</label></p>
 				<div class="onoffswitch" >
    					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked onclick="incCounter();">
@@ -65,7 +67,7 @@
 
 			<div class="notifications1">
 			<p id="alarm">Alarm 1</p>
-				<select id="times">
+				<select id="hr1">
   					<option value="1">1</option>
  					<option value="2">2</option>
   					<option value="3">3</option>
@@ -80,7 +82,7 @@
 				  	<option value="12">12</option>
 				</select>
 
-				<select id="times">
+				<select id="min1">
   					<option value="00">:00</option>
  					<option value="01">:01</option>
   					<option value="02">:02</option>
@@ -143,7 +145,7 @@
   					<option value="59">:59</option>
 				</select>
 
-				<select id="times">
+				<select id="am1">
   					<option value="am">am</option>
  					<option value="pm">pm</option>
 				</select>
@@ -151,7 +153,7 @@
 
 		<div class="notifications2">
 			<p id="alarm">Alarm 2</p>
-				<select id="times">
+				<select id="hr2">
   					<option value="1">1</option>
  					<option value="2">2</option>
   					<option value="3">3</option>
@@ -166,7 +168,7 @@
 				  	<option value="12">12</option>
 				</select>
 
-				<select id="times">
+				<select id="min2">
   					<option value="00">:00</option>
  					<option value="01">:01</option>
   					<option value="02">:02</option>
@@ -229,7 +231,7 @@
   					<option value="59">:59</option>
 				</select>
 
-				<select id="times">
+				<select id="am2">
   					<option value="am">am</option>
  					<option value="pm">pm</option>
 				</select>
@@ -237,7 +239,7 @@
 
 			<div class="notifications3">
 				<p id="alarm">Alarm 3</p>
-				<select id="times">
+				<select id="hr3">
   					<option value="1">1</option>
  					<option value="2">2</option>
   					<option value="3">3</option>
@@ -252,7 +254,7 @@
 				  	<option value="12">12</option>
 				</select>
 
-				<select id="times">
+				<select id="min3">
   					<option value="00">:00</option>
  					<option value="01">:01</option>
   					<option value="02">:02</option>
@@ -315,21 +317,25 @@
   					<option value="59">:59</option>
 				</select>
 
-				<select id="times">
+				<select id="am3">
   					<option value="am">am</option>
  					<option value="pm">pm</option>
 				</select>
 			</div>	
 
-				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
-				<p id="save_p"><input id="save" type="button" value="Save It" onclick="addHabit();"></p> <!-- onclick ="location.href='list.html'" -->
+			<p id="save_p"><input id="save" type="button" value="Save It" onclick="addHabit();"></p> <!-- onclick ="location.href='list.html'" -->
+
 			</form>
 
 		</div>
 
 		<script>
 			Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
+
 			var counter = 0;
+			var Habit = Parse.Object.extend("Habit");
+			var habit = new Habit();
+
 
 			function selectImage(name) {
 				//Clear all the other effects
