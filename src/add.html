@@ -433,12 +433,12 @@
 				}
 				else if (hasClass(document.getElementById('myImg'), "selectedIcon")) {
 					iconID = 'userUpload';
-					// defaultIconID = "none";
+					defaultIconID = "none";
 				}
+				habitToAdd.set("defaultIconID", defaultIconID);
 
 				// If one of the default images is selected
 				if (iconID == 'icon1' || iconID == 'icon2' || iconID == 'icon3') {
-					habitToAdd.set("defaultIconID", defaultIconID);
 					var query = new Parse.Query(defaultImage);
 					query.get(defaultIconID, {
 					    success: function(defaultIcon) {
