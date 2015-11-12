@@ -41,6 +41,7 @@ input#others{
 	font-size:medium;
 }
 img.icon{
+	display: inline-block;
 	width: 80px;
 	height: 80px;
 	margin-right: 20px;
@@ -251,7 +252,7 @@ p#notifications{
 
 .myFile input[type="file"] {
 	display: block;
-	position: relative;
+	position: absolute;
 	top: 0;
 	right: 0;
 	opacity: 0;
