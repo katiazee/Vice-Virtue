@@ -25,7 +25,7 @@
                                 <line x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
                             </svg>
                         </span><br>
-                        <span class="message-today">Completed <strong>1/1</strong> for today!</span>
+                        <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span>
                     </div>
                     <div class="habit-op">
                         <button type="button" class="op op-done" onclick="showMsg(this);" title="done">
@@ -101,6 +101,7 @@
             clone.querySelector(".habit-name").textContent = habit.get('name')
             clone.querySelector(".currStreak").textContent = habit.get('currStreak')
             clone.querySelector(".bestStreak").textContent = habit.get('bestStreak')
+            clone.querySelector(".frequencyPerDay").textContent = habit.get('frequency');
 
             var habitIcon = habit.get("icon");
             if (habitIcon) {
