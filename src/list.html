@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/list.css">
 	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
-<body>
+<body> 
     <section>
         <h1>Habit List</h1>
         <ul id="habit-list">
@@ -27,8 +28,20 @@
                         </span><br>
                         <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span>
                     </div>
+
+
+                    <div class="days">
+                        <p id="onSunday">S</p>
+                        <p id="onMonday">M</p>
+                        <p id="onTuesday">T</p>
+                        <p id="onWednesday">W</p>
+                        <p id="onThursday">T</p>
+                        <p id="onFriday">F</p>
+                        <p id="onSaturday">S</p>
+                    </div>
+
                     <div class="habit-op">
-                        <button type="button" class="op op-done" onclick="showMsg(this);" title="done">
+                        <button type="button" class="op op-done" id="thumbs" onclick="showMsg(this);" title="done">
                             <img src="../img/done.svg" alt="Done">
                         </button>
                         <button type="button" class="op op-edit" onclick="editHabit(this);" title="edit habit">
@@ -47,13 +60,16 @@
 
     <script type="text/javascript">
         Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
+
         var Habit = Parse.Object.extend("Habit");
 
         function showMsg(element){
             var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
             // alert(msgElement.innerHTML);
+
             msgElement.style.visibility="visible";
         }
+
 
         function editHabit(element) {
             localStorage.setItem("toEdit", element.parentNode.parentNode.getAttribute("data-id"));
@@ -90,10 +106,101 @@
             });
         }
 
+
+
+        function days(habit, clone) {
+            checkDay('onSunday', habit, clone);
+            checkDay('onMonday', habit, clone);
+            checkDay('onTuesday', habit, clone);
+            checkDay('onWednesday', habit,clone);
+            checkDay('onThursday', habit,clone);
+            checkDay('onFriday', habit, clone);
+            checkDay('onSaturday', habit, clone);
+        }
+
+
+        function checkDay(element, habit, clone) {
+            var boolDay = habit.get(element);
+
+            var d = new Date();
+            var n = d.getDay();
+
+            if (boolDay) {
+                switch (element) {
+                case 'onSunday':
+                    if (n == 0) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
+                    clone.querySelector("#onSunday").style.color = "black";
+                    clone.querySelector("#onSunday").style.fontWeight = "bold";                    
+                    break;
+                case 'onMonday':
+                     if (n == 1) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
+                    clone.querySelector("#onMonday").style.color = "black";
+                    clone.querySelector("#onMonday").style.fontWeight = "bold";
+                    break;
+                case 'onTuesday':
+                    if (n == 2) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
+                    clone.querySelector("#onTuesday").style.color = "black";
+                    clone.querySelector("#onTuesday").style.fontWeight = "bold";
+                    break;
+                case 'onWednesday':
+                    if (n == 3) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
+                    clone.querySelector("#onWednesday").style.color = "black";
+                    clone.querySelector("#onWednesday").style.fontWeight = "bold";
+                    break;
+                case 'onThursday':
+                    if (n == 4) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
+                    clone.querySelector("#onThursday").style.color = "black";
+                    clone.querySelector("#onThursday").style.fontWeight = "bold";
+                    break;
+                case 'onFriday':
+                    if (n == 5) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
+                    clone.querySelector("#onFriday").style.color = "black";
+                    clone.querySelector("#onFriday").style.fontWeight = "bold";
+                    break;
+                case 'onSaturday':
+                    if (n == 6) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
+                    clone.querySelector("#onSaturday").style.color = "black";
+                    clone.querySelector("#onSaturday").style.fontWeight = "bold";
+                    break;
+                }
+            }
+
+        }
+
+
         function addHabitToList(habit) {
             var list = document.getElementById("habit-list");
             var template = document.querySelector("#habit-template")
             var clone = document.importNode(template.content, true);
+
             // console.log(clone.childNodes.item("#habit-name"))
 
             clone.firstElementChild.setAttribute("data-id", habit.id)
@@ -102,6 +209,9 @@
             clone.querySelector(".currStreak").textContent = habit.get('currStreak')
             clone.querySelector(".bestStreak").textContent = habit.get('bestStreak')
             clone.querySelector(".frequencyPerDay").textContent = habit.get('frequency');
+
+            // Set up days display for each habit
+            days(habit, clone);
 
             var habitIcon = habit.get("icon");
             if (habitIcon) {
