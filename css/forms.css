@@ -28,19 +28,38 @@ div.forms {
 	background-color: white;
 	border-radius: 25px;
 	bottom: auto;
+	margin-bottom: 20px;
 }
 input#title{
 	height: 30px;
-	width: 350px;
+	width: 99%;
 	font-size:medium;
 
 }
 input#others{
 	height: 30px;
-	width: 250px;
+	width: 99%;
 	font-size:medium;
 }
+label.error_message{
+  	color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+} 
 img.icon{
+	width: 80px;
+	height: 80px;
+	margin-right: 20px;
+	border-radius: 25px;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+img.selectedIcon{
 	width: 80px;
 	height: 80px;
 	margin-right: 20px;
@@ -58,15 +77,16 @@ img.icon{
 	width: 350px;
 	background-color: white;
 	border-radius: 25px;
+	margin-bottom: 20px;
   }
   input#title{
 	height: 30px;
-	width: 250px;
+	width: 99%
 	font-size:small;
   }
   input#others{
 	height: 30px;
-	width: 250px;
+	width: 99%;
 	font-size:small;
 
 }
@@ -80,7 +100,26 @@ img.icon{
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
   }
-  
+  img.selectedIcon{
+	width: 60px;
+	height: 60px;
+	margin-right: 10px;
+	border-radius: 15px;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+  }
+
+  label.error_message{
+  	color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+
   p{
 	color:#6c6c6c;
 	font-size: small;
@@ -140,6 +179,7 @@ p#save_p{
 	text-align: center;
 }
 form{
+	padding-right: 25px;
 	padding-left: 25px;
 	padding-bottom: 20px;
 }
