@@ -36,6 +36,10 @@ body{
 .op-done:hover{background:#00B16A;}
 .op-done:active{background:#00B16A; border:2px solid green;}
 
+.op-down{background:rgb(194, 67, 67); border:2px solid rgb(160,12,12); pointer-events: none;}
+.op-down:hover{background:#00B16A;}
+.op-down:active{background:#00B16A; border:2px solid red;}
+
 .op-edit{background:rgba(247, 202, 24, 0.8); border:2px solid rgba(255, 255, 0, 0.3);}
 .op-edit:hover{background:#F7CA18;}
 .op-edit:active{background:#F7CA18; border:2px solid yellow;}

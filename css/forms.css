@@ -50,6 +50,7 @@ label.error_message{
     border-radius: 4px;
 } 
 img.icon{
+	display: inline-block;
 	width: 80px;
 	height: 80px;
 	margin-right: 20px;
@@ -290,8 +291,8 @@ p#notifications{
 }
 
 .myFile input[type="file"] {
-	display: block;
-	position: relative;
+	display: inline-block;
+	position: absolute;
 	top: 0;
 	right: 0;
 	opacity: 0;
@@ -299,6 +300,7 @@ p#notifications{
 
 .hide {
 	display: none;
+	position: absolute;
 }
 
 .onoffswitch {
