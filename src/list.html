@@ -123,9 +123,7 @@
             var boolDay = habit.get(element);
 
             var d = new Date();
-            var n = 0;
-            //var n = d.getDay();
-
+            var n = d.getDay();
 
             if (boolDay) {
                 switch (element) {
@@ -136,24 +134,61 @@
                         clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
                     }
                     clone.querySelector("#onSunday").style.color = "black";
+                    clone.querySelector("#onSunday").style.fontWeight = "bold";                    
                     break;
                 case 'onMonday':
+                     if (n == 1) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
                     clone.querySelector("#onMonday").style.color = "black";
+                    clone.querySelector("#onMonday").style.fontWeight = "bold";
                     break;
                 case 'onTuesday':
+                    if (n == 2) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
                     clone.querySelector("#onTuesday").style.color = "black";
+                    clone.querySelector("#onTuesday").style.fontWeight = "bold";
                     break;
                 case 'onWednesday':
+                    if (n == 3) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
                     clone.querySelector("#onWednesday").style.color = "black";
+                    clone.querySelector("#onWednesday").style.fontWeight = "bold";
                     break;
                 case 'onThursday':
+                    if (n == 4) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
                     clone.querySelector("#onThursday").style.color = "black";
+                    clone.querySelector("#onThursday").style.fontWeight = "bold";
                     break;
                 case 'onFriday':
+                    if (n == 5) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
                     clone.querySelector("#onFriday").style.color = "black";
+                    clone.querySelector("#onFriday").style.fontWeight = "bold";
                     break;
                 case 'onSaturday':
+                    if (n == 6) {
+                        clone.getElementById("thumbs").style.pointerEvents = "auto";
+                        clone.getElementById("thumbs").style.background = "rgba(0, 177, 106, 0.8)";
+                        clone.getElementById("thumbs").style.border = "2px solid rgba(0, 128, 0, 0.3)";
+                    }
                     clone.querySelector("#onSaturday").style.color = "black";
+                    clone.querySelector("#onSaturday").style.fontWeight = "bold";
                     break;
                 }
             }
