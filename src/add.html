@@ -400,6 +400,13 @@
 				habitToAdd.set("currStreak", 0);
 				habitToAdd.set("bestStreak", 0);
 
+				var dateObj = new Date();
+				var month = dateObj.getUTCMonth() + 1; //months from 1-12
+				var day = dateObj.getUTCDate();
+				var year = dateObj.getUTCFullYear();
+				habitToAdd.set("currDate", month + "/" + day + "/" + year);
+				habitToAdd.set("currDay", dateObj.getDay());
+
 				var otherFrequency = document.getElementById('others').value;
 				var frequency;
 
@@ -411,10 +418,10 @@
 					frequency = 2;
 				} else if(document.getElementById('thrice').checked) {
 					frequency = 3;
-				} /* else {
-					// DISABLE SAVE FORM OR SOMETHING???
-				} */
+				}
 				habitToAdd.set("frequency", frequency);
+				habitToAdd.set("numCompleted", 0);
+				habitToAdd.set("thumbCtr", 0);
 
 				// Image upload
 				var iconID;
@@ -497,142 +504,6 @@
 						}
 					});
 				}
-
-
-				/* if (hasClass(document.getElementById('icon1'), "selectedIcon")) {
-					var query = new Parse.Query(defaultImage);
-					query.get("0JrjvKGnbG", {
-					    success: function(defaultIcon) {
-					        habitToAdd.set("icon", defaultIcon.get("icon"));
-
-					        habitToAdd.save(null, {
-								success: function(habitToAdd) {
-									// Execute any logic that should take place after the object is saved.
-									// alert('New object created with objectId: ' + habitToAdd.id);
-
-									console.log('new object created with objectId: ' + habitToAdd.id);
-									location = "list.html"
-								},
-								error: function(habitToAdd, error) {
-									// Execute any logic that should take place if the save fails.
-									// error is a Parse.Error with an error code and message.
-									alert('Failed to create new object, with error code: ' + error.message);
-								}
-							});
-					    },
-					    error: function(object, error) {
-					        // The object was not retrieved successfully.
-					        // error is a Parse.Error with an error code and message.
-					    }
-					});
-
-					// habitToAdd.set("defaultIconID", "0JrjvKGnbG");
-				}
-				else if (hasClass(document.getElementById('icon2'), "selectedIcon")) {
-					var query = new Parse.Query(defaultImage);
-					query.get("zgGDtotXrU", {
-					    success: function(defaultIcon) {
-					        habitToAdd.set("icon", defaultIcon.get("icon"));
-
-					        habitToAdd.save(null, {
-								success: function(habitToAdd) {
-									// Execute any logic that should take place after the object is saved.
-									// alert('New object created with objectId: ' + habitToAdd.id);
-
-									console.log('new object created with objectId: ' + habitToAdd.id);
-									location = "list.html"
-								},
-								error: function(habitToAdd, error) {
-									// Execute any logic that should take place if the save fails.
-									// error is a Parse.Error with an error code and message.
-									alert('Failed to create new object, with error code: ' + error.message);
-								}
-							});
-					    },
-					    error: function(object, error) {
-					        // The object was not retrieved successfully.
-					        // error is a Parse.Error with an error code and message.
-					    }
-					});
-
-					// habitToAdd.set("defaultIconID", "zgGDtotXrU");
-				}
-				else if (hasClass(document.getElementById('icon3'), "selectedIcon")) {
-					var query = new Parse.Query(defaultImage);
-					query.get("qww3v520kk", {
-					    success: function(defaultIcon) {
-					        habitToAdd.set("icon", defaultIcon.get("icon"));
-
-					        habitToAdd.save(null, {
-								success: function(habitToAdd) {
-									// Execute any logic that should take place after the object is saved.
-									// alert('New object created with objectId: ' + habitToAdd.id);
-
-									console.log('new object created with objectId: ' + habitToAdd.id);
-									location = "list.html"
-								},
-								error: function(habitToAdd, error) {
-									// Execute any logic that should take place if the save fails.
-									// error is a Parse.Error with an error code and message.
-									alert('Failed to create new object, with error code: ' + error.message);
-								}
-							});
-					    },
-					    error: function(object, error) {
-					        // The object was not retrieved successfully.
-					        // error is a Parse.Error with an error code and message.
-					    }
-					});
-
-					// habitToAdd.set("defaultIconID", "qww3v520kk");
-				}
-				// If uploaded image was selected
-				else {
-					var fileUploadControl = $("#iconFileUpload")[0];
-					if (fileUploadControl.files.length > 0) {
-						var file = fileUploadControl.files[0];
-						var name = "icon.jpg";
-
-						var parseFile = new Parse.File(name, file);
-					}
-
-					parseFile.save().then(function() {
-						// The file has been saved to Parse.
-					}, function(error) {
-						// The file either could not be read, or could not be saved to Parse.
-					});
-					habitToAdd.set("icon", parseFile);
-
-					habitToAdd.save(null, {
-						success: function(habitToAdd) {
-							// Execute any logic that should take place after the object is saved.
-							// alert('New object created with objectId: ' + habitToAdd.id);
-
-							console.log('new object created with objectId: ' + habitToAdd.id);
-							location = "list.html"
-						},
-						error: function(habitToAdd, error) {
-							// Execute any logic that should take place if the save fails.
-						a	// error is a Parse.Error with an error code and message.
-							alert('Failed to create new object, with error code: ' + error.message);
-						}
-					});
-				} */
-
-				/* habitToAdd.save(null, {
-					success: function(habitToAdd) {
-						// Execute any logic that should take place after the object is saved.
-						// alert('New object created with objectId: ' + habitToAdd.id);
-
-						console.log('new object created with objectId: ' + habitToAdd.id);
-						location = "list.html"
-					},
-					error: function(habitToAdd, error) {
-						// Execute any logic that should take place if the save fails.
-						// error is a Parse.Error with an error code and message.
-						alert('Failed to create new object, with error code: ' + error.message);
-					}
-				}); */
 			}
 
 			function uploadIcon(){

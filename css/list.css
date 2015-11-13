@@ -49,40 +49,16 @@ body{
     line-height: 70px;
 }
 
-#onSunday {
+.dayText {
     display: inline;
     font-weight: normal;
     color: gray;
 }
-#onMonday {
-    display: inline;
-    font-weight: normal;
-    color: gray;
-}
-#onTuesday {
-    display: inline;
-    font-weight: normal;
-    color: gray;
-}
-#onWednesday {
-    display: inline;
-    font-weight: normal;
-    color: gray;
-}
-#onThursday {
-    display: inline;
-    font-weight: normal;
-    color: gray;
-}
-#onFriday {
-    display: inline;
-    font-weight: normal;
-    color: gray;
-}
-#onSaturday {
-    display: inline;
-    font-weight: normal;
-    color: gray;
+
+.enableThumbsUp {
+    pointer-events: auto;
+    background: rgba(0, 177, 106, 0.8);
+    border: 2px solid rgba(0, 128, 0, 0.3);
 }
 
 
