@@ -22,8 +22,8 @@
                         <span class="message-total">
                             <strong class="currStreak">2</strong> days in a row! Best Record: <strong class="bestStreak">5</strong><br>
                             <svg height="25" width="150">
-                                <line x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
-                                <line x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
+                                <line id="pBar1" x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
+                                <line id="pBar2" x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
                             </svg>
                         </span><br>
                         <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span>
@@ -53,7 +53,7 @@
                         <button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit">
                             <img src="../img/delete.svg" alt="Del">
                         </button>
-                        
+
                     </div>
                 </li>
             </template>
@@ -200,6 +200,25 @@
         }
 
 
+        function streak(habit, clone) {
+              var currStreak = habit.get("currStreak");
+              var bestStreak = habit.get("bestStreak");
+              console.log("curr streak = " + currStreak);
+              console.log("best streak = " + bestStreak); 
+
+              var percentage = currStreak/bestStreak * 150;
+
+              clone.getElementById("pBar1").setAttribute('x1','0');
+              clone.getElementById("pBar1").setAttribute('x2', percentage);
+              clone.getElementById("pBar2").setAttribute('x1', percentage);
+              clone.getElementById("pBar2").setAttribute('x2','150');
+        }
+
+
+           /*                 <svg height="25" width="150">
+                                <line x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
+                                <line x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />*/
+
         function addHabitToList(habit) {
             var list = document.getElementById("habit-list");
             var template = document.querySelector("#habit-template")
@@ -213,9 +232,10 @@
             clone.querySelector(".currStreak").textContent = habit.get('currStreak')
             clone.querySelector(".bestStreak").textContent = habit.get('bestStreak')
             clone.querySelector(".frequencyPerDay").textContent = habit.get('frequency');
-
             // Set up days display for each habit
             days(habit, clone);
+            streak(habit,clone);
+
 
             var habitIcon = habit.get("icon");
             if (habitIcon) {
