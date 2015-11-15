@@ -60,6 +60,7 @@ function initialiseState() {
           return;
         }
 
+        console.log(subscription)
         // Keep your server in sync with the latest subscriptionId
         sendSubscriptionToServer(subscription);
 
@@ -88,6 +89,7 @@ function subscribe() {
         pushButton.textContent = 'Disable Push Messages';
         pushButton.disabled = false;
 
+        console.log(subscription)
         // TODO: Send the subscription.endpoint to your server
         // and save it to send a push message at a later date
         return sendSubscriptionToServer(subscription);
