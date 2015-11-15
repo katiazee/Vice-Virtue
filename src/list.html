@@ -399,7 +399,49 @@
         }
 
         function failHabit(element) {
+            var habitID = element.parentNode.parentNode.getAttribute("data-id");
+            var query = new Parse.Query(Habit);
 
+            query.get(habitID, {
+                success: function(habit) {
+                    // The object was retrieved successfully.
+                    var thumbCtr = habit.get("thumbCtr");
+                    var frequency = habit.get("frequency");
+
+                    if (thumbCtr < frequency) {
+                        thumbCtr++;
+
+                        // End streak if user indicates habit was not completed
+                        habit.set("thumbCtr", thumbCtr);
+                        habit.set("currStreak", 0);
+
+                        habit.save(null, {
+                            success: function(updatedHabit) {
+                                // Execute any logic that should take place after the object is saved.
+                                // Update message
+                                element.parentNode.parentNode.querySelector(".currStreak").textContent = updatedHabit.get('currStreak')
+                            },
+                            error: function(updatedHabit, error) {
+                                // Execute any logic that should take place if the save fails.
+                                // error is a Parse.Error with an error code and message.
+                                console.log('Failed to update object, with error code: ' + error.message);
+                                alert("Unable to update habit!  Please check your network connection and try again later.");
+                            }
+                        });
+                    }
+
+                    if (thumbCtr == frequency) {
+                        // Disable thumbs up and thumbs down buttons
+                        element.parentNode.parentNode.querySelector('#thumbs').className = "op op-done";
+                    }
+                },
+                error: function(object, error) {
+                    // The object was not retrieved successfully.
+                    // error is a Parse.Error with an error code and message.
+                    console.log("Habit object was not retrieved successfully!");
+                    alert("Unable to update habit!  Please check your network connection and try again later.");
+                }
+            });
         }
 
         // Script to run when page loads
