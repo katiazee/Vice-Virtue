@@ -78,7 +78,7 @@ function initialiseState() {
 function subscribe() {
   // Disable the button so it can't be changed while
   // we process the permission request
-  var pushButton = document.querySelector('.js-push-button');
+  var pushButton = document.querySelector('.notifbutton');
 
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
     serviceWorkerRegistration.pushManager.subscribe()
