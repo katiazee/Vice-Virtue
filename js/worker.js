@@ -3,6 +3,11 @@ self.addEventListener('install', function(event) {
   console.log("installing service worker")
 });
 
+self.addEventListener('subscribe', function(event) {
+  // Perform install steps
+  console.log("subscribig in service worker")
+});
+
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
 
