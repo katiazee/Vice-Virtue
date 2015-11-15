@@ -79,11 +79,12 @@ function subscribe() {
   // Disable the button so it can't be changed while
   // we process the permission request
   var pushButton = document.querySelector('.notifbutton');
-
+console.log('button pushed')
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
     serviceWorkerRegistration.pushManager.subscribe()
       .then(function(subscription) {
         // The subscription was successful
+        console.log('here - success')
         isPushEnabled = true;
         pushButton.textContent = 'Disable Push Messages';
         pushButton.disabled = false;
