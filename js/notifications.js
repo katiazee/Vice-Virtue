@@ -129,7 +129,7 @@ function sendSubscriptionToServer(subscription) {
     $.ajax({
         url: "https://vice-virtue.herokuapp.com/",
         type: "POST",
-        data: { endpoint: subscription.endpoint, userId: Parse.User.current().id},
+        data: { endpoint: subscription.endpoint, userId: null},
         dataType: "json",
         success: function (result) {
             switch (result) {
@@ -142,7 +142,6 @@ function sendSubscriptionToServer(subscription) {
         },
         error: function (xhr, ajaxOptions, thrownError) {
         alert(xhr.status);
-        alert(thrownError);
         }
     });
 }
