@@ -100,7 +100,7 @@ function subscribe() {
         console.log(subscription)
         // TODO: Send the subscription.endpoint to your server
         // and save it to send a push message at a later date
-        // return sendSubscriptionToServer(subscription);
+        sendSubscriptionToServer(subscription);
       })
       .catch(function(e) {
         if (Notification.permission === 'denied') {
@@ -120,4 +120,29 @@ function subscribe() {
         }
       });
   });
+}
+
+function sendSubscriptionToServer(subscription) {
+    console.log(subscription)
+    console.log('endpoint:', subscription.endpoint);
+
+    $.ajax({
+        url: "https://example.com/api/",
+        type: "POST",
+        data: { apiKey: "23462", method: "example", ip: "208.74.35.5" },
+        dataType: "json",
+        success: function (result) {
+            switch (result) {
+                case true:
+                    processResponse(result);
+                    break;
+                default:
+                    resultDiv.html(result);
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status);
+        alert(thrownError);
+        }
+    });
 }
