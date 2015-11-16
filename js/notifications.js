@@ -92,9 +92,10 @@ function subscribe() {
       .then(function(subscription) {
         // The subscription was successful
         console.log('here - success')
+        console.log('endpoint:', subscription.endpoint);
         isPushEnabled = true;
         pushButton.textContent = 'Disable Push Messages';
-        pushButton.disabled = false;
+        // pushButton.disabled = false;
 
         console.log(subscription)
         // TODO: Send the subscription.endpoint to your server
