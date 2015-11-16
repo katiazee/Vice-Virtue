@@ -82,6 +82,8 @@ function subscribe() {
   console.log('button pushed')
   if ('serviceWorker' in navigator) {
       console.log("serviceworker in navigators")
+  } else {
+      console.log("nope")
   }
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
 
