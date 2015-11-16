@@ -86,7 +86,7 @@ function subscribe() {
       console.log("nope")
   }
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-
+      console.log(serviceWorkerRegistration)
     serviceWorkerRegistration.pushManager.subscribe()
       .then(function(subscription) {
         // The subscription was successful
