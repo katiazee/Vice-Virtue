@@ -88,7 +88,7 @@ function subscribe() {
   }
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
       console.log(serviceWorkerRegistration)
-    serviceWorkerRegistration.pushManager.subscribe()
+    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly:true})
       .then(function(subscription) {
         // The subscription was successful
         console.log('here - success')
