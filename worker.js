@@ -13,9 +13,9 @@ self.addEventListener('subscribe', function(event) {
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
 
-  var title = 'Yay a message.';
-  var body = 'We have received a push message.';
-  var icon = '/images/icon-192x192.png';
+  var title = "Don't forget to do <Habit title here>!";
+  var body = 'Remember to do <habit here> and update your progress.';
+  var icon = '/img/logo.png';
   var tag = 'simple-push-demo-notification-tag';
 
   event.waitUntil(
