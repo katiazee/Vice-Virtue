@@ -100,7 +100,7 @@ function subscribe() {
         console.log(subscription)
         // TODO: Send the subscription.endpoint to your server
         // and save it to send a push message at a later date
-        return sendSubscriptionToServer(subscription);
+        // return sendSubscriptionToServer(subscription);
       })
       .catch(function(e) {
         if (Notification.permission === 'denied') {
