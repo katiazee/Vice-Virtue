@@ -45,7 +45,7 @@
                             <img src="../img/done.svg" alt="Done">
                         </button>
                         <button type="button" class="op op-down" id="thumbsDown" onclick="failHabit(this); showMsg(this);" title="fail">
-                            <img src="../img/thumbsdown.jpg" alt="Down">
+                            <img src="../img/thumbsdown.svg" alt="Down">
                         </button>
                         <button type="button" class="op op-edit" onclick="editHabit(this);" title="edit habit">
                             <img src="../img/edit.svg" alt="Edit">
@@ -467,6 +467,9 @@
                                 // Execute any logic that should take place after the object is saved.
                                 // Update message
                                 element.parentNode.parentNode.querySelector(".currStreak").textContent = updatedHabit.get('currStreak');
+
+                                // Update progress bar
+                                updateStreakFromButton(updatedHabit, element.parentNode.parentNode);
                             },
                             error: function(updatedHabit, error) {
                                 // Execute any logic that should take place if the save fails.
