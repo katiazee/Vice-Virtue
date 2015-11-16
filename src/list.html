@@ -22,8 +22,8 @@
                         <span class="message-total">
                             <strong class="currStreak">2</strong> times in a row! Best Record: <strong class="bestStreak">5</strong><br>
                             <svg height="25" width="150">
-                                <line x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
-                                <line x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
+                                <line id="pBar1" x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
+                                <line id="pBar2" x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
                             </svg>
                         </span><br>
                         <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span>
@@ -41,8 +41,11 @@
                     </div>
 
                     <div class="habit-op">
-                        <button type="button" class="op op-done" id="thumbs" onclick="completeHabit(this); showMsg(this);" title="done">
+                        <button type="button" class="op op-done" id="thumbsUp" onclick="completeHabit(this); showMsg(this);" title="done">
                             <img src="../img/done.svg" alt="Done">
+                        </button>
+                        <button type="button" class="op op-down" id="thumbsDown" onclick="failHabit(this); showMsg(this);" title="fail">
+                            <img src="../img/thumbsdown.jpg" alt="Down">
                         </button>
                         <button type="button" class="op op-edit" onclick="editHabit(this);" title="edit habit">
                             <img src="../img/edit.svg" alt="Edit">
@@ -50,6 +53,7 @@
                         <button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit">
                             <img src="../img/delete.svg" alt="Del">
                         </button>
+
                     </div>
                 </li>
             </template>
@@ -160,56 +164,96 @@
                 switch (element) {
                 case 'onSunday':
                     if (n == 0) {
-                        clone.getElementById("thumbs").className = clone.getElementById("thumbs").className + " enableThumbsUp";
+                        clone.getElementById("thumbsUp").className = clone.getElementById("thumbsUp").className + " enableThumbsUp";
+                        clone.getElementById("thumbsDown").className = clone.getElementById("thumbsDown").className + " enableThumbsDown";
                     }
                     clone.querySelector("#onSunday").style.color = "black";
                     clone.querySelector("#onSunday").style.fontWeight = "bold";                    
                     break;
                 case 'onMonday':
                     if (n == 1) {
-                        clone.getElementById("thumbs").className = clone.getElementById("thumbs").className + " enableThumbsUp";
+                        clone.getElementById("thumbsUp").className = clone.getElementById("thumbsUp").className + " enableThumbsUp";
+                        clone.getElementById("thumbsDown").className = clone.getElementById("thumbsDown").className + " enableThumbsDown";
                     }
                     clone.querySelector("#onMonday").style.color = "black";
                     clone.querySelector("#onMonday").style.fontWeight = "bold";
                     break;
                 case 'onTuesday':
                     if (n == 2) {
-                        clone.getElementById("thumbs").className = clone.getElementById("thumbs").className + " enableThumbsUp";
+                        clone.getElementById("thumbsUp").className = clone.getElementById("thumbsUp").className + " enableThumbsUp";
+                        clone.getElementById("thumbsDown").className = clone.getElementById("thumbsDown").className + " enableThumbsDown";
                     }
                     clone.querySelector("#onTuesday").style.color = "black";
                     clone.querySelector("#onTuesday").style.fontWeight = "bold";
                     break;
                 case 'onWednesday':
                     if (n == 3) {
-                        clone.getElementById("thumbs").className = clone.getElementById("thumbs").className + " enableThumbsUp";
+                        clone.getElementById("thumbsUp").className = clone.getElementById("thumbsUp").className + " enableThumbsUp";
+                        clone.getElementById("thumbsDown").className = clone.getElementById("thumbsDown").className + " enableThumbsDown";
                     }
                     clone.querySelector("#onWednesday").style.color = "black";
                     clone.querySelector("#onWednesday").style.fontWeight = "bold";
                     break;
                 case 'onThursday':
                     if (n == 4) {
-                        clone.getElementById("thumbs").className = clone.getElementById("thumbs").className + " enableThumbsUp";
+                        clone.getElementById("thumbsUp").className = clone.getElementById("thumbsUp").className + " enableThumbsUp";
+                        clone.getElementById("thumbsDown").className = clone.getElementById("thumbsDown").className + " enableThumbsDown";
                     }
                     clone.querySelector("#onThursday").style.color = "black";
                     clone.querySelector("#onThursday").style.fontWeight = "bold";
                     break;
                 case 'onFriday':
                     if (n == 5) {
-                        clone.getElementById("thumbs").className = clone.getElementById("thumbs").className + " enableThumbsUp";
+                        clone.getElementById("thumbsUp").className = clone.getElementById("thumbsUp").className + " enableThumbsUp";
+                        clone.getElementById("thumbsDown").className = clone.getElementById("thumbsDown").className + " enableThumbsDown";
                     }
                     clone.querySelector("#onFriday").style.color = "black";
                     clone.querySelector("#onFriday").style.fontWeight = "bold";
                     break;
                 case 'onSaturday':
                     if (n == 6) {
-                        clone.getElementById("thumbs").className = clone.getElementById("thumbs").className + " enableThumbsUp";
+                        clone.getElementById("thumbsUp").className = clone.getElementById("thumbsUp").className + " enableThumbsUp";
+                        clone.getElementById("thumbsDown").className = clone.getElementById("thumbsDown").className + " enableThumbsDown";
                     }
                     clone.querySelector("#onSaturday").style.color = "black";
                     clone.querySelector("#onSaturday").style.fontWeight = "bold";
                     break;
                 }
             }
+        }
 
+        function streak(habit, clone) {
+            var currStreak = habit.get("currStreak");
+            var bestStreak = habit.get("bestStreak");
+            var percentage;
+
+            if (bestStreak == 0) {
+                percentage = 0;
+            } else {
+                var percentage = currStreak/bestStreak * 150;
+            }
+
+            clone.getElementById("pBar1").setAttribute('x1','0');
+            clone.getElementById("pBar1").setAttribute('x2', percentage);
+            clone.getElementById("pBar2").setAttribute('x1', percentage);
+            clone.getElementById("pBar2").setAttribute('x2','150');
+        }
+
+        function updateStreakFromButton(habit, element) {
+            var currStreak = habit.get("currStreak");
+            var bestStreak = habit.get("bestStreak");
+            var percentage;
+
+            if (bestStreak == 0) {
+                percentage = 0;
+            } else {
+                var percentage = currStreak/bestStreak * 150;
+            }
+
+            element.querySelector("#pBar1").setAttribute('x1', '0');
+            element.querySelector("#pBar1").setAttribute('x2', percentage);
+            element.querySelector("#pBar2").setAttribute('x1', percentage);
+            element.querySelector("#pBar2").setAttribute('x2', '150');
         }
 
         function addHabitToList(habit) {
@@ -217,13 +261,11 @@
             var template = document.querySelector("#habit-template")
             var clone = document.importNode(template.content, true);
 
-            // console.log(clone.childNodes.item("#habit-name"))
-
             clone.firstElementChild.setAttribute("data-id", habit.id)
-            // clone.setAttribute("id", "yolo")
 
             // Set up days display for each habit
             days(habit, clone);
+            streak(habit,clone);
 
             var habitIcon = habit.get("icon");
             if (habitIcon) {
@@ -280,6 +322,7 @@
                 //   both the thumbs up and thumbs down button
                 if (habit.get('thumbCtr') == habit.get('frequency')) {
                     clone.querySelector(".op-done").className = "op op-done";
+                    clone.querySelector(".op-down").className = "op op-down";
                     // Display message if habit completed for the day
                     showMsg(clone.querySelector(".op-done"));
                 }
@@ -374,6 +417,9 @@
                                 element.parentNode.parentNode.querySelector(".currStreak").textContent = updatedHabit.get('currStreak')
                                 element.parentNode.parentNode.querySelector(".bestStreak").textContent = updatedHabit.get('bestStreak');
                                 element.parentNode.parentNode.querySelector(".completed").textContent = updatedHabit.get('numCompleted');
+
+                                // Update progress bar
+                                updateStreakFromButton(updatedHabit, element.parentNode.parentNode);
                             },
                             error: function(updatedHabit, error) {
                                 // Execute any logic that should take place if the save fails.
@@ -386,7 +432,8 @@
 
                     if (thumbCtr == frequency) {
                         // Disable thumbs up and thumbs down buttons
-                        element.parentNode.parentNode.querySelector('#thumbs').className = "op op-done";
+                        element.parentNode.parentNode.querySelector('#thumbsUp').className = "op op-done";
+                        element.parentNode.parentNode.querySelector('#thumbsDown').className = "op op-down";
                     }
                 },
                 error: function(object, error) {
@@ -419,7 +466,7 @@
                             success: function(updatedHabit) {
                                 // Execute any logic that should take place after the object is saved.
                                 // Update message
-                                element.parentNode.parentNode.querySelector(".currStreak").textContent = updatedHabit.get('currStreak')
+                                element.parentNode.parentNode.querySelector(".currStreak").textContent = updatedHabit.get('currStreak');
                             },
                             error: function(updatedHabit, error) {
                                 // Execute any logic that should take place if the save fails.
@@ -432,7 +479,8 @@
 
                     if (thumbCtr == frequency) {
                         // Disable thumbs up and thumbs down buttons
-                        element.parentNode.parentNode.querySelector('#thumbs').className = "op op-done";
+                        element.parentNode.parentNode.querySelector('#thumbsUp').className = "op op-done";
+                        element.parentNode.parentNode.querySelector('#thumbsDown').className = "op op-down";
                     }
                 },
                 error: function(object, error) {

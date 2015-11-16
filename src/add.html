@@ -17,13 +17,15 @@
 
 		<div class="forms">
 			<h2>Add A Habit</h2>
-			<form id ="form">
+			<form id ="form" action="#">
 				<p><label><span id="title_text">Habit Title</span></label></p>
 				<p><input id="title" type="text" name="fullname" placeholder="Exercise 30 minutes" value=""></p>
 				<p><label>Habit Icon</label></p>
+				<p><label class="error_message" id="noTitle" style="display:none">Please select an icon.</label></p>
 				<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/sleep.jpg" alt="sleep image"/>
 				<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/salad.jpg" alt="eat image"/>
 				<img id="icon3" class="icon" onclick="selectImage('icon3');" src="../img/run.jpg" alt="run image"/>
+
 
 				<label class="myFile">
 					<img id="icon4" class="icon" onchange="uploadIcon()" src="../img/add.png" alt="find a image" />
@@ -31,30 +33,34 @@
 				</label>
 
 				<div class="hide">
-					<img id="myImg" class = "icon" onclick="selectImage('myImg');" src="#" alt=""/>
+					<img id="myImg" class="icon" onclick="selectImage('myImg');" src="#" alt="uploaded image"/>
 				</div>
 
 				<p><label>Weekly Frequency</label></p>
+				<p><label class="error_message" id="noFrequency" style="display:none">Please select a weekly frequency.</label></p>
 				<div id="ck-button">
-					<label> <input id="isSun" type="checkbox" name="date" value="sunday"><span>Sun</span></label>
-					<label> <input id="isMon" type="checkbox" name="date" value="monday"><span>Mon</span></label>
-					<label> <input id="isTues" type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
-					<label> <input id="isWed" type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
-					<label> <input id="isThurs" type="checkbox" name="date" value="thursday"><span>Thur</span></label>
-					<label> <input id="isFri" type="checkbox" name="date" value="friday"><span>Fri</span></label>
-					<label> <input id="isSat" type="checkbox" name="date" value="saturday"><span>Sat</span></label>
+					<label> <input style="display:none" id="isSun" type="checkbox" name="date" value="sunday"><span>Sun</span></label>
+					<label> <input style="display:none" id="isMon" type="checkbox" name="date" value="monday"><span>Mon</span></label>
+					<label> <input style="display:none" id="isTues" type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
+					<label> <input style="display:none" id="isWed" type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
+					<label> <input style="display:none" id="isThurs" type="checkbox" name="date" value="thursday"><span>Thur</span></label>
+					<label> <input style="display:none" id="isFri" type="checkbox" name="date" value="friday"><span>Fri</span></label>
+					<label> <input style="display:none" id="isSat" type="checkbox" name="date" value="saturday"><span>Sat</span></label>
 				</div>
 
 
 				<p><label>Daily Frequency</label></p>
+				<p><label class="error_message" id="noDailyFrequency" style="display:none">Please select a daily frequency or enter your own (<10).</label></p>
+				<p><label class="error_message" id="selectedBothFrequencies" style="display:none">Please select EITHER a daily frequency OR enter your own (<10).</label></p>
 				<div id="daily-button">
-					<label> <input id="once" type="radio" name="day" value="one" onclick="notify();"><span>1</span></label>
-					<label> <input id="twice" type="radio" name="day" value="two" onclick="notify();"><span>2</span></label>
-					<label> <input id="thrice" type="radio" name="day" value="three"
+					<label> <input style="display:none" id="once" type="radio" name="day" value="one" onclick="notify();"><span>1</span></label>
+					<label> <input style="display:none" id="twice" type="radio" name="day" value="two" onclick="notify();"><span>2</span></label>
+					<label> <input style="display:none" id="thrice" type="radio" name="day" value="three"
 					onclick="notify();"><span>3</span></label>
 					<span id="times">times</span>
 				</div>
-				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
+				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>	
+				<!--<p id="save_p"><input id="save" type="button" onclick="validateForm()" value="Save It" > onclick="location.href='list.html'" > onclick="addHabit();"></p> onclick ="location.href='list.html'" -->
 
 				<p id="notifications"><label>Notifications:</label></p>
 				<div class="onoffswitch" >
@@ -322,8 +328,7 @@
 	 					<option value="pm">pm</option>
 					</select>
 				</div>
-
-				<p id="save_p"><input id="save" type="button" value="Save It" onclick="addHabit();"></p> <!-- onclick ="location.href='list.html'" -->
+				<p id="save_p"><input id="save" type="button" value="Save It" onclick="validateForm();"></p> <!-- onclick ="location.href='list.html'"  addHabit() used to be inside-->
 			</form>
 
 		</div>
@@ -335,16 +340,154 @@
 			var defaultImage = Parse.Object.extend("DefaultImages");
 			var counter = 0;
 
+			$("input[type='radio']").click(function()
+			{
+			  var previousValue = $(this).attr('previousValue');
+			  var name = $(this).attr('name');
+
+			  if (previousValue == 'checked')
+			  {
+			    $(this).removeAttr('checked');
+			    $(this).attr('previousValue', false);
+			  }
+			  else
+			  {
+			    $("input[name="+name+"]:radio").attr('previousValue', false);
+			    $(this).attr('previousValue', 'checked');
+			  }
+			});
+
 			function selectImage(name) {
 				//Clear all the other effects
+				document.getElementById('icon1').style.border = "none";
 				document.getElementById('icon1').className = "icon";
+				document.getElementById('icon2').style.border = "none";
 				document.getElementById('icon2').className = "icon";
-				document.getElementById('icon3').className = "icon";
+				document.getElementById('icon3').style.border = "none";
+				document.getElementById('icon3').className = "icon";				
+				document.getElementById('myImg').style.border = "none";
 				document.getElementById('myImg').className = "icon";
 				var image = document.getElementById(name);
+				image.style.border = "5px solid #42A5F5";
 				image.className = image.className + " selectedIcon";
 
 				fileName = name;
+			}
+			function validateForm() {
+
+				var tileValidated = false;
+				var iconValidated = false;
+				var freqValidated = false;
+				var dailyFreqValidated = false;
+
+				//title validation
+				if (document.getElementById('title').value == "")				
+				{
+					document.getElementById('title').style.border = '1px solid';
+					document.getElementById('title').style.borderColor = '#b94a48';
+				}
+				else 
+				{
+					document.getElementById('title').style.border = '2px inset';
+					tileValidated = true;
+				}
+				//icon validation
+				if ($( "#icon1, #icon2, #icon3, #myImg" ).hasClass( "selectedIcon" ) )
+				{
+					document.getElementById('noTitle').style.display = 'none';
+					iconValidated = true;
+				}
+				else
+					document.getElementById('noTitle').style.display = 'block';
+
+				//frequency validation
+				if (document.getElementById('isSun').checked)
+					document.getElementById('isSun').className += " selectedDay";
+				else
+					document.getElementById('isSun').className = "";
+
+				if (document.getElementById('isMon').checked)
+					document.getElementById('isMon').className += " selectedDay";
+				else
+					document.getElementById('isMon').className = "";
+
+				if (document.getElementById('isTues').checked)
+					document.getElementById('isTues').className += " selectedDay";
+				else
+					document.getElementById('isTues').className = "";
+
+				if (document.getElementById('isWed').checked)
+					document.getElementById('isWed').className += " selectedDay";
+				else
+					document.getElementById('isWed').className = "";
+
+				if (document.getElementById('isThurs').checked)
+					document.getElementById('isThurs').className += " selectedDay";
+				else
+					document.getElementById('isThurs').className = "";
+
+				if (document.getElementById('isFri').checked)
+					document.getElementById('isFri').className += " selectedDay";
+				else
+					document.getElementById('isFri').className = "";
+
+				if (document.getElementById('isSat').checked)
+					document.getElementById('isSat').className += " selectedDay";
+				else
+					document.getElementById('isSat').className = "";
+
+				if ($( "#isSun, #isMon, #isTues, #isWed, #isThur, #isFri, #isSat" ).hasClass( "selectedDay" ) )
+				{
+					document.getElementById('noFrequency').style.display = 'none';
+					freqValidated = true;
+				}
+				else
+					document.getElementById('noFrequency').style.display = 'block';
+
+				//daily frequency validation
+				if (document.getElementById('once').checked)
+					document.getElementById('once').className += " selectedTimesADay";
+				else
+					document.getElementById('once').className = "";
+				if (document.getElementById('twice').checked)
+					document.getElementById('twice').className += " selectedTimesADay";
+				else
+					document.getElementById('twice').className = "";
+				if (document.getElementById('thrice').checked)
+					document.getElementById('thrice').className += " selectedTimesADay";
+				else
+					document.getElementById('thrice').className = "";
+				//both daily frequency selected and others selected
+				if ($( "#once, #twice, #thrice" ).hasClass( "selectedTimesADay" ) && $('#others').val() != '' )
+				{
+					document.getElementById('selectedBothFrequencies').style.display = 'block';
+					document.getElementById('noDailyFrequency').style.display = 'none';
+					document.getElementById('others').style.border = '2px inset';
+				}
+				//either daily frequency selected or others selected  (validates!)
+				else if (($( "#once, #twice, #thrice" ).hasClass( "selectedTimesADay" ) && $('#others').val() == '')
+					|| (!($( "#once, #twice, #thrice" ).hasClass( "selectedTimesADay" )) && $('#others').val() != ''
+					 && $('#others').val() < 10 && $('#others').val() % 1 == 0 ) ) 
+				{
+					document.getElementById('selectedBothFrequencies').style.display = 'none';
+					document.getElementById('noDailyFrequency').style.display = 'none';
+					document.getElementById('others').style.border = '2px inset';
+					dailyFreqValidated = true;
+				}
+				//nothing selected or invalid input in others box 
+				else
+				{
+					document.getElementById('others').style.border = '1px solid';
+					document.getElementById('others').style.borderColor = '#b94a48';
+					document.getElementById('noDailyFrequency').style.display = 'block';
+					document.getElementById('selectedBothFrequencies').style.display = 'none';
+				}
+				if (tileValidated && iconValidated && freqValidated && dailyFreqValidated)
+				{
+					addHabit();
+				}
+				 
+			//if ($('#title').val() == '')
 			}
 
 			function hasClass(element, cls) {
