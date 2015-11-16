@@ -127,9 +127,9 @@ function sendSubscriptionToServer(subscription) {
     console.log('endpoint:', subscription.endpoint);
 
     $.ajax({
-        url: "https://example.com/api/",
+        url: "https://vice-virtue.herokuapp.com/",
         type: "POST",
-        data: { apiKey: "23462", method: "example", ip: "208.74.35.5" },
+        data: { endpoint: subscription.endpoint, userId: Parse.User.current().id},
         dataType: "json",
         success: function (result) {
             switch (result) {
