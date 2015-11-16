@@ -82,7 +82,7 @@ function subscribe() {
   console.log('button pushed')
   if ('serviceWorker' in navigator) {
       console.log("serviceworker in navigators")
-      console.log(navigator.serviceWorker)
+      console.log(navigator.serviceWorker.ready)
   } else {
       console.log("nope")
   }
