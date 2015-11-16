@@ -127,7 +127,7 @@ function sendSubscriptionToServer(subscription) {
     console.log('endpoint:', subscription.endpoint);
 
     $.ajax({
-        url: "https://vice-virtue.herokuapp.com/",
+        url: "https://vice-virtue.herokuapp.com/subscribe",
         type: "POST",
         data: { endpoint: subscription.endpoint},
         dataType: "json",
