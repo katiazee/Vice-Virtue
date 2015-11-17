@@ -26,3 +26,9 @@ self.addEventListener('push', function(event) {
     })
   );
 });
+
+self.addEventListener('notificationclick', function(event) {
+  var url = event.notification.data.url;
+  event.notification.close();
+  event.waitUntil(clients.openWindow(url));
+});
