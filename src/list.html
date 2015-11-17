@@ -116,29 +116,33 @@
             var parent = child.parentNode;
 
             var query = new Parse.Query(Habit);
-            console.log("Element to delete: " + child.getAttribute("data-id"))
-            query.get(child.getAttribute("data-id"), {
-                success: function(habit) {
-                    // The object was retrieved successfully.
-                    habit.destroy({
-                        success: function(habit) {
-                            // The object was deleted from the Parse Cloud.
-                            parent.removeChild(child);
-                        },
-                        error: function(habit, error) {
-                            // The delete failed.
-                            // error is a Parse.Error with an error code and message.
-                            console.log("error here 2")
-                        }
-                    });
-                },
-                error: function(object, error) {
-                    // The object was not retrieved successfully.
-                    // error is a Parse.Error with an error code and message.
-                    console.log("error here1")
-                    console.log(error)
-                }
-            });
+            // console.log("Element to delete: " + child.getAttribute("data-id"))
+            var confirmDelete = confirm("Are you sure you want to delete this habit?");
+            if (confirmDelete == true) {
+                query.get(child.getAttribute("data-id"), {
+                    success: function(habit) {
+                        // The object was retrieved successfully.
+                        habit.destroy({
+                            success: function(habit) {
+                                // The object was deleted from the Parse Cloud.
+                                parent.removeChild(child);
+                            },
+                            error: function(habit, error) {
+                                // The delete failed.
+                                // error is a Parse.Error with an error code and message.
+                                console.log("error here 2")
+                            }
+                        });
+                    },
+                    error: function(object, error) {
+                        // The object was not retrieved successfully.
+                        // error is a Parse.Error with an error code and message.
+                        console.log("error here1")
+                        console.log(error)
+                    }
+                });
+            }
+            // If not, don't delete habit
         }
 
 
