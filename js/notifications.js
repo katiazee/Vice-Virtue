@@ -30,6 +30,8 @@ function initialiseState() {
   if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
     console.warn('Notifications aren\'t supported.');
     document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    alert("notifications aren't supported")
+
     //TODO
     return;
   }
@@ -40,6 +42,7 @@ function initialiseState() {
   if (Notification.permission === 'denied') {
     console.warn('The user has blocked notifications.');
     document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    alert("denied")
     //TODO
     return;
   }
@@ -48,12 +51,21 @@ function initialiseState() {
   if (!('PushManager' in window)) {
     console.warn('Push messaging isn\'t supported.');
     document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    alert("not supported")
     //TODO
     return;
   }
+}
+
+function subscribe() {
+  // Disable the button so it can't be changed while
+  // we process the permission request
+  console.log("subscribing")
+  var pushButton = document.querySelector('.onoffswitch-checkbox');
 
   // We need the service worker registration to check for a subscription
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+
     // Do we already have a push message subscription?
     serviceWorkerRegistration.pushManager.getSubscription()
       .then(function(subscription) {
@@ -65,11 +77,43 @@ function initialiseState() {
         if (!subscription) {
           // We aren't subscribed to push, so set UI
           // to allow the user to enable push
+          serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly:true})
+            .then(function(subscription) {
+              // The subscription was successful
+              console.log('here - success')
+              console.log('endpoint:', subscription.endpoint);
+              isPushEnabled = true;
+              // pushButton.disabled = false;
+
+              console.log(subscription)
+              // TODO: Send the subscription.endpoint to your server
+              // and save it to send a push message at a later date
+              sendSubscriptionToServer(subscription);
+            }).catch(function(e) {
+              if (Notification.permission === 'denied') {
+                // The user denied the notification permission which
+                // means we failed to subscribe and the user will need
+                // to manually change the notification permission to
+                // subscribe to push messages
+                console.warn('Permission for Notifications was denied');
+                document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+                //TODO
+                pushButton.disabled = true;
+              } else {
+                // A problem occurred with the subscription; common reasons
+                // include network errors, and lacking gcm_sender_id and/or
+                // gcm_user_visible_only in the manifest.
+                console.error('Unable to subscribe to push.', e);
+                pushButton.disabled = false;
+                document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+                //TODO
+              }
+            });
           return;
         }
 
         console.log(subscription)
-        // Keep your server in sync with the latest subscriptionId
+        // Already have a subscription id, but send it to the server anyway, in case
         sendSubscriptionToServer(subscription);
 
         // Set your UI to show they have subscribed for
@@ -78,49 +122,6 @@ function initialiseState() {
       })
       .catch(function(err) {
         console.warn('Error during getSubscription()', err);
-      });
-  });
-}
-
-function subscribe() {
-  // Disable the button so it can't be changed while
-  // we process the permission request
-  console.log("subscribing")
-  var pushButton = document.querySelector('.onoffswitch-checkbox');
-  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-      console.log(serviceWorkerRegistration)
-    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly:true})
-      .then(function(subscription) {
-        // The subscription was successful
-        console.log('here - success')
-        console.log('endpoint:', subscription.endpoint);
-        isPushEnabled = true;
-        // pushButton.disabled = false;
-
-        console.log(subscription)
-        // TODO: Send the subscription.endpoint to your server
-        // and save it to send a push message at a later date
-        sendSubscriptionToServer(subscription);
-      })
-      .catch(function(e) {
-        if (Notification.permission === 'denied') {
-          // The user denied the notification permission which
-          // means we failed to subscribe and the user will need
-          // to manually change the notification permission to
-          // subscribe to push messages
-          console.warn('Permission for Notifications was denied');
-          document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
-          //TODO
-          pushButton.disabled = true;
-        } else {
-          // A problem occurred with the subscription; common reasons
-          // include network errors, and lacking gcm_sender_id and/or
-          // gcm_user_visible_only in the manifest.
-          console.error('Unable to subscribe to push.', e);
-          pushButton.disabled = false;
-          document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
-          //TODO
-        }
       });
   });
 }
@@ -144,7 +145,6 @@ function sendSubscriptionToServer(subscription) {
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
-        alert(xhr.status);
         }
     });
 }
