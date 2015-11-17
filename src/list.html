@@ -27,10 +27,12 @@
                     <div class="message">
                         <span class="message-total">
                             <strong class="currStreak">2</strong> times in a row! Best Record: <strong class="bestStreak">5</strong><br>
-                            <svg height="25" width="150">
+                           <!-- <svg height="25" width="150">
                                 <line id="pBar1" x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
                                 <line id="pBar2" x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
-                            </svg>
+                            </svg> -->
+<div id="progressBar"><div></div></div>
+
                         </span><br>
                         <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span>
                     </div>
@@ -240,13 +242,16 @@
             if (bestStreak == 0) {
                 percentage = 0;
             } else {
-                var percentage = currStreak/bestStreak * 150;
+                var percentage = currStreak/bestStreak * 220;  
             }
 
-            clone.getElementById("pBar1").setAttribute('x1','0');
-            clone.getElementById("pBar1").setAttribute('x2', percentage);
-            clone.getElementById("pBar2").setAttribute('x1', percentage);
-            clone.getElementById("pBar2").setAttribute('x2','150');
+  $(clone).find('#progressBar').find('div').animate({ width: percentage }, 500);
+  //$(clone).find('ani').animate({ width: 50 }, 500);
+
+         // $('#progressBar').find('ani').animate({ width: 50 }, 500);
+
+      
+
         }
 
         function updateStreakFromButton(habit, element) {
@@ -257,14 +262,34 @@
             if (bestStreak == 0) {
                 percentage = 0;
             } else {
-                var percentage = currStreak/bestStreak * 150;
+                var percentage = currStreak/bestStreak * 220;
             }
 
-            element.querySelector("#pBar1").setAttribute('x1', '0');
-            element.querySelector("#pBar1").setAttribute('x2', percentage);
-            element.querySelector("#pBar2").setAttribute('x1', percentage);
-            element.querySelector("#pBar2").setAttribute('x2', '150');
+  $(element).find('#progressBar').find('div').animate({ width: percentage }, 500);
+
+
         }
+/*
+    function progress(percent, clone) {
+
+$('.hidden-resizer').each(function(i, obj) {
+                while($(this).width() > $('.title-li').width()) {
+                    var size = parseInt($(this).css("font-size"), 10);
+                    $(this).css("font-size", size - 1);
+                }
+             });
+
+
+ $clone.getElementById("progressBar").element.find('div').animate({ width: progressBarWidth }, 500).html(percent + "% ");
+
+        clone.getElementById("progressBar").firstElementChild.animate({ width: percent }, 500);
+
+
+          $('#progressBar').find('div').animate({ width: progressBarWidth }, 500).html(percent + "% ");
+
+    }
+*/
+
 
         function addHabitToList(habit) {
             var list = document.getElementById("habit-list");
