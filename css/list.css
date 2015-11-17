@@ -82,8 +82,10 @@ body{
     height: 20px;
     margin-top: 20px;
     background-color: #bebebe;
+    border-radius: 20px;
 }
 #progressBar div {
+    border-radius: 20px;
     height: 100%;
     color: #fff;
     text-align: right;
