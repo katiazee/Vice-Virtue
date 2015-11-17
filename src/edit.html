@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Edit a habit</title>
 		<link rel="stylesheet" href="../css/forms.css">
-		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+		<script type="text/javascript" src="https://www.parsecdn.com/js/parse-latest.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	</head>
 	<body>
@@ -51,7 +51,7 @@
 					<label> <input style="display:none" id="thrice" type="radio" name="day" value="three" onclick="notify();"><span>3</span></label>
 					<span id="times">times</span>
 				</div>
-				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>	
+				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
 				<!--<p id="save_p"><input id="save" type="button" onclick="validateForm()" value="Save It" > onclick="location.href='list.html'" > onclick="addHabit();"></p> onclick ="location.href='list.html'" -->
 
 				<p id="notifications"><label>Notifications:</label></p>
@@ -147,7 +147,7 @@
 	  					<option value="am">am</option>
 	 					<option value="pm">pm</option>
 					</select>
-				</div>	
+				</div>
 
 			<div class="notifications2">
 				<p id="alarm">Alarm 2</p>
@@ -233,7 +233,7 @@
 	  					<option value="am">am</option>
 	 					<option value="pm">pm</option>
 					</select>
-				</div>	
+				</div>
 
 				<div class="notifications3">
 					<p id="alarm">Alarm 3</p>
@@ -362,11 +362,11 @@
 						case "one":
 							$('.notifications1').css('display','block');
 							$('.notifications2').css('display','none');
-							$('.notifications3').css('display','none');		
+							$('.notifications3').css('display','none');
 							break;
 						case "two":
 							$('.notifications1').css('display','block');
-							$('.notifications2').css('display','block');	
+							$('.notifications2').css('display','block');
 							$('.notifications3').css('display','none');
 							break;
 						case "three":
@@ -374,8 +374,8 @@
 							$('.notifications2').css('display','block');
 							$('.notifications3').css('display','block');
 							break;
-						default: 
-							$('.notifications1').css('display','block');	
+						default:
+							$('.notifications1').css('display','block');
 					}
 
 				}
@@ -393,7 +393,7 @@
 				document.getElementById('icon2').style.border = "none";
 				document.getElementById('icon2').className = "icon";
 				document.getElementById('icon3').style.border = "none";
-				document.getElementById('icon3').className = "icon";				
+				document.getElementById('icon3').className = "icon";
 				document.getElementById('myImg').style.border = "none";
 				document.getElementById('myImg').className = "icon";
 				var image = document.getElementById(name);
@@ -410,12 +410,12 @@
 				var dailyFreqValidated = false;
 
 				//title validation
-				if (document.getElementById('title').value == "")				
+				if (document.getElementById('title').value == "")
 				{
 					document.getElementById('title').style.border = '1px solid';
 					document.getElementById('title').style.borderColor = '#b94a48';
 				}
-				else 
+				else
 				{
 					document.getElementById('title').style.border = '2px inset';
 					tileValidated = true;
@@ -496,14 +496,14 @@
 				//either daily frequency selected or others selected  (validates!)
 				else if (($( "#once, #twice, #thrice" ).hasClass( "selectedTimesADay" ) && $('#others').val() == '')
 					|| (!($( "#once, #twice, #thrice" ).hasClass( "selectedTimesADay" )) && $('#others').val() != ''
-					 && $('#others').val() < 10 && $('#others').val() % 1 == 0 ) ) 
+					 && $('#others').val() < 10 && $('#others').val() % 1 == 0 ) )
 				{
 					document.getElementById('selectedBothFrequencies').style.display = 'none';
 					document.getElementById('noDailyFrequency').style.display = 'none';
 					document.getElementById('others').style.border = '2px inset';
 					dailyFreqValidated = true;
 				}
-				//nothing selected or invalid input in others box 
+				//nothing selected or invalid input in others box
 				else
 				{
 					document.getElementById('others').style.border = '1px solid';
@@ -515,7 +515,7 @@
 				{
 					updateHabit();
 				}
-				 
+
 			//if ($('#title').val() == '')
 			}
 
