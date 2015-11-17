@@ -13,6 +13,7 @@ self.addEventListener('subscribe', function(event) {
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
 
+
   var title = "Don't forget to do <Habit title here>!";
   var body = 'Remember to do <habit here> and update your progress.';
   var icon = '/img/logo.png';
@@ -25,4 +26,5 @@ self.addEventListener('push', function(event) {
       tag: tag
     })
   );
+  console.log(event.extra)
 });
