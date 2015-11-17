@@ -9,10 +9,515 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	</head>
 	<body>
+		<div class="forms">
+			<h2>Edit A Habit</h2>
+			<form id ="form" action="#">
+				<p><label><span id="title_text">Habit Title</span></label></p>
+				<p><input id="title" type="text" name="fullname" placeholder="Exercise 30 minutes" value=""></p>
+				<p><label>Habit Icon</label></p>
+				<p><label class="error_message" id="noTitle" style="display:none">Please select an icon.</label></p>
+				<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/sleep.jpg" alt="sleep image"/>
+				<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/salad.jpg" alt="eat image"/>
+				<img id="icon3" class="icon" onclick="selectImage('icon3');" src="../img/run.jpg" alt="run image"/>
+
+				<label class="myFile">
+					<img id="icon4" class="icon" onchange="uploadIcon()" src="../img/add.png" alt="find a image" />
+					<input type="file" id="iconFileUpload" />
+				</label>
+
+				<div class="hide">
+					<img id="myImg" class = "icon" onclick="selectImage('myImg');" src="#" alt=""/>
+				</div>
+
+				<p><label>Weekly Frequency</label></p>
+				<p><label class="error_message" id="noFrequency" style="display:none">Please select a weekly frequency.</label></p>
+				<div id="ck-button">
+					<label> <input style="display:none" id="isSun" type="checkbox" name="date" value="sunday"><span>Sun</span></label>
+					<label> <input style="display:none" id="isMon" type="checkbox" name="date" value="monday"><span>Mon</span></label>
+					<label> <input style="display:none" id="isTues" type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
+					<label> <input style="display:none" id="isWed" type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
+					<label> <input style="display:none" id="isThurs" type="checkbox" name="date" value="thursday"><span>Thur</span></label>
+					<label> <input style="display:none" id="isFri" type="checkbox" name="date" value="friday"><span>Fri</span></label>
+					<label> <input style="display:none" id="isSat" type="checkbox" name="date" value="saturday"><span>Sat</span></label>
+				</div>
+
+
+				<p><label>Daily Frequency</label></p>
+				<p><label class="error_message" id="noDailyFrequency" style="display:none">Please select a daily frequency or enter your own (<10).</label></p>
+				<p><label class="error_message" id="selectedBothFrequencies" style="display:none">Please select EITHER a daily frequency OR enter your own (<10).</label></p>
+				<div id="daily-button">
+					<label> <input style="display:none" id="once" type="radio" name="day" value="one" onclick="notify();"><span>1</span></label>
+					<label> <input style="display:none" id="twice" type="radio" name="day" value="two" onclick="notify();"><span>2</span></label>
+					<label> <input style="display:none" id="thrice" type="radio" name="day" value="three" onclick="notify();"><span>3</span></label>
+					<span id="times">times</span>
+				</div>
+				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>	
+				<!--<p id="save_p"><input id="save" type="button" onclick="validateForm()" value="Save It" > onclick="location.href='list.html'" > onclick="addHabit();"></p> onclick ="location.href='list.html'" -->
+
+				<p id="notifications"><label>Notifications:</label></p>
+				<div class="onoffswitch" >
+   					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked onclick="incCounter();">
+    				<label class="onoffswitch-label" for="myonoffswitch">
+        			<span class="onoffswitch-inner"></span>
+        			<span class="onoffswitch-switch"></span>
+    				</label>
+				</div>
+
+				<div class="notifications1">
+				<p id="alarm">Alarm 1</p>
+					<select id="hr1">
+	  					<option value="1">1</option>
+	 					<option value="2">2</option>
+	  					<option value="3">3</option>
+					  	<option value="4">4</option>
+	  					<option value="5">5</option>
+	 					<option value="6">6</option>
+	  					<option value="7">7</option>
+					  	<option value="8">8</option>
+	  					<option value="9">9</option>
+	 					<option value="10">10</option>
+	  					<option value="11">11</option>
+					  	<option value="12">12</option>
+					</select>
+
+					<select id="min1">
+	  					<option value="00">:00</option>
+	 					<option value="01">:01</option>
+	  					<option value="02">:02</option>
+					  	<option value="03">:03</option>
+	  					<option value="04">:04</option>
+	 					<option value="05">:05</option>
+	 					<option value="06">:06</option>
+	  					<option value="07">:07</option>
+					  	<option value="08">:08</option>
+	  					<option value="09">:09</option>
+	 					<option value="10">:10</option>
+	  					<option value="11">:11</option>
+					  	<option value="12">:12</option>
+					  	<option value="13">:13</option>
+	  					<option value="14">:14</option>
+	 					<option value="15">:15</option>
+	 					<option value="16">:16</option>
+	  					<option value="17">:17</option>
+					  	<option value="18">:18</option>
+	  					<option value="19">:19</option>
+	 					<option value="20">:20</option>
+	  					<option value="21">:21</option>
+					  	<option value="22">:22</option>
+					  	<option value="23">:23</option>
+	  					<option value="24">:24</option>
+	 					<option value="25">:25</option>
+	 					<option value="26">:26</option>
+	  					<option value="27">:27</option>
+					  	<option value="28">:28</option>
+	  					<option value="29">:29</option>
+	 					<option value="30">:30</option>
+	  					<option value="31">:31</option>
+					  	<option value="32">:32</option>
+					  	<option value="33">:33</option>
+	  					<option value="34">:34</option>
+	 					<option value="35">:35</option>
+	 					<option value="36">:36</option>
+	  					<option value="37">:37</option>
+					  	<option value="38">:38</option>
+	  					<option value="39">:39</option>
+	  					<option value="40">:40</option>
+	  					<option value="41">:41</option>
+					  	<option value="42">:42</option>
+					  	<option value="43">:43</option>
+	  					<option value="44">:44</option>
+	 					<option value="45">:45</option>
+	 					<option value="46">:46</option>
+	  					<option value="47">:47</option>
+					  	<option value="48">:48</option>
+	  					<option value="49">:49</option>
+	 					<option value="50">:50</option>
+	  					<option value="51">:51</option>
+					  	<option value="52">:52</option>
+					  	<option value="53">:53</option>
+	  					<option value="54">:54</option>
+	 					<option value="55">:55</option>
+	 					<option value="56">:56</option>
+	  					<option value="57">:57</option>
+					  	<option value="58">:58</option>
+	  					<option value="59">:59</option>
+					</select>
+
+					<select id="am1">
+	  					<option value="am">am</option>
+	 					<option value="pm">pm</option>
+					</select>
+				</div>	
+
+			<div class="notifications2">
+				<p id="alarm">Alarm 2</p>
+					<select id="hr2">
+	  					<option value="1">1</option>
+	 					<option value="2">2</option>
+	  					<option value="3">3</option>
+					  	<option value="4">4</option>
+	  					<option value="5">5</option>
+	 					<option value="6">6</option>
+	  					<option value="7">7</option>
+					  	<option value="8">8</option>
+	  					<option value="9">9</option>
+	 					<option value="10">10</option>
+	  					<option value="11">11</option>
+					  	<option value="12">12</option>
+					</select>
+
+					<select id="min2">
+	  					<option value="00">:00</option>
+	 					<option value="01">:01</option>
+	  					<option value="02">:02</option>
+					  	<option value="03">:03</option>
+	  					<option value="04">:04</option>
+	 					<option value="05">:05</option>
+	 					<option value="06">:06</option>
+	  					<option value="07">:07</option>
+					  	<option value="08">:08</option>
+	  					<option value="09">:09</option>
+	 					<option value="10">:10</option>
+	  					<option value="11">:11</option>
+					  	<option value="12">:12</option>
+					  	<option value="13">:13</option>
+	  					<option value="14">:14</option>
+	 					<option value="15">:15</option>
+	 					<option value="16">:16</option>
+	  					<option value="17">:17</option>
+					  	<option value="18">:18</option>
+	  					<option value="19">:19</option>
+	 					<option value="20">:20</option>
+	  					<option value="21">:21</option>
+					  	<option value="22">:22</option>
+					  	<option value="23">:23</option>
+	  					<option value="24">:24</option>
+	 					<option value="25">:25</option>
+	 					<option value="26">:26</option>
+	  					<option value="27">:27</option>
+					  	<option value="28">:28</option>
+	  					<option value="29">:29</option>
+	 					<option value="30">:30</option>
+	  					<option value="31">:31</option>
+					  	<option value="32">:32</option>
+					  	<option value="33">:33</option>
+	  					<option value="34">:34</option>
+	 					<option value="35">:35</option>
+	 					<option value="36">:36</option>
+	  					<option value="37">:37</option>
+					  	<option value="38">:38</option>
+	  					<option value="39">:39</option>
+	  					<option value="40">:40</option>
+	  					<option value="41">:41</option>
+					  	<option value="42">:42</option>
+					  	<option value="43">:43</option>
+	  					<option value="44">:44</option>
+	 					<option value="45">:45</option>
+	 					<option value="46">:46</option>
+	  					<option value="47">:47</option>
+					  	<option value="48">:48</option>
+	  					<option value="49">:49</option>
+	 					<option value="50">:50</option>
+	  					<option value="51">:51</option>
+					  	<option value="52">:52</option>
+					  	<option value="53">:53</option>
+	  					<option value="54">:54</option>
+	 					<option value="55">:55</option>
+	 					<option value="56">:56</option>
+	  					<option value="57">:57</option>
+					  	<option value="58">:58</option>
+	  					<option value="59">:59</option>
+					</select>
+
+					<select id="am2">
+	  					<option value="am">am</option>
+	 					<option value="pm">pm</option>
+					</select>
+				</div>	
+
+				<div class="notifications3">
+					<p id="alarm">Alarm 3</p>
+					<select id="hr3">
+	  					<option value="1">1</option>
+	 					<option value="2">2</option>
+	  					<option value="3">3</option>
+					  	<option value="4">4</option>
+	  					<option value="5">5</option>
+	 					<option value="6">6</option>
+	  					<option value="7">7</option>
+					  	<option value="8">8</option>
+	  					<option value="9">9</option>
+	 					<option value="10">10</option>
+	  					<option value="11">11</option>
+					  	<option value="12">12</option>
+					</select>
+
+					<select id="min3">
+	  					<option value="00">:00</option>
+	 					<option value="01">:01</option>
+	  					<option value="02">:02</option>
+					  	<option value="03">:03</option>
+	  					<option value="04">:04</option>
+	 					<option value="05">:05</option>
+	 					<option value="06">:06</option>
+	  					<option value="07">:07</option>
+					  	<option value="08">:08</option>
+	  					<option value="09">:09</option>
+	 					<option value="10">:10</option>
+	  					<option value="11">:11</option>
+					  	<option value="12">:12</option>
+					  	<option value="13">:13</option>
+	  					<option value="14">:14</option>
+	 					<option value="15">:15</option>
+	 					<option value="16">:16</option>
+	  					<option value="17">:17</option>
+					  	<option value="18">:18</option>
+	  					<option value="19">:19</option>
+	 					<option value="20">:20</option>
+	  					<option value="21">:21</option>
+					  	<option value="22">:22</option>
+					  	<option value="23">:23</option>
+	  					<option value="24">:24</option>
+	 					<option value="25">:25</option>
+	 					<option value="26">:26</option>
+	  					<option value="27">:27</option>
+					  	<option value="28">:28</option>
+	  					<option value="29">:29</option>
+	 					<option value="30">:30</option>
+	  					<option value="31">:31</option>
+					  	<option value="32">:32</option>
+					  	<option value="33">:33</option>
+	  					<option value="34">:34</option>
+	 					<option value="35">:35</option>
+	 					<option value="36">:36</option>
+	  					<option value="37">:37</option>
+					  	<option value="38">:38</option>
+	  					<option value="39">:39</option>
+	  					<option value="40">:40</option>
+	  					<option value="41">:41</option>
+					  	<option value="42">:42</option>
+					  	<option value="43">:43</option>
+	  					<option value="44">:44</option>
+	 					<option value="45">:45</option>
+	 					<option value="46">:46</option>
+	  					<option value="47">:47</option>
+					  	<option value="48">:48</option>
+	  					<option value="49">:49</option>
+	 					<option value="50">:50</option>
+	  					<option value="51">:51</option>
+					  	<option value="52">:52</option>
+					  	<option value="53">:53</option>
+	  					<option value="54">:54</option>
+	 					<option value="55">:55</option>
+	 					<option value="56">:56</option>
+	  					<option value="57">:57</option>
+					  	<option value="58">:58</option>
+	  					<option value="59">:59</option>
+					</select>
+
+					<select id="am3">
+	  					<option value="am">am</option>
+	 					<option value="pm">pm</option>
+					</select>
+				</div>
+				<p id="save_p"><input id="save" type="button" value="Save It" onclick="validateForm();"></p> <!-- onclick ="location.href='list.html'"  updateHabit() used to be inside-->
+			</form>
+
+		</div>
+
 		<script type="text/javascript">
 			Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
 			var Habit = Parse.Object.extend("Habit");
 			var defaultImage = Parse.Object.extend("DefaultImages");
+			var hasImageChanged = false;
+			var hasUploaded = false;
+			var counter = 0;
+
+			console.log("loading here")
+			$("input[type='radio']").click(function()
+			{
+			  	var previousValue = $(this).attr('previousValue');
+			  	var name = $(this).attr('name');
+
+			  if (previousValue == 'checked')
+			  {
+			    $(this).removeAttr('checked');
+			    $(this).attr('previousValue', false);
+			  }
+			  else
+			  {
+			    $("input[name="+name+"]:radio").attr('previousValue', false);
+			    $(this).attr('previousValue', 'checked');
+			  }
+			});
+
+
+			function notify() {
+				if( counter % 2 == 1) {
+					$('.notifications1').css('display','none');
+					$('.notifications2').css('display','none');
+					$('.notifications3').css('display','none');
+				} else {
+					switch ($("input[name='day']:checked").val()) {
+						case "one":
+							$('.notifications1').css('display','block');
+							$('.notifications2').css('display','none');
+							$('.notifications3').css('display','none');		
+							break;
+						case "two":
+							$('.notifications1').css('display','block');
+							$('.notifications2').css('display','block');	
+							$('.notifications3').css('display','none');
+							break;
+						case "three":
+							$('.notifications1').css('display','block');
+							$('.notifications2').css('display','block');
+							$('.notifications3').css('display','block');
+							break;
+						default: 
+							$('.notifications1').css('display','block');	
+					}
+
+				}
+			}
+
+			function incCounter() {
+				counter ++;
+				notify();
+			}
+
+			function selectImage(name) {
+				//Clear all the other effects
+				document.getElementById('icon1').style.border = "none";
+				document.getElementById('icon1').className = "icon";
+				document.getElementById('icon2').style.border = "none";
+				document.getElementById('icon2').className = "icon";
+				document.getElementById('icon3').style.border = "none";
+				document.getElementById('icon3').className = "icon";				
+				document.getElementById('myImg').style.border = "none";
+				document.getElementById('myImg').className = "icon";
+				var image = document.getElementById(name);
+				image.style.border = "5px solid #42A5F5";
+				image.className = image.className + " selectedIcon";
+
+				fileName = name;
+			}
+			function validateForm() {
+
+				var tileValidated = false;
+				var iconValidated = false;
+				var freqValidated = false;
+				var dailyFreqValidated = false;
+
+				//title validation
+				if (document.getElementById('title').value == "")				
+				{
+					document.getElementById('title').style.border = '1px solid';
+					document.getElementById('title').style.borderColor = '#b94a48';
+				}
+				else 
+				{
+					document.getElementById('title').style.border = '2px inset';
+					tileValidated = true;
+				}
+				//icon validation
+				if ($( "#icon1, #icon2, #icon3, #myImg" ).hasClass( "selectedIcon" ) )
+				{
+					document.getElementById('noTitle').style.display = 'none';
+					iconValidated = true;
+				}
+				else
+					document.getElementById('noTitle').style.display = 'block';
+
+				//frequency validation
+				if (document.getElementById('isSun').checked)
+					document.getElementById('isSun').className += " selectedDay";
+				else
+					document.getElementById('isSun').className = "";
+
+				if (document.getElementById('isMon').checked)
+					document.getElementById('isMon').className += " selectedDay";
+				else
+					document.getElementById('isMon').className = "";
+
+				if (document.getElementById('isTues').checked)
+					document.getElementById('isTues').className += " selectedDay";
+				else
+					document.getElementById('isTues').className = "";
+
+				if (document.getElementById('isWed').checked)
+					document.getElementById('isWed').className += " selectedDay";
+				else
+					document.getElementById('isWed').className = "";
+
+				if (document.getElementById('isThurs').checked)
+					document.getElementById('isThurs').className += " selectedDay";
+				else
+					document.getElementById('isThurs').className = "";
+
+				if (document.getElementById('isFri').checked)
+					document.getElementById('isFri').className += " selectedDay";
+				else
+					document.getElementById('isFri').className = "";
+
+				if (document.getElementById('isSat').checked)
+					document.getElementById('isSat').className += " selectedDay";
+				else
+					document.getElementById('isSat').className = "";
+
+				if ($( "#isSun, #isMon, #isTues, #isWed, #isThur, #isFri, #isSat" ).hasClass( "selectedDay" ) )
+				{
+					document.getElementById('noFrequency').style.display = 'none';
+					freqValidated = true;
+				}
+				else
+					document.getElementById('noFrequency').style.display = 'block';
+
+				//daily frequency validation
+				if (document.getElementById('once').checked)
+					document.getElementById('once').className += " selectedTimesADay";
+				else
+					document.getElementById('once').className = "";
+				if (document.getElementById('twice').checked)
+					document.getElementById('twice').className += " selectedTimesADay";
+				else
+					document.getElementById('twice').className = "";
+				if (document.getElementById('thrice').checked)
+					document.getElementById('thrice').className += " selectedTimesADay";
+				else
+					document.getElementById('thrice').className = "";
+				//both daily frequency selected and others selected
+				if ($( "#once, #twice, #thrice" ).hasClass( "selectedTimesADay" ) && $('#others').val() != '' )
+				{
+					document.getElementById('selectedBothFrequencies').style.display = 'block';
+					document.getElementById('noDailyFrequency').style.display = 'none';
+					document.getElementById('others').style.border = '2px inset';
+				}
+				//either daily frequency selected or others selected  (validates!)
+				else if (($( "#once, #twice, #thrice" ).hasClass( "selectedTimesADay" ) && $('#others').val() == '')
+					|| (!($( "#once, #twice, #thrice" ).hasClass( "selectedTimesADay" )) && $('#others').val() != ''
+					 && $('#others').val() < 10 && $('#others').val() % 1 == 0 ) ) 
+				{
+					document.getElementById('selectedBothFrequencies').style.display = 'none';
+					document.getElementById('noDailyFrequency').style.display = 'none';
+					document.getElementById('others').style.border = '2px inset';
+					dailyFreqValidated = true;
+				}
+				//nothing selected or invalid input in others box 
+				else
+				{
+					document.getElementById('others').style.border = '1px solid';
+					document.getElementById('others').style.borderColor = '#b94a48';
+					document.getElementById('noDailyFrequency').style.display = 'block';
+					document.getElementById('selectedBothFrequencies').style.display = 'none';
+				}
+				if (tileValidated && iconValidated && freqValidated && dailyFreqValidated)
+				{
+					updateHabit();
+				}
+				 
+			//if ($('#title').val() == '')
+			}
 
 			function getParameterByName(name) {
 			    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -26,6 +531,16 @@
 			}
 
 			function selectImage(name) {
+				// Check if different image was selected
+				if (name == "myImg" && !hasUploaded) {
+					// If selecting previously uploaded image, then no change
+					hasImageChanged = false;
+				}
+				else {
+					// If selecting a default icon or upload a new image, then there is a change
+					hasImageChanged = true;
+				}
+
 				//Clear all the other effects
 				document.getElementById('icon1').className = "icon";
 				document.getElementById('icon2').className = "icon";
@@ -79,6 +594,7 @@
 			function imageIsLoaded(e) {
 				$('.hide').css('display','inline-block');
 			    $('#myImg').attr('src', e.target.result);
+			    hasUploaded = true;
 			    selectImage('myImg');
 			};
 
@@ -86,8 +602,15 @@
             	// declare and load Parse Habit object using objectid
             	// console.log(localStorage.getItem("toEdit"));
 				var query = new Parse.Query(Habit);
+
+				// Redirect user to home page if no habit object to edit
+				editHabitID = getParameterByName("id");
+				if (editHabitID == null || editHabitID == "") {
+					location = "list.html";
+				}
+
 				// query.get(localStorage.getItem("toEdit"), {
-				query.get(getParameterByName("id"), {
+				query.get(editHabitID, {
 					success: function(habit) {
 						// The object was retrieved successfully.
 						document.getElementById("title").value = habit.get("name");
@@ -119,23 +642,28 @@
 							document.getElementById("others").value = "" + frequencyPerDay;
 						}
 
-						// Set selected default image
-						if (habit.get("defaultIconID") != "none") {
-							switch (habit.get("defaultIconID")) {
-								case "0JrjvKGnbG":
-									selectImage("icon1");
-									break;
-								case "zgGDtotXrU":
-									selectImage("icon2");
-									break;
-								case "qww3v520kk":
-									selectImage("icon3");
-									break;
-								default:
-							}
-						}
-						else {
-							// Select uploaded image somehow???
+						// Upload user uploaded image if it exists
+						var habitIcon = habit.get("icon");
+			            if (habitIcon) {
+			                document.getElementById("myImg").src = habitIcon.url();
+			            }
+
+						// Set selected default image or uploaded image
+						switch (habit.get("defaultIconID")) {
+							case "0JrjvKGnbG":
+								selectImage("icon1");
+								break;
+							case "zgGDtotXrU":
+								selectImage("icon2");
+								break;
+							case "qww3v520kk":
+								selectImage("icon3");
+								break;
+							case "none":
+								$('.hide').css('display','inline-block');
+								selectImage("myImg");
+								break;
+							default:
 						}
 					},
 					error: function(object, error) {
@@ -226,8 +754,8 @@
 							    }
 							});
 						}
-						// If user selects uploaded image
-						else if (iconID == 'userUpload') {
+						// If user uploaded a new image
+						else if (hasImageChanged && iconID == 'userUpload') {
 							var fileUploadControl = $("#iconFileUpload")[0];
 							if (fileUploadControl.files.length > 0) {
 								var file = fileUploadControl.files[0];
@@ -255,6 +783,11 @@
 								}
 							});
 						}
+						else {
+							// Don't upload new image, just save changes
+							habitToEdit.save();
+							location = "list.html";
+						}
 					},
 					error: function(object, error) {
 						// The object was not retrieved successfully.
@@ -266,49 +799,5 @@
 
 			window.onload = onStart;
 		</script>
-		<div class="forms">
-			<h2>Edit A Habit</h2>
-			<form>
-				<p><label><span id="title_text">Habit Title</span></label></p>
-				<p><input id="title" type="text" name="fullname" value="Exercise 30 minutes"></p>
-				<p><label>Habit Icon</label></p>
-				<img id="icon1" class="icon" onclick="selectImage('icon1');" src="../img/sleep.jpg" alt="sleep image"/>
-				<img id="icon2" class="icon" onclick="selectImage('icon2');" src="../img/salad.jpg" alt="eat image"/>
-				<img id="icon3" class="icon" onclick="selectImage('icon3');" src="../img/run.jpg" alt="run image"/>
-
-				<label class="myFile">
-					<img id="icon4" class="icon" onchange="uploadIcon()" src="../img/add.png" alt="find a image" />
-					<input type="file" id="iconFileUpload" />
-				</label>
-
-				<div class="hide">
-					<img id="myImg" class = "icon" onclick="selectImage('myImg');" src="#" alt=""/>
-				</div>
-
-				<p><label>Weekly Frequency</label></p>
-				<div id="ck-button">
-					<label> <input id="isSun" type="checkbox" name="date" value="sunday"><span>Sun</span></label>
-					<label> <input id="isMon" type="checkbox" name="date" value="monday"><span>Mon</span></label>
-					<label> <input id="isTues" type="checkbox" name="date" value="tuesday"><span>Tues</span></label>
-					<label> <input id="isWed" type="checkbox" name="date" value="wednesday"><span>Wed</span></label>
-					<label> <input id="isThurs" type="checkbox" name="date" value="thursday"><span>Thur</span></label>
-					<label> <input id="isFri" type="checkbox" name="date" value="friday"><span>Fri</span></label>
-					<label> <input id="isSat" type="checkbox" name="date" value="saturday"><span>Sat</span></label>
-				</div>
-		
-		
-				<p><label>Daily Frequency</label></p>
-				<div id="daily-button">
-					<label> <input id="once" type="radio" name="day" value="one"><span>1</span></label>
-					<label> <input id="twice" type="radio" name="day" value="two"><span>2</span></label>
-					<label> <input id="thrice" type="radio" name="day" value="three"><span>3</span></label>
-					<span id="times">times</span>
-				</div>
-				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>
-				<p id="save_p"><input id="save" type="button" value="Save It" onclick="updateHabit();"></p>
-				
-			</form>
-
-		</div>
 	</body>
 </html>
