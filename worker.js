@@ -12,12 +12,10 @@ self.addEventListener('subscribe', function(event) {
 
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
-  console.log(event.data)
-console.log(asdgadgadg)
 
-  var title = "Don't forget to do <Habit title here>!";
-  var body = 'Remember to do <habit here> and update your progress.';
-  var icon = '/img/logo.png';
+  var title = "Habit Reminder";
+  var body = 'Remember to record your habits today!';
+  var icon = 'http://katiazee.github.io/Vice-Virtue/img/logo.png';
   var tag = 'simple-push-demo-notification-tag';
 
   event.waitUntil(
