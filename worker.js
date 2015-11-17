@@ -30,5 +30,5 @@ self.addEventListener('push', function(event) {
 self.addEventListener('notificationclick', function(event) {
   var url = event.notification.data.url;
   event.notification.close();
-  event.waitUntil(clients.openWindow(url));
+  event.waitUntil(clients.openWindow("http://katiazee.github.io/Vice-Virtue/src/list.html"));
 });
