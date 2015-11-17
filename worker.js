@@ -12,6 +12,7 @@ self.addEventListener('subscribe', function(event) {
 
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
+  console.log(event.data)
 
 
   var title = "Don't forget to do <Habit title here>!";
@@ -26,5 +27,4 @@ self.addEventListener('push', function(event) {
       tag: tag
     })
   );
-  console.log(event.extra)
 });
