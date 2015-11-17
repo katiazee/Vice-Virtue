@@ -1,5 +1,7 @@
 /* basic structure & layout */
-/*html{height: 100%;}*/
+
+
+
 h1{color:#888;text-align: center;}
 body{
     height:100%;
@@ -70,6 +72,27 @@ body{
     background:rgb(194, 67, 67); 
     border:2px solid rgb(160,12,12);
 }
+
+
+
+
+
+#progressBar {
+    width: 220px;
+    height: 20px;
+    margin-top: 20px;
+    background-color: #737373;
+}
+#progressBar div {
+    height: 100%;
+    color: #fff;
+    text-align: right;
+    line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+    width: 0;
+    background-color: #0099ff;
+}
+
+
 
 
 /* add habit */
