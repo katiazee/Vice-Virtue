@@ -1,14 +1,14 @@
-console.log("hello world")
 
 var isPushEnabled = false;
 
 window.addEventListener('load', function() {
-  var pushButton = document.querySelector('.notifbutton');
-  pushButton.addEventListener('click', function() {
-    if (isPushEnabled) {
-      unsubscribe();
+  var pushButton = document.querySelector('.onoffswitch-checkbox');
+  pushButton.addEventListener('click', function(event) {
+    console.log("switched")
+    if (event.target.checked) {
+        subscribe();
     } else {
-      subscribe();
+        unsubscribe();
     }
   });
 
@@ -19,6 +19,8 @@ window.addEventListener('load', function() {
     .then(initialiseState);
   } else {
     console.warn('Service workers aren\'t supported in this browser.');
+    document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    //TODO
   }
 });
 
@@ -27,6 +29,8 @@ function initialiseState() {
   // Are Notifications supported in the service worker?
   if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
     console.warn('Notifications aren\'t supported.');
+    document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    //TODO
     return;
   }
 
@@ -35,12 +39,16 @@ function initialiseState() {
   // user changes the permission
   if (Notification.permission === 'denied') {
     console.warn('The user has blocked notifications.');
+    document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    //TODO
     return;
   }
 
   // Check if push messaging is supported
   if (!('PushManager' in window)) {
     console.warn('Push messaging isn\'t supported.');
+    document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    //TODO
     return;
   }
 
@@ -51,7 +59,7 @@ function initialiseState() {
       .then(function(subscription) {
         // Enable any UI which subscribes / unsubscribes from
         // push messages.
-        var pushButton = document.querySelector('.notifbutton');
+        var pushButton = document.querySelector('.onoffswitch-checkbox');
         pushButton.disabled = false;
 
         if (!subscription) {
@@ -66,7 +74,6 @@ function initialiseState() {
 
         // Set your UI to show they have subscribed for
         // push messages
-        pushButton.textContent = 'Disable Push Messages';
         isPushEnabled = true;
       })
       .catch(function(err) {
@@ -78,14 +85,8 @@ function initialiseState() {
 function subscribe() {
   // Disable the button so it can't be changed while
   // we process the permission request
-  var pushButton = document.querySelector('.notifbutton');
-  console.log('button pushed')
-  if ('serviceWorker' in navigator) {
-      console.log("serviceworker in navigators")
-      console.log(navigator.serviceWorker.ready)
-  } else {
-      console.log("nope")
-  }
+  console.log("subscribing")
+  var pushButton = document.querySelector('.onoffswitch-checkbox');
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
       console.log(serviceWorkerRegistration)
     serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly:true})
@@ -94,7 +95,6 @@ function subscribe() {
         console.log('here - success')
         console.log('endpoint:', subscription.endpoint);
         isPushEnabled = true;
-        pushButton.textContent = 'Disable Push Messages';
         // pushButton.disabled = false;
 
         console.log(subscription)
@@ -109,6 +109,8 @@ function subscribe() {
           // to manually change the notification permission to
           // subscribe to push messages
           console.warn('Permission for Notifications was denied');
+          document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+          //TODO
           pushButton.disabled = true;
         } else {
           // A problem occurred with the subscription; common reasons
@@ -116,7 +118,8 @@ function subscribe() {
           // gcm_user_visible_only in the manifest.
           console.error('Unable to subscribe to push.', e);
           pushButton.disabled = false;
-          pushButton.textContent = 'Enable Push Messages';
+          document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+          //TODO
         }
       });
   });
