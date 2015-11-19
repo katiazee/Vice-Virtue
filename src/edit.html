@@ -206,32 +206,6 @@
           		}
 			});
 
-<<<<<<< HEAD
-			function notify() {
-				if( counter % 2 == 1) {
-					$('.notifications1').css('display','none');
-					$('.notifications2').css('display','none');
-					$('.notifications3').css('display','none');
-				} else {
-					switch ($("input[name='day']:checked").val()) {
-						case "one":
-							$('.notifications1').css('display','block');
-							$('.notifications2').css('display','none');
-							$('.notifications3').css('display','none');
-							break;
-						case "two":
-							$('.notifications1').css('display','block');
-							$('.notifications2').css('display','block');
-							$('.notifications3').css('display','none');
-							break;
-						case "three":
-							$('.notifications1').css('display','block');
-							$('.notifications2').css('display','block');
-							$('.notifications3').css('display','block');
-							break;
-						default:
-							$('.notifications1').css('display','block');
-=======
 			function switchNotification()
 			{
 				var switchState = document.getElementById('myonoffswitch');
@@ -271,7 +245,6 @@
 				 		{
 	                		addAlarmToList(i);
 	              		}
->>>>>>> d6e785de044295b1e60f4686e56e09efed093e30
 					}
 				}
 			}
