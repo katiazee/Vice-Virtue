@@ -24,15 +24,17 @@
                         <li><div class="habit-name">Sleep 8 hours</div></li>
                         <li><img class="habit-icon" src="../img/sleep.jpg" alt="habit icon"></li>
                     </ul>
+
+                    <div class="delete-habit">
+                        <button type="button" class="delete op-del" onclick="deleteHabit(this);" title="delete habit">
+                            <img src="../img/smoke.png" alt="Del">
+                        </button>
+                    </div>
+
                     <div class="message">
                         <span class="message-total">
                             <strong class="currStreak">2</strong> times in a row! Best Record: <strong class="bestStreak">5</strong><br>
-                           <!-- <svg height="25" width="150">
-                                <line id="pBar1" x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
-                                <line id="pBar2" x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
-                            </svg> -->
-<div id="progressBar"><div></div></div>
-
+                            <div id="progressBar"><div></div></div>
                         </span><br>
                         <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span>
                     </div>
@@ -57,9 +59,6 @@
                         </button>
                         <button type="button" class="op op-edit" onclick="editHabit(this);" title="edit habit">
                             <img src="../img/edit.svg" alt="Edit">
-                        </button>
-                        <button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit">
-                            <img src="../img/delete.svg" alt="Del">
                         </button>
 
                     </div>
@@ -245,13 +244,12 @@
                 var percentage = currStreak/bestStreak * 220;  
             }
 
-  $(clone).find('#progressBar').find('div').animate({ width: percentage }, 500);
-  //$(clone).find('ani').animate({ width: 50 }, 500);
-
-         // $('#progressBar').find('ani').animate({ width: 50 }, 500);
-
-      
-
+            $(clone).find('#progressBar').find('div').animate({ width: percentage }, 500);
+            if (percentage == 220) {
+                $(clone).find('#progressBar').find('div').css('background', '#009900');
+            } else {
+                $(clone).find('#progressBar').find('div').css('background', '#0099ff');
+            }
         }
 
         function updateStreakFromButton(habit, element) {
@@ -265,30 +263,15 @@
                 var percentage = currStreak/bestStreak * 220;
             }
 
-  $(element).find('#progressBar').find('div').animate({ width: percentage }, 500);
+            $(element).find('#progressBar').find('div').animate({ width: percentage }, 500);
 
+            if (percentage == 220) {
+                $(element).find('#progressBar').find('div').css('background', '#009900');
+            } else {
+                $(element).find('#progressBar').find('div').css('background', '#0099ff');
+            }
 
         }
-/*
-    function progress(percent, clone) {
-
-$('.hidden-resizer').each(function(i, obj) {
-                while($(this).width() > $('.title-li').width()) {
-                    var size = parseInt($(this).css("font-size"), 10);
-                    $(this).css("font-size", size - 1);
-                }
-             });
-
-
- $clone.getElementById("progressBar").element.find('div').animate({ width: progressBarWidth }, 500).html(percent + "% ");
-
-        clone.getElementById("progressBar").firstElementChild.animate({ width: percent }, 500);
-
-
-          $('#progressBar').find('div').animate({ width: progressBarWidth }, 500).html(percent + "% ");
-
-    }
-*/
 
 
         function addHabitToList(habit) {
