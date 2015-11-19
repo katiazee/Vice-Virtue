@@ -21,6 +21,8 @@ window.addEventListener('load', function() {
     console.warn('Service workers aren\'t supported in this browser.');
     document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
     //TODO
+    // Set some kind of error message
+    document.getElementById('noNotifications').style.display = 'block';
   }
 });
 

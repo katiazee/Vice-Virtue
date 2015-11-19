@@ -19,7 +19,7 @@ body {
 p{
 	color:#6c6c6c;
 	font-size: medium;
-}	
+}
 div.forms {
 	position: relative;
 	margin: 0 auto;
@@ -48,7 +48,15 @@ label.error_message{
     padding: 8px 35px 8px 14px;
     margin-bottom: 20px;
     border-radius: 4px;
-} 
+}
+label.warning{
+	/*color: #000;*/
+	background-color: #F0F0F0;
+	border-color: #000;
+	padding: 8px 35px 8px 14px;
+	margin-bottom: 20px;
+	border-radius: 4px;
+}
 img.icon{
 	display: inline-block;
 	width: 80px;
@@ -120,12 +128,20 @@ img.selectedIcon{
     margin-bottom: 20px;
     border-radius: 4px;
   }
+  label.warning{
+  	/*color: #000;*/
+  	background-color: #F0F0F0;
+  	border-color: #000;
+  	padding: 8px 35px 8px 14px;
+  	margin-bottom: 20px;
+  	border-radius: 4px;
+  }
 
   p{
 	color:#6c6c6c;
 	font-size: small;
-	}	
-  
+	}
+
 }
 
 h2{
@@ -164,7 +180,7 @@ input#save{
 	background-color: #48BA87;
 	-webkit-border-radius: 5px; /*For Safari, etc. */
 	-moz-border-radius: 5px; /* For Mozilla, etc. */
-	border-radius: 5px; /* CSS3 Feature */	
+	border-radius: 5px; /* CSS3 Feature */
 	opacity: 1.0;
 	font-size: medium;
 	-webkit-box-sizing: border-box;
@@ -187,7 +203,7 @@ div label input {
    margin-right:100px;
 }
 
-#ck-button {  
+#ck-button {
     overflow:auto;
 }
 
@@ -215,7 +231,7 @@ div label input {
 }
 
 #ck-button input:checked + span {
-    background-color:#9c9696; 
+    background-color:#9c9696;
     border-radius:5px;
     color:#fff;
 }
@@ -223,7 +239,7 @@ div label input {
     cursor: pointer;
 }
 
-#daily-button {  
+#daily-button {
     overflow:auto;
 }
 
@@ -256,7 +272,7 @@ span#times{
 }
 
 #daily-button input:checked + span {
-    background-color:#9c9696; 
+    background-color:#9c9696;
     border-radius:25px;
     color:#fff;
 }
@@ -304,7 +320,7 @@ p#notifications{
 }
 
 .onoffswitch {
-    position: relative; width: 63px; 
+    position: relative; width: 63px;
     margin-top: -36px;
     left: 20%;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
@@ -342,13 +358,13 @@ p#notifications{
     position: absolute; top: 0; bottom: 0;
     right: 40px;
     border: 2px solid #999999; border-radius: 20px;
-    transition: all 0.3s ease-in 0s; 
+    transition: all 0.3s ease-in 0s;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
 }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
+    right: 0px;
 }
 
 ul#alarm-list {
@@ -356,7 +372,3 @@ ul#alarm-list {
 	padding: 0;
 	margin: 0;
 }
-
-
-
-
