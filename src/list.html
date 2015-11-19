@@ -21,18 +21,23 @@
             <template id="habit-template">
                 <li>
                     <ul class="habit-info">
-                        <li><div class="habit-name">Sleep 8 hours</div></li>
+                        <li class="title-li"><div class="habit-name hidden-resizer">Sleep 8 hours</div></li>
                         <li><img class="habit-icon" src="../img/sleep.jpg" alt="habit icon"></li>
                     </ul>
+
+                    <div class="delete-habit">
+                        <button type="button" class="delete op-del" onclick="deleteHabit(this);" title="delete habit">
+                            <img src="../img/smoke.png" alt="Del">
+                        </button>
+                    </div>
+
                     <div class="message">
-                        <span class="message-total">
+                        <div class="message-total">
                             <strong class="currStreak">2</strong> times in a row! Best Record: <strong class="bestStreak">5</strong><br>
-                            <svg height="25" width="150">
-                                <line id="pBar1" x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
-                                <line id="pBar2" x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
-                            </svg>
-                        </span><br>
-                        <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span>
+                            <div id="progressBar"><div></div></div>
+                        </div><br>
+                        <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span><br>
+                        <span class="message-missed">Missed <strong class="missed">0</strong> time(s) today</span>
                     </div>
 
 
@@ -55,9 +60,6 @@
                         </button>
                         <button type="button" class="op op-edit" onclick="editHabit(this);" title="edit habit">
                             <img src="../img/edit.svg" alt="Edit">
-                        </button>
-                        <button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit">
-                            <img src="../img/delete.svg" alt="Del">
                         </button>
 
                     </div>
@@ -131,7 +133,7 @@
                         habit.destroy({
                             success: function(habit) {
                                 // The object was deleted from the Parse Cloud.
-                                parent.removeChild(child);
+                                $(element.parentNode.parentNode).fadeOut(400, function() { $(this).remove(); });
                             },
                             error: function(habit, error) {
                                 // The delete failed.
@@ -240,13 +242,15 @@
             if (bestStreak == 0) {
                 percentage = 0;
             } else {
-                var percentage = currStreak/bestStreak * 150;
+                var percentage = currStreak/bestStreak * 220;  
             }
 
-            clone.getElementById("pBar1").setAttribute('x1','0');
-            clone.getElementById("pBar1").setAttribute('x2', percentage);
-            clone.getElementById("pBar2").setAttribute('x1', percentage);
-            clone.getElementById("pBar2").setAttribute('x2','150');
+            $(clone).find('#progressBar').find('div').animate({ width: percentage }, 500);
+            if (percentage == 220) {
+                $(clone).find('#progressBar').find('div').css('background', '#009900');
+            } else {
+                $(clone).find('#progressBar').find('div').css('background', '#0099ff');
+            }
         }
 
         function updateStreakFromButton(habit, element) {
@@ -257,14 +261,19 @@
             if (bestStreak == 0) {
                 percentage = 0;
             } else {
-                var percentage = currStreak/bestStreak * 150;
+                var percentage = currStreak/bestStreak * 220;
             }
 
-            element.querySelector("#pBar1").setAttribute('x1', '0');
-            element.querySelector("#pBar1").setAttribute('x2', percentage);
-            element.querySelector("#pBar2").setAttribute('x1', percentage);
-            element.querySelector("#pBar2").setAttribute('x2', '150');
+            $(element).find('#progressBar').find('div').animate({ width: percentage }, 500);
+
+            if (percentage == 220) {
+                $(element).find('#progressBar').find('div').css('background', '#009900');
+            } else {
+                $(element).find('#progressBar').find('div').css('background', '#0099ff');
+            }
+
         }
+
 
         function addHabitToList(habit) {
             var list = document.getElementById("habit-list");
@@ -295,6 +304,15 @@
             var day = currentDate.getUTCDate();
             var year = currentDate.getUTCFullYear();
             var currDateStr = month + "/" + day + "/" + year;
+            var dayOfWeek = currentDate.getDay();
+
+            // Show completed/missed message if correct day
+            if (habit.get(daysBoolArr[dayOfWeek])) {
+                showMsg(clone.querySelector(".op-done"));
+            } else {
+                clone.querySelector(".message-today").className = clone.querySelector(".message-today").className + " hide";
+                clone.querySelector(".message-missed").className = clone.querySelector(".message-missed").className + " hide";
+            }
 
             if (compareDates(dateStr, currDateStr) != 0) {
                 // Different day, so reset thumbCtr and numCompleted -- reset streak if did not complete habits
@@ -320,12 +338,26 @@
                 // Missed a day for habit, so reset streak
                 if (compareDates(currDateStr, nextDateStr) == 1) {
                     habit.set('currStreak', 0);
+                    streak(habit, clone);
                 }
 
                 // Update current date for habits
                 habit.set('currDate', currDateStr);
                 habit.set('currDay', currentDate.getDay());
                 habit.save();
+                /* habit.save(null, {
+                    success: function(updatedHabit) {
+                        // Execute any logic that should take place after the object is saved.
+                        // Update progress bar
+                        streak(updatedHabit, clone);
+                    },
+                    error: function(updatedHabit, error) {
+                        // Execute any logic that should take place if the save fails.
+                        // error is a Parse.Error with an error code and message.
+                        console.log('Failed to update object, with error code: ' + error.message);
+                        alert("Error with accessing habits; please check your network connection and try again later.");
+                    }
+                }); */
             }
             else {
                 // If user already completed/failed habit the specified number of times for that day, disable
@@ -334,15 +366,17 @@
                     clone.querySelector(".op-done").className = "op op-done";
                     clone.querySelector(".op-down").className = "op op-down";
                     // Display message if habit completed for the day
-                    showMsg(clone.querySelector(".op-done"));
+                    // showMsg(clone.querySelector(".op-done"));
                 }
             }
 
             clone.querySelector(".habit-name").textContent = habit.get('name');
+
             clone.querySelector(".currStreak").textContent = habit.get('currStreak');
             clone.querySelector(".bestStreak").textContent = habit.get('bestStreak');
             clone.querySelector(".frequencyPerDay").textContent = habit.get('frequency');
             clone.querySelector(".completed").textContent = habit.get('numCompleted');
+            clone.querySelector(".missed").textContent = habit.get('thumbCtr') - habit.get('numCompleted');
 
             var res = list.appendChild(clone);
         }
@@ -381,6 +415,7 @@
                                 element.parentNode.parentNode.querySelector(".currStreak").textContent = updatedHabit.get('currStreak')
                                 element.parentNode.parentNode.querySelector(".bestStreak").textContent = updatedHabit.get('bestStreak');
                                 element.parentNode.parentNode.querySelector(".completed").textContent = updatedHabit.get('numCompleted');
+                                element.parentNode.parentNode.querySelector(".missed").textContent = updatedHabit.get('thumbCtr') - updatedHabit.get('numCompleted');
 
                                 // Update progress bar
                                 updateStreakFromButton(updatedHabit, element.parentNode.parentNode);
@@ -431,6 +466,7 @@
                                 // Execute any logic that should take place after the object is saved.
                                 // Update message
                                 element.parentNode.parentNode.querySelector(".currStreak").textContent = updatedHabit.get('currStreak');
+                                element.parentNode.parentNode.querySelector(".missed").textContent = updatedHabit.get('thumbCtr') - updatedHabit.get('numCompleted');
 
                                 // Update progress bar
                                 updateStreakFromButton(updatedHabit, element.parentNode.parentNode);
@@ -459,16 +495,35 @@
             });
         }
 
+        // Resize titles on resize of window
+        $(window).resize(function() {
+            $('.hidden-resizer').each(function(i, obj) {
+                $(this).css("font-size", 24);
+                while($(this).width() > $('.title-li').width()) {
+                    var size = parseInt($(this).css("font-size"), 10);
+                    $(this).css("font-size", size - 1);
+                }
+             });
+        })
+
         // Script to run when page loads
         var query = new Parse.Query(Habit);
         query.find({
           success: function(results) {
             // Do something with the returned Parse.Object values
             for (var i = 0; i < results.length; i++) {
-                addHabitToList(results[i])
-                console.log(results[i])
-                console.log(results[i].id)
+                addHabitToList(results[i]);
+                console.log(results[i]);
+                console.log(results[i].id);
             }
+
+            // Resize titles so they fit in habit box
+            $('.hidden-resizer').each(function(i, obj) {
+                while($(this).width() > $('.title-li').width()) {
+                    var size = parseInt($(this).css("font-size"), 10);
+                    $(this).css("font-size", size - 1);
+                }
+             });
           },
           error: function(error) {
             alert("Error: " + error.code + " " + error.message);
