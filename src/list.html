@@ -15,7 +15,7 @@
             <template id="habit-template">
                 <li>
                     <ul class="habit-info">
-                        <li><div class="habit-name">Sleep 8 hours</div></li>
+                        <li class="title-li"><div class="habit-name hidden-resizer">Sleep 8 hours</div></li>
                         <li><img class="habit-icon" src="../img/sleep.jpg" alt="habit icon"></li>
                     </ul>
                     <div class="message">
@@ -125,7 +125,7 @@
                         habit.destroy({
                             success: function(habit) {
                                 // The object was deleted from the Parse Cloud.
-                                parent.removeChild(child);
+                                $(element.parentNode.parentNode).fadeOut(400, function() { $(this).remove(); });
                             },
                             error: function(habit, error) {
                                 // The delete failed.
@@ -314,12 +314,26 @@
                 // Missed a day for habit, so reset streak
                 if (compareDates(currDateStr, nextDateStr) == 1) {
                     habit.set('currStreak', 0);
+                    streak(habit, clone);
                 }
 
                 // Update current date for habits
                 habit.set('currDate', currDateStr);
                 habit.set('currDay', currentDate.getDay());
                 habit.save();
+                /* habit.save(null, {
+                    success: function(updatedHabit) {
+                        // Execute any logic that should take place after the object is saved.
+                        // Update progress bar
+                        streak(updatedHabit, clone);
+                    },
+                    error: function(updatedHabit, error) {
+                        // Execute any logic that should take place if the save fails.
+                        // error is a Parse.Error with an error code and message.
+                        console.log('Failed to update object, with error code: ' + error.message);
+                        alert("Error with accessing habits; please check your network connection and try again later.");
+                    }
+                }); */
             }
             else {
                 // If user already completed/failed habit the specified number of times for that day, disable
@@ -332,7 +346,9 @@
                 }
             }
 
+            // TODO - should check length of habit name, and scale size of title !!!
             clone.querySelector(".habit-name").textContent = habit.get('name');
+
             clone.querySelector(".currStreak").textContent = habit.get('currStreak');
             clone.querySelector(".bestStreak").textContent = habit.get('bestStreak');
             clone.querySelector(".frequencyPerDay").textContent = habit.get('frequency');
@@ -499,17 +515,37 @@
             });
         }
 
+        // Resize titles on resize of window
+        $(window).resize(function() {
+            $('.hidden-resizer').each(function(i, obj) {
+                $(this).css("font-size", 24);
+                while($(this).width() > $('.title-li').width()) {
+                    var size = parseInt($(this).css("font-size"), 10);
+                    $(this).css("font-size", size - 1);
+                }
+             });
+        })
+
         // Script to run when page loads
         var query = new Parse.Query(Habit);
         query.find({
           success: function(results) {
             // Do something with the returned Parse.Object values
             for (var i = 0; i < results.length; i++) {
-                addHabitToList(results[i])
-                console.log(results[i])
-                console.log(results[i].id)
+                addHabitToList(results[i]);
+                console.log(results[i]);
+                console.log(results[i].id);
             }
-            notifyMe()
+
+            // Resize titles so they fit in habit box
+            $('.hidden-resizer').each(function(i, obj) {
+                while($(this).width() > $('.title-li').width()) {
+                    var size = parseInt($(this).css("font-size"), 10);
+                    $(this).css("font-size", size - 1);
+                }
+             });
+
+            notifyMe();
           },
           error: function(error) {
             alert("Error: " + error.code + " " + error.message);
