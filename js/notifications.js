@@ -128,8 +128,7 @@ function subscribe() {
       })
       .catch(function(err) {
         console.warn('Error during getSubscription()', err);
-        document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
-        //TODO
+        document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", false)
         document.getElementById('noNotifications').style.display = 'block';
         document.getElementById('noNotifications').textContent= 'Unfortunately, we were unable to enable notifications';
         pushButton.disabled = true
