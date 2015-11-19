@@ -242,11 +242,11 @@
             if (bestStreak == 0) {
                 percentage = 0;
             } else {
-                var percentage = currStreak/bestStreak * 220;  
+                var percentage = currStreak/bestStreak * 200;  
             }
 
             $(clone).find('#progressBar').find('div').animate({ width: percentage }, 500);
-            if (percentage == 220) {
+            if (percentage == 200) {
                 $(clone).find('#progressBar').find('div').css('background', '#009900');
             } else {
                 $(clone).find('#progressBar').find('div').css('background', '#0099ff');
@@ -261,12 +261,12 @@
             if (bestStreak == 0) {
                 percentage = 0;
             } else {
-                var percentage = currStreak/bestStreak * 220;
+                var percentage = currStreak/bestStreak * 200;
             }
 
             $(element).find('#progressBar').find('div').animate({ width: percentage }, 500);
 
-            if (percentage == 220) {
+            if (percentage == 200) {
                 $(element).find('#progressBar').find('div').css('background', '#009900');
             } else {
                 $(element).find('#progressBar').find('div').css('background', '#0099ff');
