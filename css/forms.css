@@ -324,6 +324,7 @@ p#notifications{
     margin-top: -36px;
     left: 20%;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    margin-left: 20px
 }
 .onoffswitch-checkbox {
     display: none;
