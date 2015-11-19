@@ -11,8 +11,6 @@
 	<script type="text/javascript" src="https://www.parsecdn.com/js/parse-latest.js"></script>
 </head>
 <body>
-    <button class="notifbutton">Push me</button>
-
     <section>
         <h1>Habit List</h1>
         <ul id="habit-list">
@@ -240,7 +238,7 @@
             if (bestStreak == 0) {
                 percentage = 0;
             } else {
-                var percentage = currStreak/bestStreak * 200;  
+                var percentage = currStreak/bestStreak * 200;
             }
 
             $(clone).find('#progressBar').find('div').animate({ width: percentage }, 500);
