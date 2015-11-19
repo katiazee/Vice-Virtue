@@ -9,7 +9,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	</head>
 	<body>
-		<div class="forms">
+		<div class="forms" id="editForm">
 			<h2>Edit A Habit</h2>
 			<form id ="form" action="#">
 				<p><label><span id="title_text">Habit Title</span></label></p>
@@ -716,6 +716,25 @@
 					}
 				});
 			}
+
+			// Make uploaded image go on next line
+	        $(window).resize(function() {
+	        	if($('.hide').css('display') != 'none') {
+		        	// Make uploaded image go on next line
+		            if($('#form').width() < 360) {
+		            	$('.hide').css('display','block');
+		            	$('.hide').css('position', 'relative');
+		            } else {
+		            	$('.hide').css('position', 'absolute');
+		            	$('.hide').css('display', 'inline-block');
+
+		            	// Reload icons to respace them
+		            	var container = document.getElementById("editForm");
+						var content = container.innerHTML;
+						container.innerHTML = content;
+		            }
+		        }
+	        })
 
 			window.onload = onStart;
 		</script>

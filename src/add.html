@@ -15,7 +15,7 @@
 			<input type="file" id="myFile" multiple size="50" onchange="uploadIcon()">
 		</div>
 
-		<div class="forms">
+		<div class="forms" id="addForm">
 			<h2>Add A Habit</h2>
 			<form id ="form" action="#">
 				<p><label><span id="title_text">Habit Title</span></label></p>
@@ -568,6 +568,25 @@
 			    $('#myImg').attr('src', e.target.result);
 			    selectImage('myImg');
 			};
+
+			// Make uploaded image go on next line
+	        $(window).resize(function() {
+	        	if($('.hide').css('display') != 'none') {
+		        	// Make uploaded image go on next line
+		            if($('#form').width() < 360) {
+		            	$('.hide').css('display','block');
+		            	$('.hide').css('position', 'relative');
+		            } else {
+		            	$('.hide').css('position', 'absolute');
+		            	$('.hide').css('display', 'inline-block');
+
+		            	// Reload icons to respace them
+		            	var container = document.getElementById("addForm");
+						var content = container.innerHTML;
+						container.innerHTML = content;
+		            }
+		        }
+	        })
 
 		</script>
 	</body>
