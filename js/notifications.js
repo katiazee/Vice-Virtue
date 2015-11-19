@@ -44,8 +44,10 @@ function initialiseState() {
   if (Notification.permission === 'denied') {
     console.warn('The user has blocked notifications.');
     document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
-    alert("denied")
     //TODO
+    document.getElementById('noNotifications').style.display = 'block';
+    document.getElementById('noNotifications').textContent= 'blah';
+
     return;
   }
 
