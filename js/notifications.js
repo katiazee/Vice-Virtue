@@ -42,7 +42,6 @@ function initialiseState() {
   // If its denied, it's a permanent block until the
   // user changes the permission
   if (Notification.permission === 'denied') {
-    console.warn('The user has blocked notifications.');
     document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
     //TODO
     document.getElementById('noNotifications').style.display = 'block';
@@ -53,10 +52,10 @@ function initialiseState() {
 
   // Check if push messaging is supported
   if (!('PushManager' in window)) {
-    console.warn('Push messaging isn\'t supported.');
     document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
-    alert("not supported")
     //TODO
+    document.getElementById('noNotifications').style.display = 'block';
+    document.getElementById('noNotifications').textContent= 'Push notifications are not supported in your browser';
     return;
   }
 }
@@ -99,18 +98,20 @@ function subscribe() {
                 // means we failed to subscribe and the user will need
                 // to manually change the notification permission to
                 // subscribe to push messages
-                console.warn('Permission for Notifications was denied');
                 document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
                 //TODO
-                pushButton.disabled = true;
+                document.getElementById('noNotifications').style.display = 'block';
+                document.getElementById('noNotifications').textContent= 'Enable notifications in your browser in order to receive push notifications';
+                pushButton.disabled = true
               } else {
                 // A problem occurred with the subscription; common reasons
                 // include network errors, and lacking gcm_sender_id and/or
                 // gcm_user_visible_only in the manifest.
-                console.error('Unable to subscribe to push.', e);
-                pushButton.disabled = false;
                 document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
                 //TODO
+                document.getElementById('noNotifications').style.display = 'block';
+                document.getElementById('noNotifications').textContent= 'Unfortunately, we were unable to enable notifications';
+                pushButton.disabled = true
               }
             });
           return;
@@ -126,6 +127,11 @@ function subscribe() {
       })
       .catch(function(err) {
         console.warn('Error during getSubscription()', err);
+        document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+        //TODO
+        document.getElementById('noNotifications').style.display = 'block';
+        document.getElementById('noNotifications').textContent= 'Unfortunately, we were unable to enable notifications';
+        pushButton.disabled = true
       });
   });
 }
