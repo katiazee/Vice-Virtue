@@ -46,7 +46,7 @@ function initialiseState() {
     document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
     //TODO
     document.getElementById('noNotifications').style.display = 'block';
-    document.getElementById('noNotifications').textContent= 'blah';
+    document.getElementById('noNotifications').textContent= 'Enable notifications in your browser in order to receive push notifications';
 
     return;
   }
