@@ -1,14 +1,14 @@
-console.log("hello world")
 
 var isPushEnabled = false;
 
 window.addEventListener('load', function() {
-  var pushButton = document.querySelector('.notifbutton');
-  pushButton.addEventListener('click', function() {
-    if (isPushEnabled) {
-      unsubscribe();
+  var pushButton = document.querySelector('.onoffswitch-checkbox');
+  pushButton.addEventListener('click', function(event) {
+    console.log("switched")
+    if (event.target.checked) {
+        subscribe();
     } else {
-      subscribe();
+        unsubscribe();
     }
   });
 
@@ -19,6 +19,10 @@ window.addEventListener('load', function() {
     .then(initialiseState);
   } else {
     console.warn('Service workers aren\'t supported in this browser.');
+    document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    //TODO
+    // Set some kind of error message
+    document.getElementById('noNotifications').style.display = 'block';
   }
 });
 
@@ -27,6 +31,10 @@ function initialiseState() {
   // Are Notifications supported in the service worker?
   if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
     console.warn('Notifications aren\'t supported.');
+    document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    alert("notifications aren't supported")
+
+    //TODO
     return;
   }
 
@@ -34,90 +42,96 @@ function initialiseState() {
   // If its denied, it's a permanent block until the
   // user changes the permission
   if (Notification.permission === 'denied') {
-    console.warn('The user has blocked notifications.');
+    document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    //TODO
+    document.getElementById('noNotifications').style.display = 'block';
+    document.getElementById('noNotifications').textContent= 'Enable notifications in your browser in order to receive push notifications';
+
     return;
   }
 
   // Check if push messaging is supported
   if (!('PushManager' in window)) {
-    console.warn('Push messaging isn\'t supported.');
+    document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+    //TODO
+    document.getElementById('noNotifications').style.display = 'block';
+    document.getElementById('noNotifications').textContent= 'Push notifications are not supported in your browser';
     return;
   }
-
-  // We need the service worker registration to check for a subscription
-  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-    // Do we already have a push message subscription?
-    serviceWorkerRegistration.pushManager.getSubscription()
-      .then(function(subscription) {
-        // Enable any UI which subscribes / unsubscribes from
-        // push messages.
-        var pushButton = document.querySelector('.notifbutton');
-        pushButton.disabled = false;
-
-        if (!subscription) {
-          // We aren't subscribed to push, so set UI
-          // to allow the user to enable push
-          return;
-        }
-
-        console.log(subscription)
-        // Keep your server in sync with the latest subscriptionId
-        sendSubscriptionToServer(subscription);
-
-        // Set your UI to show they have subscribed for
-        // push messages
-        pushButton.textContent = 'Disable Push Messages';
-        isPushEnabled = true;
-      })
-      .catch(function(err) {
-        console.warn('Error during getSubscription()', err);
-      });
-  });
 }
 
 function subscribe() {
   // Disable the button so it can't be changed while
   // we process the permission request
-  var pushButton = document.querySelector('.notifbutton');
-  console.log('button pushed')
-  if ('serviceWorker' in navigator) {
-      console.log("serviceworker in navigators")
-      console.log(navigator.serviceWorker.ready)
-  } else {
-      console.log("nope")
-  }
+  console.log("subscribing")
+  var pushButton = document.querySelector('.onoffswitch-checkbox');
+
+  // We need the service worker registration to check for a subscription
   navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-      console.log(serviceWorkerRegistration)
-    serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly:true})
+
+    // Do we already have a push message subscription?
+    serviceWorkerRegistration.pushManager.getSubscription()
       .then(function(subscription) {
-        // The subscription was successful
-        console.log('here - success')
-        console.log('endpoint:', subscription.endpoint);
-        isPushEnabled = true;
-        pushButton.textContent = 'Disable Push Messages';
-        // pushButton.disabled = false;
+        // Enable any UI which subscribes / unsubscribes from
+        // push messages.
+        var pushButton = document.querySelector('.onoffswitch-checkbox');
+        pushButton.disabled = false;
+
+        if (!subscription) {
+          // We aren't subscribed to push, so set UI
+          // to allow the user to enable push
+          serviceWorkerRegistration.pushManager.subscribe({userVisibleOnly:true})
+            .then(function(subscription) {
+              // The subscription was successful
+              console.log('here - success')
+              console.log('endpoint:', subscription.endpoint);
+              isPushEnabled = true;
+              // pushButton.disabled = false;
+
+              console.log(subscription)
+              // TODO: Send the subscription.endpoint to your server
+              // and save it to send a push message at a later date
+              sendSubscriptionToServer(subscription);
+            }).catch(function(e) {
+              if (Notification.permission === 'denied') {
+                // The user denied the notification permission which
+                // means we failed to subscribe and the user will need
+                // to manually change the notification permission to
+                // subscribe to push messages
+                document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+                //TODO
+                document.getElementById('noNotifications').style.display = 'block';
+                document.getElementById('noNotifications').textContent= 'Enable notifications in your browser in order to receive push notifications';
+                pushButton.disabled = true
+              } else {
+                // A problem occurred with the subscription; common reasons
+                // include network errors, and lacking gcm_sender_id and/or
+                // gcm_user_visible_only in the manifest.
+                document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
+                //TODO
+                document.getElementById('noNotifications').style.display = 'block';
+                document.getElementById('noNotifications').textContent= 'Unfortunately, we were unable to enable notifications';
+                // pushButton.disabled = true
+                console.log(e)
+              }
+            });
+          return;
+        }
 
         console.log(subscription)
-        // TODO: Send the subscription.endpoint to your server
-        // and save it to send a push message at a later date
+        // Already have a subscription id, but send it to the server anyway, in case
         sendSubscriptionToServer(subscription);
+
+        // Set your UI to show they have subscribed for
+        // push messages
+        isPushEnabled = true;
       })
-      .catch(function(e) {
-        if (Notification.permission === 'denied') {
-          // The user denied the notification permission which
-          // means we failed to subscribe and the user will need
-          // to manually change the notification permission to
-          // subscribe to push messages
-          console.warn('Permission for Notifications was denied');
-          pushButton.disabled = true;
-        } else {
-          // A problem occurred with the subscription; common reasons
-          // include network errors, and lacking gcm_sender_id and/or
-          // gcm_user_visible_only in the manifest.
-          console.error('Unable to subscribe to push.', e);
-          pushButton.disabled = false;
-          pushButton.textContent = 'Enable Push Messages';
-        }
+      .catch(function(err) {
+        console.warn('Error during getSubscription()', err);
+        document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", false)
+        document.getElementById('noNotifications').style.display = 'block';
+        document.getElementById('noNotifications').textContent= 'Unfortunately, we were unable to enable notifications';
+        pushButton.disabled = true
       });
   });
 }
@@ -141,7 +155,6 @@ function sendSubscriptionToServer(subscription) {
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
-        alert(xhr.status);
         }
     });
 }

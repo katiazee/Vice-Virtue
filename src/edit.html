@@ -5,7 +5,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Edit a habit</title>
 		<link rel="stylesheet" href="../css/forms.css">
-		<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+		<link rel="manifest" href="../manifest.json">
+	    <script
+		<script type="text/javascript" src="https://www.parsecdn.com/js/parse-latest.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	</head>
 	<body>
@@ -104,9 +106,7 @@
 				</template>
 
 				<ul id="alarm-list">
-					
 				</ul>
-
 				<p id="save_p"><input id="save" type="button" value="Save It" onclick="validateForm();"></p>
 			</form>
 
@@ -119,7 +119,7 @@
 			var hasImageChanged = false;
 			var hasUploaded = false;
 
-			function addAlarmToList(alarmNumber) 
+			function addAlarmToList(alarmNumber)
 	        {
 	            var list = document.getElementById("alarm-list");
 	            var template = document.querySelector("#alarm")
@@ -131,7 +131,7 @@
        		}
 
 
-			function editAlarmToList(alarmNumber, hours, minutes, am) 
+			function editAlarmToList(alarmNumber, hours, minutes, am)
 	        {
 	            var list = document.getElementById("alarm-list");
 	            var template = document.querySelector("#alarm")
@@ -176,14 +176,14 @@
 			  var switchState = document.getElementById('myonoffswitch');
 			  if (switchState.checked)
 			  {
-				  for (var i = 1; i <= frequencyAlarm; i++) 
+				  for (var i = 1; i <= frequencyAlarm; i++)
 				  {
 	                	addAlarmToList(i);
 	              }
           	  }
 			});
 
-			//function called when other_text changes 
+			//function called when other_text changes
 			$("#others").change(function (e) {
    				$("input[type='radio']").removeAttr('checked');
 			    $('#alarm-list').empty();
@@ -196,7 +196,7 @@
 					var switchState = document.getElementById('myonoffswitch');
 				    if (switchState.checked)
 				    {
-					  for (var i = 1; i <= frequencyAlarm; i++) 
+					  for (var i = 1; i <= frequencyAlarm; i++)
 					  {
 		                	addAlarmToList(i);
 		              }
@@ -204,43 +204,43 @@
           		}
 			});
 
-			function switchNotification() 
+			function switchNotification()
 			{
 				var switchState = document.getElementById('myonoffswitch');
 				$('#alarm-list').empty(); //needed in either case (if notification on or off)
 
 				if (switchState.checked)
-				{	
+				{
 					var frequencyAlarm;
 					if (document.getElementById('once').checked)
 					{
 						frequencyAlarm = 1;
-						for (var i = 1; i <= frequencyAlarm; i++) 
-				 		{		
+						for (var i = 1; i <= frequencyAlarm; i++)
+				 		{
 	                		addAlarmToList(i);
 	              		}
 					}
 					else if (document.getElementById('twice').checked)
 					{
 						frequencyAlarm = 2;
-						for (var i = 1; i <= frequencyAlarm; i++) 
-				 		{		
+						for (var i = 1; i <= frequencyAlarm; i++)
+				 		{
 	                		addAlarmToList(i);
 	              		}
 					}
 					else if (document.getElementById('thrice').checked)
 					{
 						frequencyAlarm = 3;
-						for (var i = 1; i <= frequencyAlarm; i++) 
-				 		{		
+						for (var i = 1; i <= frequencyAlarm; i++)
+				 		{
 	                		addAlarmToList(i);
 	              		}
 					}
 					else if($('#others').val() < 10 && $('#others').val() % 1 == 0 && $('#others').val() > 0 )
 					{
 						frequencyAlarm = $('#others').val();
-						for (var i = 1; i <= frequencyAlarm; i++) 
-				 		{		
+						for (var i = 1; i <= frequencyAlarm; i++)
+				 		{
 	                		addAlarmToList(i);
 	              		}
 					}
@@ -254,7 +254,7 @@
 				document.getElementById('icon2').style.border = "none";
 				document.getElementById('icon2').className = "icon";
 				document.getElementById('icon3').style.border = "none";
-				document.getElementById('icon3').className = "icon";				
+				document.getElementById('icon3').className = "icon";
 				document.getElementById('myImg').style.border = "none";
 				document.getElementById('myImg').className = "icon";
 				var image = document.getElementById(name);
@@ -271,12 +271,12 @@
 				var dailyFreqValidated = false;
 
 				//title validation
-				if (document.getElementById('title').value == "")				
+				if (document.getElementById('title').value == "")
 				{
 					document.getElementById('title').style.border = '1px solid';
 					document.getElementById('title').style.borderColor = '#b94a48';
 				}
-				else 
+				else
 				{
 					document.getElementById('title').style.border = '2px inset';
 					tileValidated = true;
@@ -326,7 +326,7 @@
 				else
 					document.getElementById('isSat').className = "";
 
-				if ($( "#isSun, #isMon, #isTues, #isWed, #isThur, #isFri, #isSat" ).hasClass( "selectedDay" ) )
+				if ($( "#isSun, #isMon, #isTues, #isWed, #isThurs, #isFri, #isSat" ).hasClass( "selectedDay" ) )
 				{
 					document.getElementById('noFrequency').style.display = 'none';
 					freqValidated = true;
@@ -357,14 +357,14 @@
 				//either daily frequency selected or others selected  (validates!)
 				else if (($( "#once, #twice, #thrice" ).hasClass( "selectedTimesADay" ) && $('#others').val() == '')
 					|| (!($( "#once, #twice, #thrice" ).hasClass( "selectedTimesADay" )) && $('#others').val() != ''
-					 && $('#others').val() < 10 && $('#others').val() % 1 == 0 ) ) 
+					 && $('#others').val() < 10 && $('#others').val() % 1 == 0 ) )
 				{
 					document.getElementById('selectedBothFrequencies').style.display = 'none';
 					document.getElementById('noDailyFrequency').style.display = 'none';
 					document.getElementById('others').style.border = '2px inset';
 					dailyFreqValidated = true;
 				}
-				//nothing selected or invalid input in others box 
+				//nothing selected or invalid input in others box
 				else
 				{
 					document.getElementById('others').style.border = '1px solid';
@@ -511,7 +511,7 @@
 						var hr;
 						var min;
 
-						for (var i = 0; i < alarms.length; ++i) 
+						for (var i = 0; i < alarms.length; ++i)
 						{
 							if (alarms[i].substring(0,2) > 11 && alarms[i].substring(0,2) < 24)
 								am = 'pm';
@@ -522,10 +522,10 @@
 								hr = alarms[i].substring(0,2) - 12;
 							else if (alarms[i].substring(0,2) == "00" || alarms[i].substring(0,2) == "12")
 								hr = "12";
-							else 
-								hr = alarms[i].substring(1,2); 
+							else
+								hr = alarms[i].substring(1,2);
 
-							min = alarms[i].substring(3,5); 
+							min = alarms[i].substring(3,5);
 
 							editAlarmToList(i + 1, hr, min, am);
 						}
