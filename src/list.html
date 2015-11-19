@@ -32,12 +32,12 @@
                     </div>
 
                     <div class="message">
-                        <span class="message-total">
+                        <div class="message-total">
                             <strong class="currStreak">2</strong> times in a row! Best Record: <strong class="bestStreak">5</strong><br>
                             <div id="progressBar"><div></div></div>
-                        </span><br>
+                        </div><br>
                         <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span><br>
-                        <span class="message-missed">(Missed <strong class="missed">0</strong> time(s))</span>
+                        <span class="message-missed">Missed <strong class="missed">0</strong> time(s) today</span>
                     </div>
 
 
@@ -309,6 +309,9 @@
             // Show completed/missed message if correct day
             if (habit.get(daysBoolArr[dayOfWeek])) {
                 showMsg(clone.querySelector(".op-done"));
+            } else {
+                clone.querySelector(".message-today").className = clone.querySelector(".message-today").className + " hide";
+                clone.querySelector(".message-missed").className = clone.querySelector(".message-missed").className + " hide";
             }
 
             if (compareDates(dateStr, currDateStr) != 0) {
@@ -367,7 +370,6 @@
                 }
             }
 
-            // TODO - should check length of habit name, and scale size of title !!!
             clone.querySelector(".habit-name").textContent = habit.get('name');
 
             clone.querySelector(".currStreak").textContent = habit.get('currStreak');

@@ -50,8 +50,8 @@
 
 
 				<p><label>Daily Frequency</label></p>
-				<p><label class="error_message" id="noDailyFrequency" style="display:none">Please select a daily frequency or enter your own (<10).</label></p>
-				<p><label class="error_message" id="selectedBothFrequencies" style="display:none">Please select EITHER a daily frequency OR enter your own (<10).</label></p>
+				<p><label class="error_message" id="noDailyFrequency" style="display:none">Please select a daily frequency or enter your own (&lt;10).</label></p>
+				<p><label class="error_message" id="selectedBothFrequencies" style="display:none">Please select EITHER a daily frequency OR enter your own (&lt;10).</label></p>
 				<div id="daily-button">
 					<label> <input style="display:none" id="once" type="radio" name="day" value="one"><span>1</span></label>
 					<label> <input style="display:none" id="twice" type="radio" name="day" value="two"><span>2</span></label>
@@ -253,6 +253,7 @@
 
 				fileName = name;
 			}
+
 			function validateForm() {
 
 				var tileValidated = false;

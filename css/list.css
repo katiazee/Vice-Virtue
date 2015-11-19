@@ -26,6 +26,7 @@ body{
 .message-total{visibility: visible;}
 .message-total>svg{margin: 15px auto;}
 .message-missed{font-size: 12px;}
+.hide{display: none;}
 
 .title-li{width: 90%;}
 
@@ -110,7 +111,7 @@ body{
 /* add habit */
 #addHabit{position:fixed; bottom: 40px; right:20px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
 #addHabit:hover{background: rgba(33, 72, 100, 0.7); border:1px solid rgba(85,85,85,0.7); box-shadow: 0 0 5px gray;}
-#addHabit:active{border: 2px solid gray; background: rgba(33, 72, 100); box-shadow: 0 0 10px gray;}
+#addHabit:active{border: 2px solid gray; background: rgba(33, 72, 100, 1.0); box-shadow: 0 0 10px gray;}
 #addHabit:focus{outline-style:none;}
 
 /* phone */
