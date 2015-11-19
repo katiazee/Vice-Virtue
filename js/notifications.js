@@ -111,7 +111,8 @@ function subscribe() {
                 //TODO
                 document.getElementById('noNotifications').style.display = 'block';
                 document.getElementById('noNotifications').textContent= 'Unfortunately, we were unable to enable notifications';
-                pushButton.disabled = true
+                // pushButton.disabled = true
+                console.log(e)
               }
             });
           return;
