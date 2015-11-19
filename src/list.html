@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/list.css">
-	<script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+
+    <link rel="manifest" href="../manifest.json">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="https://www.parsecdn.com/js/parse-latest.js"></script>
+    <script src='../js/notifications.js'></script>
+
 </head>
-<body> 
+<body>
+    <button class="notifbutton">Push me</button>
+
     <section>
         <h1>Habit List</h1>
         <ul id="habit-list">
@@ -18,15 +24,20 @@
                         <li class="title-li"><div class="habit-name hidden-resizer">Sleep 8 hours</div></li>
                         <li><img class="habit-icon" src="../img/sleep.jpg" alt="habit icon"></li>
                     </ul>
+
+                    <div class="delete-habit">
+                        <button type="button" class="delete op-del" onclick="deleteHabit(this);" title="delete habit">
+                            <img src="../img/smoke.png" alt="Del">
+                        </button>
+                    </div>
+
                     <div class="message">
                         <span class="message-total">
                             <strong class="currStreak">2</strong> times in a row! Best Record: <strong class="bestStreak">5</strong><br>
-                            <svg height="25" width="150">
-                                <line id="pBar1" x1="0" y1="0" x2="60" y2="0" style="stroke:rgba(65, 131, 215, 0.8);stroke-width:25" />
-                                <line id="pBar2" x1="60" y1="0" x2="150" y2="0" style="stroke:rgba(171,171,171,0.6);stroke-width:25" />
-                            </svg>
+                            <div id="progressBar"><div></div></div>
                         </span><br>
-                        <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span>
+                        <span class="message-today">Completed <strong class="completed">1</strong>/<strong class="frequencyPerDay">1</strong> for today!</span><br>
+                        <span class="message-missed">(Missed <strong class="missed">0</strong> time(s))</span>
                     </div>
 
 
@@ -49,9 +60,6 @@
                         </button>
                         <button type="button" class="op op-edit" onclick="editHabit(this);" title="edit habit">
                             <img src="../img/edit.svg" alt="Edit">
-                        </button>
-                        <button type="button" class="op op-del" onclick="deleteHabit(this);" title="delete habit">
-                            <img src="../img/delete.svg" alt="Del">
                         </button>
 
                     </div>
@@ -172,7 +180,7 @@
                         clone.getElementById("thumbsDown").className = clone.getElementById("thumbsDown").className + " enableThumbsDown";
                     }
                     clone.querySelector("#onSunday").style.color = "black";
-                    clone.querySelector("#onSunday").style.fontWeight = "bold";                    
+                    clone.querySelector("#onSunday").style.fontWeight = "bold";
                     break;
                 case 'onMonday':
                     if (n == 1) {
@@ -234,13 +242,15 @@
             if (bestStreak == 0) {
                 percentage = 0;
             } else {
-                var percentage = currStreak/bestStreak * 150;
+                var percentage = currStreak/bestStreak * 220;  
             }
 
-            clone.getElementById("pBar1").setAttribute('x1','0');
-            clone.getElementById("pBar1").setAttribute('x2', percentage);
-            clone.getElementById("pBar2").setAttribute('x1', percentage);
-            clone.getElementById("pBar2").setAttribute('x2','150');
+            $(clone).find('#progressBar').find('div').animate({ width: percentage }, 500);
+            if (percentage == 220) {
+                $(clone).find('#progressBar').find('div').css('background', '#009900');
+            } else {
+                $(clone).find('#progressBar').find('div').css('background', '#0099ff');
+            }
         }
 
         function updateStreakFromButton(habit, element) {
@@ -251,14 +261,19 @@
             if (bestStreak == 0) {
                 percentage = 0;
             } else {
-                var percentage = currStreak/bestStreak * 150;
+                var percentage = currStreak/bestStreak * 220;
             }
 
-            element.querySelector("#pBar1").setAttribute('x1', '0');
-            element.querySelector("#pBar1").setAttribute('x2', percentage);
-            element.querySelector("#pBar2").setAttribute('x1', percentage);
-            element.querySelector("#pBar2").setAttribute('x2', '150');
+            $(element).find('#progressBar').find('div').animate({ width: percentage }, 500);
+
+            if (percentage == 220) {
+                $(element).find('#progressBar').find('div').css('background', '#009900');
+            } else {
+                $(element).find('#progressBar').find('div').css('background', '#0099ff');
+            }
+
         }
+
 
         function addHabitToList(habit) {
             var list = document.getElementById("habit-list");
@@ -289,6 +304,12 @@
             var day = currentDate.getUTCDate();
             var year = currentDate.getUTCFullYear();
             var currDateStr = month + "/" + day + "/" + year;
+            var dayOfWeek = currentDate.getDay();
+
+            // Show completed/missed message if correct day
+            if (habit.get(daysBoolArr[dayOfWeek])) {
+                showMsg(clone.querySelector(".op-done"));
+            }
 
             if (compareDates(dateStr, currDateStr) != 0) {
                 // Different day, so reset thumbCtr and numCompleted -- reset streak if did not complete habits
@@ -342,7 +363,7 @@
                     clone.querySelector(".op-done").className = "op op-done";
                     clone.querySelector(".op-down").className = "op op-down";
                     // Display message if habit completed for the day
-                    showMsg(clone.querySelector(".op-done"));
+                    // showMsg(clone.querySelector(".op-done"));
                 }
             }
 
@@ -353,54 +374,9 @@
             clone.querySelector(".bestStreak").textContent = habit.get('bestStreak');
             clone.querySelector(".frequencyPerDay").textContent = habit.get('frequency');
             clone.querySelector(".completed").textContent = habit.get('numCompleted');
+            clone.querySelector(".missed").textContent = habit.get('thumbCtr') - habit.get('numCompleted');
 
             var res = list.appendChild(clone);
-        }
-
-        function notifyMe() {
-              console.log("woooo notifs")
-              console.log(Notification.permission)
-
-              // Let's check if the browser supports notifications
-              if (!("Notification" in window)) {
-                alert("This browser does not support desktop notification");
-                console.log("browser doesn't support notifs")
-              }
-              // Let's check whether notification permissions have already been granted
-              else if (Notification.permission === "granted") {
-                // If it's okay let's create a notification
-                spawnNotification("Vice/Virtue", "home slice")
-              }
-
-              // Otherwise, we need to ask the user for permission
-              else if (Notification.permission !== 'denied') {
-                Notification.requestPermission(function (permission) {
-                  // If the user accepts, let's create a notification
-                  if (permission === "granted") {
-                    var notification = new Notification("Hi there!");
-                  }
-                });
-              }
-
-              // Otherwise, we need to ask the user for permission
-              else if (Notification.permission === 'denied') {
-                Notification.requestPermission(function (permission) {
-                  // If the user accepts, let's create a notification
-                  if (permission === "granted") {
-                    var notification = new Notification("Hi there!");
-                  }
-                });
-              }
-          // At last, if the user has denied notifications, and you
-          // want to be respectful there is no need to bother them any more.
-        }
-
-        function spawnNotification(theTitle, theBody) {
-            var options = {
-                body: theBody,
-                icon: "logo.png"
-            }
-            var n = new Notification(theTitle,options);
         }
 
         function completeHabit(element) {
@@ -437,6 +413,7 @@
                                 element.parentNode.parentNode.querySelector(".currStreak").textContent = updatedHabit.get('currStreak')
                                 element.parentNode.parentNode.querySelector(".bestStreak").textContent = updatedHabit.get('bestStreak');
                                 element.parentNode.parentNode.querySelector(".completed").textContent = updatedHabit.get('numCompleted');
+                                element.parentNode.parentNode.querySelector(".missed").textContent = updatedHabit.get('thumbCtr') - updatedHabit.get('numCompleted');
 
                                 // Update progress bar
                                 updateStreakFromButton(updatedHabit, element.parentNode.parentNode);
@@ -487,6 +464,7 @@
                                 // Execute any logic that should take place after the object is saved.
                                 // Update message
                                 element.parentNode.parentNode.querySelector(".currStreak").textContent = updatedHabit.get('currStreak');
+                                element.parentNode.parentNode.querySelector(".missed").textContent = updatedHabit.get('thumbCtr') - updatedHabit.get('numCompleted');
 
                                 // Update progress bar
                                 updateStreakFromButton(updatedHabit, element.parentNode.parentNode);
@@ -544,8 +522,6 @@
                     $(this).css("font-size", size - 1);
                 }
              });
-
-            notifyMe();
           },
           error: function(error) {
             alert("Error: " + error.code + " " + error.message);

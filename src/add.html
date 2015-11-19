@@ -53,10 +53,9 @@
 				<p><label class="error_message" id="noDailyFrequency" style="display:none">Please select a daily frequency or enter your own (<10).</label></p>
 				<p><label class="error_message" id="selectedBothFrequencies" style="display:none">Please select EITHER a daily frequency OR enter your own (<10).</label></p>
 				<div id="daily-button">
-					<label> <input style="display:none" id="once" type="radio" name="day" value="one" onclick="notify();"><span>1</span></label>
-					<label> <input style="display:none" id="twice" type="radio" name="day" value="two" onclick="notify();"><span>2</span></label>
-					<label> <input style="display:none" id="thrice" type="radio" name="day" value="three"
-					onclick="notify();"><span>3</span></label>
+					<label> <input style="display:none" id="once" type="radio" name="day" value="one"><span>1</span></label>
+					<label> <input style="display:none" id="twice" type="radio" name="day" value="two"><span>2</span></label>
+					<label> <input style="display:none" id="thrice" type="radio" name="day" value="three"><span>3</span></label>
 					<span id="times">times</span>
 				</div>
 				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>	
@@ -125,7 +124,6 @@
 
 			var Habit = Parse.Object.extend("Habit");
 			var defaultImage = Parse.Object.extend("DefaultImages");
-			var counter = 0;
 
 			function addAlarmToList(alarmNumber) 
 	        {
@@ -178,12 +176,6 @@
 			//function called when other_text changes 
 			$("#others").change(function (e) {
    				$("input[type='radio']").removeAttr('checked');
-   				//var radioButton = document.getElementById('once');
-   				//if (radioButton.attr('previousValue') == 'checked')
-   				//{
-   				// 	radioButton.removeAttr('checked');
-			    //	radioButton.attr('previousValue', false);
-			    //}
 			    $('#alarm-list').empty();
 			    if ($('#others').val() < 10 && $('#others').val() % 1 == 0  && $('#others').val() > 0 )
 			    {
@@ -382,39 +374,6 @@
 			    return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
 			}
 
-			function notify() {
-				if( counter % 2 == 1) {
-					$('.notifications1').css('display','none');
-					$('.notifications2').css('display','none');
-					$('.notifications3').css('display','none');
-				} else {
-					switch ($("input[name='day']:checked").val()) {
-						case "one":
-							$('.notifications1').css('display','block');
-							$('.notifications2').css('display','none');
-							$('.notifications3').css('display','none');		
-							break;
-						case "two":
-							$('.notifications1').css('display','block');
-							$('.notifications2').css('display','block');	
-							$('.notifications3').css('display','none');
-							break;
-						case "three":
-							$('.notifications1').css('display','block');
-							$('.notifications2').css('display','block');
-							$('.notifications3').css('display','block');
-							break;
-						default: 
-							$('.notifications1').css('display','block');	
-					}
-
-				}
-			}
-
-			function incCounter() {
-				counter ++;
-				notify();
-			}
 
 			function addHabit() {
 				var habitToAdd = new Habit();
