@@ -52,7 +52,6 @@
 					<span id="times">times</span>
 				</div>
 				<p><label><span id="others_text">Others: </span><input id="others" type="text" name="day" placeholder="More than 3 times"></label></p>	
-				<!--<p id="save_p"><input id="save" type="button" onclick="validateForm()" value="Save It" > onclick="location.href='list.html'" > onclick="addHabit();"></p> onclick ="location.href='list.html'" -->
 
 				<p id="notifications"><label>Notifications:</label></p>
 				<div class="onoffswitch" >
@@ -108,7 +107,7 @@
 					
 				</ul>
 
-				<p id="save_p"><input id="save" type="button" value="Save It" onclick="validateForm();"></p> <!-- onclick ="location.href='list.html'"  updateHabit() used to be inside-->
+				<p id="save_p"><input id="save" type="button" value="Save It" onclick="validateForm();"></p>
 			</form>
 
 		</div>
@@ -377,8 +376,6 @@
 				{
 					updateHabit();
 				}
-				 
-			//if ($('#title').val() == '')
 			}
 
 			function getParameterByName(name) {
@@ -462,7 +459,6 @@
 
 			function onStart() {
             	// declare and load Parse Habit object using objectid
-            	// console.log(localStorage.getItem("toEdit"));
 				var query = new Parse.Query(Habit);
 
 				// Redirect user to home page if no habit object to edit
@@ -471,7 +467,6 @@
 					location = "list.html";
 				}
 
-				// query.get(localStorage.getItem("toEdit"), {
 				query.get(editHabitID, {
 					success: function(habit) {
 						// The object was retrieved successfully.
@@ -518,7 +513,6 @@
 
 						for (var i = 0; i < alarms.length; ++i) 
 						{
-							//alert(alarms[i].substring(0,2));
 							if (alarms[i].substring(0,2) > 11 && alarms[i].substring(0,2) < 24)
 								am = 'pm';
 							else
@@ -570,7 +564,6 @@
 
 			function updateHabit() {
 				var query = new Parse.Query(Habit);
-				// query.get(localStorage.getItem("toEdit"), {
 				query.get(getParameterByName("id"), {
 					success: function(habitToEdit) {
 						// The object was retrieved successfully.
@@ -583,9 +576,6 @@
 						habitToEdit.set("onThursday", document.getElementById('isThurs').checked);
 						habitToEdit.set("onFriday", document.getElementById('isFri').checked);
 						habitToEdit.set("onSaturday", document.getElementById('isSat').checked);
-						// Streak should not reset with updating habit object??
-						// habit.set("currStreak", 0);
-						// habit.set("bestStreak", 0);
 
 						var otherFrequency = document.getElementById('others').value;
 						var frequency;
@@ -712,7 +702,7 @@
 					error: function(object, error) {
 						// The object was not retrieved successfully.
 				    	// error is a Parse.Error with an error code and message.
-				    	console.log("Habit object was not retrieved successfully!");
+				    	alert("Habit object was not retrieved successfully!  Please check your network connection and try again.");
 					}
 				});
 			}
