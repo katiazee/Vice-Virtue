@@ -202,7 +202,7 @@ function addHabitToList(habit) {
     var list = document.getElementById("habit-list");
     var template = document.querySelector("#habit-template")
     if (!template.content) {
-        throw "unsupported"
+        throw new Error("unsupported")
     }
     var clone = document.importNode(template.content, true);
 
