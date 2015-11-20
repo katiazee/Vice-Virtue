@@ -441,6 +441,7 @@ function loadHabits() {
 
 function notSupported() {
     document.getElementById('notSupported').style.display = 'block';
+    alert("This website doesn't support your browser. Only Chrome, Safari, and Firefox are supported.")
 }
 
 try {
