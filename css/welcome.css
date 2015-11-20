@@ -88,7 +88,9 @@ i  {
 }
 p#add{
 	text-align:center;
-	
+}
+p#list{
+  text-align:center;
 }
 .welcome .addbutton {
  -webkit-appearance:none;
