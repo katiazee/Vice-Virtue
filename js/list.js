@@ -202,7 +202,7 @@ function addHabitToList(habit) {
     var list = document.getElementById("habit-list");
     var template = document.querySelector("#habit-template")
     if (!template.content) {
-        throw new Error("fuck IE")
+        notSupported()
     }
     var clone = document.importNode(template.content, true);
 
@@ -422,7 +422,7 @@ function loadHabits() {
       success: function(results) {
         // Do something with the returned Parse.Object values
         for (var i = 0; i < results.length; i++) {
-            addHabitToList(results[i]);
+            addHabitToList(results[i])
         }
 
         // Resize titles so they fit in habit box
@@ -437,6 +437,10 @@ function loadHabits() {
         alert("Error: " + error.code + " " + error.message);
       }
     });
+}
+
+function notSupported() {
+    document.getElementById('notSupported').style.display = 'block';
 }
 
 try {
