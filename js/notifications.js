@@ -4,8 +4,7 @@ var isPushEnabled = false;
 window.addEventListener('load', function() {
   var pushButton = document.querySelector('.onoffswitch-checkbox');
   var proto = location.protocol
-  console.log(proto)
-  if (proto !== 'https') {
+  if (proto !== 'https:') {
       document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
       document.getElementById('noNotifications').style.display = 'block';
       document.getElementById('noNotifications').textContent= 'Notifications only work over secure HTTPS.';
