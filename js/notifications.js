@@ -3,6 +3,8 @@ var isPushEnabled = false;
 
 window.addEventListener('load', function() {
   var pushButton = document.querySelector('.onoffswitch-checkbox');
+  var proto = location.protocol
+  console.log(proto)
   pushButton.addEventListener('click', function(event) {
     console.log("switched")
     if (event.target.checked) {
@@ -11,6 +13,7 @@ window.addEventListener('load', function() {
         unsubscribe();
     }
   });
+
 
   // Check that service workers are supported, if so, progressively
   // enhance and add push messaging support, otherwise continue without it.
