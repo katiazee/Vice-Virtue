@@ -4,17 +4,18 @@ var isPushEnabled = false;
 window.addEventListener('load', function() {
   var pushButton = document.querySelector('.onoffswitch-checkbox');
   var proto = location.protocol
-  if (proto == 'https:') {
+  console.log(proto)
+  if (proto !== 'https') {
       document.querySelector(".onoffswitch-checkbox").setAttribute("disabled", true)
       document.getElementById('noNotifications').style.display = 'block';
-      document.getElementById('noNotifications').textContent= 'Notifications only work over secure HTTPS';
+      document.getElementById('noNotifications').textContent= 'Notifications only work over secure HTTPS.';
   }
   pushButton.addEventListener('click', function(event) {
     console.log("switched")
     if (event.target.checked) {
         subscribe();
     } else {
-        unsubscribe();
+        // unsubscribe
     }
   });
 
