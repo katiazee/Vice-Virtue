@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/list.css">
+    <link rel="stylesheet" href="../css/animate.css">
 
     <link rel="manifest" href="../manifest.json">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -13,7 +14,7 @@
 <body>
     <section>
         <h1>Habit List</h1>
-        <ul id="habit-list">
+        <ul id="habit-list" class="animated zoomInDown">
             <template id="habit-template">
                 <li>
                     <ul class="habit-info">
@@ -64,7 +65,7 @@
         </ul>
     </section>
 
-    <button type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
+    <button class="animated fadeInRightBig" type="button" id="addHabit" onclick="location.href='add.html'" title="add habit">+</button>
 
     <script src="../js/list.js"></script>
 </body>

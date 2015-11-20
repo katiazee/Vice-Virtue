@@ -56,7 +56,9 @@ label.warning{
 	padding: 8px 35px 8px 14px;
 	margin-bottom: 20px;
 	border-radius: 4px;
+
 }
+
 img.icon{
 	display: inline-block;
 	width: 80px;
@@ -78,6 +80,7 @@ img.selectedIcon{
 	-webkit-transition: .3s ease-in-out;
 	transition: .3s ease-in-out;
 }
+
 @media (max-width: 500px) {
   div.forms {
   	position: relative;
@@ -177,18 +180,26 @@ input#save{
 	background: none;
 	border: none;
 	color: white;
-	background-color: #48BA87;
+	background-color: #003366;
 	-webkit-border-radius: 5px; /*For Safari, etc. */
 	-moz-border-radius: 5px; /* For Mozilla, etc. */
 	border-radius: 5px; /* CSS3 Feature */
-	opacity: 1.0;
+	opacity: .75;
 	font-size: medium;
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
 input#save:hover{
+	background-color: #98FB98;
+	opacity: 1;
+	-webkit-transform: scale(1.3);
+	transform: scale(1.3);
 	cursor: pointer;
 }
 p#save_p{
@@ -211,7 +222,8 @@ div label input {
     margin:4px;
     border-radius:5px;
 	/*border:1px solid #D0D0D0;*/
-    background-color:#EFEFEF;
+    background-color:#cccc99;
+    opacity: 0.5px;
     float:left;
     width:4.0em;
 }
@@ -231,7 +243,7 @@ div label input {
 }
 
 #ck-button input:checked + span {
-    background-color:#9c9696;
+    background-color:#4169E1;
     border-radius:5px;
     color:#fff;
 }
@@ -246,9 +258,11 @@ div label input {
 #daily-button label {
     margin:4px;
     border-radius:25px;
-    background-color:#EFEFEF;
+    background-color:#cccc99;
+    opacity: 0.75px;
     float:left;
     width:2.0em;
+
 }
 
 span#times{
@@ -263,7 +277,6 @@ span#times{
     display:block;
     /*border:1px solid #D0D0D0;*/
     overflow:auto;
-
 }
 
 #daily-button label input {
@@ -272,7 +285,7 @@ span#times{
 }
 
 #daily-button input:checked + span {
-    background-color:#9c9696;
+    background-color:#4169E1;
     border-radius:25px;
     color:#fff;
 }
@@ -281,7 +294,7 @@ span#times{
 }
 
 .selectedIcon {
-	border: 5px solid #42A5F5;
+	border: 5px solid #4169E1;
 }
 
 .notifications1 {
@@ -373,3 +386,64 @@ ul#alarm-list {
 	padding: 0;
 	margin: 0;
 }
+
+#hr1{
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cccc99;
+   opacity: 0.75;
+}
+
+#min1{
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cccc99;
+   opacity: 0.75;
+}
+
+#am1{
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cccc99;
+   opacity: 0.75;
+}
+
+#hr1::-ms-expand { /* for IE 11 */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cccc99;
+   opacity: 0.75;
+}
+
+#min1::-ms-expand { /* for IE 11 */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cccc99;
+   opacity: 0.75;
+}
+
+#am1::-ms-expand { /* for IE 11 */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cccc99;
+   opacity: 0.75;
+}
+
+
+
+
+
+
+
