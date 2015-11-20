@@ -416,7 +416,6 @@ $(window).resize(function() {
 // Detect compatibility
 if (document.importNode == undefined) {
     console.log("Not supported")
-    return;
 }
 var query = new Parse.Query(Habit);
 query.find({
