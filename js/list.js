@@ -202,7 +202,7 @@ function addHabitToList(habit) {
     var list = document.getElementById("habit-list");
     var template = document.querySelector("#habit-template")
     if (!template.content) {
-        throw new Error("unsupported")
+        throw new Error("fuck IE")
     }
     var clone = document.importNode(template.content, true);
 
