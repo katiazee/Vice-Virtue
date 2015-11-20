@@ -340,7 +340,6 @@ function imageIsLoaded(e) {
 
 function onStart() {
 	// declare and load Parse Habit object using objectid
-	// console.log(localStorage.getItem("toEdit"));
 	var query = new Parse.Query(Habit);
 
 	// Redirect user to home page if no habit object to edit
@@ -349,7 +348,6 @@ function onStart() {
 		location = "list.html";
 	}
 
-	// query.get(localStorage.getItem("toEdit"), {
 	query.get(editHabitID, {
 		success: function(habit) {
 			// The object was retrieved successfully.
@@ -448,7 +446,6 @@ function onStart() {
 
 function updateHabit() {
 	var query = new Parse.Query(Habit);
-	// query.get(localStorage.getItem("toEdit"), {
 	query.get(getParameterByName("id"), {
 		success: function(habitToEdit) {
 			// The object was retrieved successfully.
@@ -461,9 +458,6 @@ function updateHabit() {
 			habitToEdit.set("onThursday", document.getElementById('isThurs').checked);
 			habitToEdit.set("onFriday", document.getElementById('isFri').checked);
 			habitToEdit.set("onSaturday", document.getElementById('isSat').checked);
-			// Streak should not reset with updating habit object??
-			// habit.set("currStreak", 0);
-			// habit.set("bestStreak", 0);
 
 			var otherFrequency = document.getElementById('others').value;
 			var frequency;
