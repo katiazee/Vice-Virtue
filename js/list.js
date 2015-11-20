@@ -201,6 +201,9 @@ function updateStreakFromButton(habit, element) {
 function addHabitToList(habit) {
     var list = document.getElementById("habit-list");
     var template = document.querySelector("#habit-template")
+    if (!template.content) {
+        notSupported()
+    }
     var clone = document.importNode(template.content, true);
 
     clone.firstElementChild.setAttribute("data-id", habit.id)
@@ -412,24 +415,39 @@ $(window).resize(function() {
      });
 })
 
-// Script to run when page loads
-var query = new Parse.Query(Habit);
-query.find({
-  success: function(results) {
-    // Do something with the returned Parse.Object values
-    for (var i = 0; i < results.length; i++) {
-        addHabitToList(results[i]);
-    }
-
-    // Resize titles so they fit in habit box
-    $('.hidden-resizer').each(function(i, obj) {
-        while($(this).width() > $('.title-li').width()) {
-            var size = parseInt($(this).css("font-size"), 10);
-            $(this).css("font-size", size - 1);
+function loadHabits() {
+    // Script to run when page loads
+    var query = new Parse.Query(Habit);
+    query.find({
+      success: function(results) {
+        // Do something with the returned Parse.Object values
+        for (var i = 0; i < results.length; i++) {
+            addHabitToList(results[i])
         }
-     });
-  },
-  error: function(error) {
-    alert("Error: " + error.code + " " + error.message);
-  }
-});
+
+        // Resize titles so they fit in habit box
+        $('.hidden-resizer').each(function(i, obj) {
+            while($(this).width() > $('.title-li').width()) {
+                var size = parseInt($(this).css("font-size"), 10);
+                $(this).css("font-size", size - 1);
+            }
+         });
+      },
+      error: function(error) {
+        alert("Error: " + error.code + " " + error.message);
+      }
+    });
+}
+
+function notSupported() {
+    document.getElementById('notSupported').style.display = 'block';
+    alert("This website doesn't support your browser. Only Chrome, Safari, and Firefox are supported.")
+    
+}
+
+try {
+    loadHabits()
+} catch (exception) {
+    console.error("exception caught")
+    document.getElementById('notSupported').style.display = 'block';
+}
