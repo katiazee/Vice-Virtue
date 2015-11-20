@@ -261,13 +261,14 @@ function addHabitToList(habit) {
         // Missed a day for habit, so reset streak
         if (compareDates(currDateStr, nextDateStr) == 1) {
             habit.set('currStreak', 0);
-            streak(habit, clone);
+            // streak(habit, clone);
         }
 
         // Update current date for habits
         habit.set('currDate', currDateStr);
-        habit.set('currDay', currentDate.getDay());
+        habit.set('currDay', dayOfWeek);
         habit.save();
+        streak(habit, clone);
     }
     else {
         // If user already completed/failed habit the specified number of times for that day, disable
