@@ -201,6 +201,9 @@ function updateStreakFromButton(habit, element) {
 function addHabitToList(habit) {
     var list = document.getElementById("habit-list");
     var template = document.querySelector("#habit-template")
+    if (!template.content) {
+        throw "unsupported"
+    }
     var clone = document.importNode(template.content, true);
 
     clone.firstElementChild.setAttribute("data-id", habit.id)
