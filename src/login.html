@@ -5,12 +5,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Welcome to Virtue/Vice!</title>
 		<link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/animate.min.css">
 	</head>
 	<body>
 	  <div class="login">
-	  	<h1>virtue / <i>vice</i></h1>
+	  	<h1 id="virtue" class="animated fadeInDown">virtue / <i id ="vice" class="animated fadeInDown">vice</i></h1>
 
-      <form class="loginForm" action="index_submit" method="get" accept-charset="utf-8">
+      <form class="loginForm animated slideInUp" action="index_submit" method="get" accept-charset="utf-8">
       	<table>
       		<tr>
         		<td class="svgTd">
@@ -39,5 +40,12 @@
     </div>
 
     <script src="../js/login.js"></script>
+
+    <script type="text/javascript">
+      window.onbeforeunload = function(){
+        document.getElementById("virtue").className = document.getElementById("virtue").className + " bounceOutDown";
+        document.getElementById("slogan").className = document.getElementById("slogan").className + " bounceOutLeft";
+      };
+    </script>
 	</body>
 </html>
