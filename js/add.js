@@ -245,8 +245,6 @@ function validateForm() {
 	{
 		addHabit();
 	}
-
-//if ($('#title').val() == '')
 }
 
 function hasClass(element, cls) {
@@ -346,9 +344,6 @@ function addHabit() {
 		        habitToAdd.save(null, {
 					success: function(habitToAdd) {
 						// Execute any logic that should take place after the object is saved.
-						// alert('New object created with objectId: ' + habitToAdd.id);
-
-						//console.log('new object created with objectId: ' + habitToAdd.id);
 						location = "list.html"
 					},
 					error: function(habitToAdd, error) {
@@ -384,9 +379,6 @@ function addHabit() {
 		habitToAdd.save(null, {
 			success: function(habitToAdd) {
 				// Execute any logic that should take place after the object is saved.
-				// alert('New object created with objectId: ' + habitToAdd.id);
-
-				//console.log('new object created with objectId: ' + habitToAdd.id);
 				location = "list.html"
 			},
 			error: function(habitToAdd, error) {

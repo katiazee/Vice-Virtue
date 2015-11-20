@@ -9,13 +9,19 @@
 	</head>
 	<body>
 	  <div class="welcome">
-	  	<h1 class="animated bounceInDown">virtue / <i class="animated bounceInDown">vice</i></h1>
+	  	<h1 id="virtue" class="animated bounceInDown">virtue / <i id="vice" class="animated bounceInDown">vice</i></h1>
           
-        <h2 class="animated bounceInLeft"><span>keep your habits in line</span></h2>    
+        <h2 id="slogan" class="animated bounceInLeft"><span>keep your habits in line</span></h2>    
      
      	<p id="list"><input class="addbutton animated bounceInUp" type="button" value="view my habits" onclick="location.href='list.html'"></p>
 	    <p id="add"><input class="addbutton animated bounceInUp" type="button" value="add a habit" onclick="location.href='add.html'">
 		</p>
 	  </div>
+	  <script type="text/javascript">
+	  	window.onbeforeunload = function(){
+			document.getElementById("virtue").className = document.getElementById("virtue").className + " bounceOutDown";
+			document.getElementById("slogan").className = document.getElementById("slogan").className + " bounceOutLeft"
+		};
+	  </script>
 	</body>
 </html>

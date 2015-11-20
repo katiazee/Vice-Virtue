@@ -5,7 +5,6 @@ var daysBoolArr = ['onSunday', 'onMonday', 'onTuesday', 'onWednesday', 'onThursd
 
 function showMsg(element){
     var msgElement = (element.parentNode.parentNode.getElementsByClassName("message"))[0];
-    // alert(msgElement.innerHTML);
 
     msgElement.style.visibility="visible";
 }
@@ -42,7 +41,6 @@ function compareDates(date1, date2) {
 }
 
 function editHabit(element) {
-    // localStorage.setItem("toEdit", element.parentNode.parentNode.getAttribute("data-id"));
     location = "edit.html?id=" + element.parentNode.parentNode.getAttribute("data-id");
 }
 
@@ -51,7 +49,6 @@ function deleteHabit(element){
     var parent = child.parentNode;
 
     var query = new Parse.Query(Habit);
-    // console.log("Element to delete: " + child.getAttribute("data-id"))
     var confirmDelete = confirm("Are you sure you want to delete this habit?");
     if (confirmDelete == true) {
         query.get(child.getAttribute("data-id"), {
@@ -65,15 +62,14 @@ function deleteHabit(element){
                     error: function(habit, error) {
                         // The delete failed.
                         // error is a Parse.Error with an error code and message.
-                        console.log("error here 2")
+                        alert("There was an error deleting this habit; please try again.");
                     }
                 });
             },
             error: function(object, error) {
                 // The object was not retrieved successfully.
                 // error is a Parse.Error with an error code and message.
-                console.log("error here1")
-                console.log(error)
+                alert("There was an error deleting this habit; please try again.");
             }
         });
     }
@@ -272,19 +268,6 @@ function addHabitToList(habit) {
         habit.set('currDate', currDateStr);
         habit.set('currDay', currentDate.getDay());
         habit.save();
-        /* habit.save(null, {
-            success: function(updatedHabit) {
-                // Execute any logic that should take place after the object is saved.
-                // Update progress bar
-                streak(updatedHabit, clone);
-            },
-            error: function(updatedHabit, error) {
-                // Execute any logic that should take place if the save fails.
-                // error is a Parse.Error with an error code and message.
-                console.log('Failed to update object, with error code: ' + error.message);
-                alert("Error with accessing habits; please check your network connection and try again later.");
-            }
-        }); */
     }
     else {
         // If user already completed/failed habit the specified number of times for that day, disable
@@ -292,8 +275,6 @@ function addHabitToList(habit) {
         if (habit.get('thumbCtr') == habit.get('frequency')) {
             clone.querySelector(".op-done").className = "op op-done";
             clone.querySelector(".op-down").className = "op op-down";
-            // Display message if habit completed for the day
-            // showMsg(clone.querySelector(".op-done"));
         }
     }
 
@@ -350,7 +331,6 @@ function completeHabit(element) {
                     error: function(updatedHabit, error) {
                         // Execute any logic that should take place if the save fails.
                         // error is a Parse.Error with an error code and message.
-                        console.log('Failed to update object, with error code: ' + error.message);
                         alert("Unable to update habit!  Please check your network connection and try again later.");
                     }
                 });
@@ -401,7 +381,6 @@ function failHabit(element) {
                     error: function(updatedHabit, error) {
                         // Execute any logic that should take place if the save fails.
                         // error is a Parse.Error with an error code and message.
-                        console.log('Failed to update object, with error code: ' + error.message);
                         alert("Unable to update habit!  Please check your network connection and try again later.");
                     }
                 });
@@ -416,7 +395,6 @@ function failHabit(element) {
         error: function(object, error) {
             // The object was not retrieved successfully.
             // error is a Parse.Error with an error code and message.
-            console.log("Habit object was not retrieved successfully!");
             alert("Unable to update habit!  Please check your network connection and try again later.");
         }
     });
@@ -440,8 +418,6 @@ query.find({
     // Do something with the returned Parse.Object values
     for (var i = 0; i < results.length; i++) {
         addHabitToList(results[i]);
-       // console.log(results[i]);
-       // console.log(results[i].id);
     }
 
     // Resize titles so they fit in habit box
