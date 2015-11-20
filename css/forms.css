@@ -373,3 +373,57 @@ ul#alarm-list {
 	padding: 0;
 	margin: 0;
 }
+
+#hr1{
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cce5ff;
+   opacity: 0.75;
+}
+
+#min1{
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cce5ff;
+   opacity: 0.75;
+}
+
+#am1{
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cce5ff;
+   opacity: 0.75;
+}
+
+#hr1::-ms-expand { /* for IE 11 */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cce5ff;
+   opacity: 0.75;
+}
+
+#min1::-ms-expand { /* for IE 11 */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cce5ff;
+   opacity: 0.75;
+}
+
+#am1::-ms-expand { /* for IE 11 */
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+   border-radius: 4px;
+   height: 25px;
+   background-color: #cce5ff;
+   opacity: 0.75;
+}
