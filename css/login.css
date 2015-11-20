@@ -125,9 +125,9 @@ body {
 
 .login .loginForm .loginButton {
   -webkit-appearance:none;
-	width: 49%;
+	width: 45%;
 	display: inline-block;
-	margin: 0;
+	margin-right: 10px;
 	padding: 15px;
 	background:none;
 	background-color: #214864;
@@ -136,23 +136,29 @@ body {
   -webkit-border-radius: 5px; /*For Safari, etc. */
   -moz-border-radius: 5px; /* For Mozilla, etc. */
   border-radius: 5px; /* CSS3 Feature */
-  opacity: 1.0;
+  opacity: 0.75;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 .login .loginForm .loginButton:hover {
-	opacity: 0.75;
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+	opacity: 1;
 	cursor: pointer;
 }
 
 
 .login .loginForm .signUpButton {
   -webkit-appearance:none;
-	width: 49%;
+	width: 45%;
 	display: inline-block;
-	margin: 0;
+	margin-left: 25px;
 	padding: 15px;
 	background: none;
   border: none;
@@ -161,7 +167,11 @@ body {
   -webkit-border-radius: 5px; /*For Safari, etc. */
   -moz-border-radius: 5px; /* For Mozilla, etc. */
   border-radius: 5px; /* CSS3 Feature */
-  opacity: 1.0;
+  opacity: 0.75;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -185,7 +195,9 @@ body {
 }
 
 .login .loginForm .signUpButton:hover {
-	opacity: 0.75;
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+	opacity: 1;
 	cursor: pointer;
 }
 
