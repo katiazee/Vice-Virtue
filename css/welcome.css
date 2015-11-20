@@ -106,10 +106,6 @@ p#list{
   -moz-border-radius: 5px; /* For Mozilla, etc. */
   border-radius: 5px; /* CSS3 Feature */
   opacity: 1.0;
-  -webkit-transform: scale(1);
-  transform: scale(1);
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -118,10 +114,7 @@ p#list{
 
 
 .welcome .addbutton:hover {
-  background-color: #98FB98;
-  -webkit-transform: scale(1.2);
-  transform: scale(1.2);
-	opacity: 1;
+	opacity: 0.75;
 	cursor: pointer;
 }
 
