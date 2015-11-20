@@ -13,7 +13,7 @@ function addAlarmToList(alarmNumber)
     clone.querySelector(".alarm-name").textContent = "Alarm " + alarmNumber;
 
     var res = list.appendChild(clone);
-	}
+}
 
 
 function editAlarmToList(alarmNumber, hours, minutes, am)
@@ -391,18 +391,21 @@ function onStart() {
 			var am;
 			var hr;
 			var min;
+			var parseHour;
 
 			for (var i = 0; i < alarms.length; ++i)
 			{
-				//alert(alarms[i].substring(0,2));
-				if (alarms[i].substring(0,2) > 11 && alarms[i].substring(0,2) < 24)
+				parseHour = alarms[i].substring(0,2);
+				if (parseHour > 11 && parseHour < 24)
 					am = 'pm';
 				else
 					am = 'am';
 
-				if (alarms[i].substring(0,2) > 12 )
-					hr = alarms[i].substring(0,2) - 12;
-				else if (alarms[i].substring(0,2) == "00" || alarms[i].substring(0,2) == "12")
+				if (parseHour > 12)
+					hr = parseHour - 12;
+				else if (parseHour >= 10)
+					hr = parseHour;
+				else if (parseHour == "00")
 					hr = "12";
 				else
 					hr = alarms[i].substring(1,2);
