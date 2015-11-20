@@ -439,5 +439,6 @@ function loadHabits() {
 try {
     loadHabits()
 } catch (exception) {
+    console.error("exception caught")
     document.getElementById('notSupported').style.display = 'block';
 }
