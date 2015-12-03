@@ -1,0 +1,148 @@
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Helvetica', sans-serif;
+  background: -webkit-linear-gradient(left top, #BBDEFB, #B0C4DE); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right,#BBDEFB, #B0C4DE); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #BBDEFB, #B0C4DE); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right,  #BBDEFB, #B0C4DE); /* Standard syntax */
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.appTitle h1{
+  font-size: 2.0em;
+  text-align: left;
+  margin-left: 10px;
+  color: #808080;
+}
+
+.appTitle h1 i{
+  color: #333;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+}
+
+.resetPassContainer {
+  width: 406px;
+  max-width: 406px;
+  margin: 0 auto;
+}
+
+#resetPassForm {
+    padding: 0px 25px 25px;
+    background: #fff;
+    box-shadow: 
+        0px 0px 0px 5px rgba( 255,255,255,0.4 ), 
+        0px 4px 20px rgba( 0,0,0,0.33 );
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    display: table;
+    position: static;
+}
+
+#resetPassForm .header{
+  text-align: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: 1.5em;
+}
+
+#resetPassForm .sep {
+    height: 2px;
+    background: #e8e8e8;
+    width: 406px;
+    margin: 0px -25px;
+}
+
+#resetPassForm .inputs {
+    margin-top: 25px;
+}
+
+#resetPassForm .inputs label {
+    color: #8f8f8f;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 7px;
+    display: block;
+}
+
+input::-webkit-input-placeholder {
+    color:    #b5b5b5;
+}
+
+input:-moz-placeholder {
+    color:    #b5b5b5;
+}
+
+#resetPassForm .inputs input[type=email]{
+    background: #f5f5f5;
+    font-size: 0.8rem;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    padding: 13px 10px;
+    width: 330px;
+    margin-bottom: 20px;
+    box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.1 );
+    clear: both;
+}
+
+#resetPassForm .inputs input[type=email]:focus{
+    background: #fff;
+    box-shadow: 0px 0px 0px 3px #fff38e, inset 0px 2px 3px rgba( 0,0,0,0.2 ), 0px 5px 5px rgba( 0,0,0,0.15 );
+    outline: none;   
+}
+
+#resetPassForm .button {
+  display: inline-block;
+  width: 100%;
+  margin-left: 100px;
+  padding: 0;
+  -webkit-transition: bottom 1s, height 0.5s;
+  transition: bottom 1s, height 0.5s;
+  -webkit-appearance:none;
+}
+
+#resetPassForm .button .submitButton {
+  -webkit-appearance:none;
+  width: 40%;
+  margin: 0 auto;
+  padding: 10px;
+  background:none;
+  background-color: #214864;
+  border:none;
+  color:white;
+  -webkit-border-radius: 5px; /*For Safari, etc. */
+  -moz-border-radius: 5px; /* For Mozilla, etc. */
+  border-radius: 5px; /* CSS3 Feature */
+  opacity: 1.0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#resetPassForm .button .submitButton:hover {
+  opacity: 0.80;
+  cursor: pointer;
+}
+
+label.error_message{
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}

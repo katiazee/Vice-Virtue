@@ -260,8 +260,9 @@ function hasClass(element, cls) {
 
 function addHabit() {
 	var habitToAdd = new Habit();
+	var currentUser = Parse.User.current();
 
-	habitToAdd.set("username", "smarties");
+	habitToAdd.set("username", currentUser.get("username"));
 	habitToAdd.set("name", document.getElementById("title").value);
 	habitToAdd.set("onSunday", document.getElementById('isSun').checked);
 	habitToAdd.set("onMonday", document.getElementById('isMon').checked);

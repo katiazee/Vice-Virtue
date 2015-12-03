@@ -7,6 +7,8 @@
 		<link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../css/animate.min.css">
 
+    <script type="text/javascript" src="https://www.parsecdn.com/js/parse-latest.js"></script>
+
 
     <script type="text/javascript">
   !function(a,b,c,d,e,f,g,h){a.RaygunObject=e,a[e]=a[e]||function(){
@@ -40,22 +42,28 @@
           	</td>
           	<td><input id="password" class="textInput" type="password" name="password" placeholder="Password" required></td>
           </tr>
+          <tr>
+            <td></td>
+            <td>
+              <!-- <label class="error_message" id="invalidLogin" style="display:block">Invalid email or password.  Please try again.</label> -->
+              <span id="invalidLoginError">Invalid email or password.  Please try again.</span>
+            </td>
+          </tr>
        	</table>
-       	<p id="signInMessage">Sign in successful! <span style="color: #4caf50">&#10004;</span></p>
        	<div class="buttons">
-       		<input class="loginButton" type="button" value="Login" onclick="location.href='welcome.html'">
-          <input class="signUpButton" type="button" value="Signup" onclick="onClickSignUp()">
+       		<input class="loginButton" type="button" value="Login" onclick="signIn()">
+          <input class="signUpButton" type="button" value="Sign up" onclick="location='signup.html'">
         </div>
       </form>
     </div>
 
     <script src="../js/login.js"></script>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       window.onbeforeunload = function(){
         document.getElementById("virtue").className = document.getElementById("virtue").className + " bounceOutDown";
-        document.getElementById("slogan").className = document.getElementById("slogan").className + " bounceOutLeft";
+        document.getElementById("vice").className = document.getElementById("vice").className + " bounceOutLeft";
       };
-    </script>
+    </script> -->
 	</body>
 </html>

@@ -167,6 +167,18 @@ body {
   box-sizing: border-box;
 }
 
+#invalidLoginError {
+  color: #b94a48;
+  font-size: 0.8em;
+  margin-top: 10px;
+  display: none;
+}
+
+.inputError {
+  border: 1px solid;
+  border-color: #b94a48;
+}
+
 @media (max-width: 380px) {
   .login {
     top: 7%;
@@ -188,5 +200,4 @@ body {
 	opacity: 0.75;
 	cursor: pointer;
 }
-
 
