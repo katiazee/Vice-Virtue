@@ -415,9 +415,16 @@ $(window).resize(function() {
      });
 })
 
+function logOff() {
+    Parse.User.logOut();
+    location = "login.html";
+}
+
 function loadHabits() {
     // Script to run when page loads
     var query = new Parse.Query(Habit);
+    var currentUser = Parse.User.current();
+    query.equalTo("username", currentUser.get("username"));
     query.find({
       success: function(results) {
         // Do something with the returned Parse.Object values

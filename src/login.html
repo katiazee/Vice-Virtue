@@ -6,6 +6,7 @@
 		<title>Welcome to Virtue/Vice!</title>
 		<link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../css/animate.min.css">
+    <script type="text/javascript" src="https://www.parsecdn.com/js/parse-latest.js"></script>
 	</head>
 	<body>
 	  <div class="login">
@@ -30,22 +31,27 @@
           	</td>
           	<td><input id="password" class="textInput" type="password" name="password" placeholder="Password" required></td>
           </tr>
+          <!-- <tr>
+            <td></td>
+            <td>
+              Please work this is invalid input.
+            </td>
+          </tr> -->
        	</table>
-       	<p id="signInMessage">Sign in successful! <span style="color: #4caf50">&#10004;</span></p>
        	<div class="buttons">
-       		<input class="loginButton" type="button" value="Login" onclick="location.href='welcome.html'">
-          <input class="signUpButton" type="button" value="Signup" onclick="onClickSignUp()">
+       		<input class="loginButton" type="button" value="Login" onclick="signIn()">
+          <input class="signUpButton" type="button" value="Sign up" onclick="location='signup.html'">
         </div>
       </form>
     </div>
 
     <script src="../js/login.js"></script>
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
       window.onbeforeunload = function(){
         document.getElementById("virtue").className = document.getElementById("virtue").className + " bounceOutDown";
-        document.getElementById("slogan").className = document.getElementById("slogan").className + " bounceOutLeft";
+        document.getElementById("vice").className = document.getElementById("vice").className + " bounceOutLeft";
       };
-    </script>
+    </script> -->
 	</body>
 </html>

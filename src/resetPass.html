@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Let's Reset Your Password</title>
+        <link rel="stylesheet" href="../css/resetPass.css">
+    <link rel="stylesheet" href="../css/animate.min.css">
+</head>
+<body>
+    <div class="appTitle">
+        <h1 id="virtue">Virtue/<i id ="vice">vice</i></h1>
+
+    </div>
+
+    <div class="resetPassContainer">
+        <form id="resetPassForm">
+            <div class="header">
+            <h3>Let's Get Into Your Account</h3>
+            </div>
+   
+            <div class="sep"></div>
+
+            <div class="inputs">
+                <p><label class="error_message" id="noEmail" style="display:none">Please input an email address.</label></p>
+                <input id="validEmail" type="email" placeholder="Email Address" autofocus />
+
+            </div>
+
+            <div class="button">
+                <input class="submitButton" type="button" value="Submit" onclick="validateForm();">
+            </div>
+
+        </form>
+    </div>  
+
+    <script src="../js/signUpPage.js"></script>
+​
+</body>
+</html>

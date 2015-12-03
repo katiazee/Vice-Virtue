@@ -82,10 +82,6 @@ body{
     border:2px solid rgb(160,12,12);
 }
 
-
-
-
-
 #progressBar {
     width: 200px;
     height: 20px;
@@ -104,9 +100,6 @@ body{
     background-color: #0099ff; 
   
 }
-
-
-
 
 /* add habit */
 #addHabit{position:fixed; bottom: 40px; right:20px;background:rgba(33, 72, 100, 1.0); width: 60px;height:60px; vertical-align: middle; font-size:36px; padding: 5px;line-height: 100%;color:white; border:2px solid rgba(85,85,85,0.7); -webkit-appereance: none; border-radius: 50%; box-shadow: 0 0 3px gray;}
