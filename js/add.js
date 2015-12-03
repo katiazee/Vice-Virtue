@@ -1,3 +1,10 @@
+
+  rg4js('apiKey', '5HU2mFdkS/e5Tur8l31gcA==');
+  rg4js('attach', true);
+  rg4js('enablePulse', true);
+
+
+
 Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
 
 var Habit = Parse.Object.extend("Habit");
@@ -457,3 +464,5 @@ $(window).resize(function() {
         }
     }
 })
+
+
