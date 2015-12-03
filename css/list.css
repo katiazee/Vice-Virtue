@@ -104,13 +104,11 @@ body{
 
 
 
-.logout-button{position:absolute; left:93%; top:4%; right:0px;}
-.logout-button img{height: 100%;}
-.logout{width:60px; height:60px;margin-right:5px;border-radius: 50%; box-shadow: 0 0 3px gray; padding: 5px; vertical-align: middle;}
-
-.op-logout{background:rgba(33, 72, 100, 1.0); border:1px solid rgba(85,85,85,0.7);}
-.op-logout:hover{background:rgba(33, 72, 100, 1.0); border:1px solid gray; box-shadow: 0 0 8px gray;}
-.op-logout:active{border: 2px solid gray; background: rgba(33, 72, 100, 1.0); box-shadow: 0 0 10px gray;}
+.logout-button{position:absolute; left:92%; top:2%; right:0px;}
+.logout{width:60px; height:60px;margin-right:5px;border: none; vertical-align: middle;}
+.op-logout{color:#888; font-size: medium; font-style: verdana; background: none}
+.op-logout:hover{text-decoration: underline;}
+.op-logout:active{background: none;}
 
 
 /* add habit */
