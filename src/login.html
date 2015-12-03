@@ -31,12 +31,13 @@
           	</td>
           	<td><input id="password" class="textInput" type="password" name="password" placeholder="Password" required></td>
           </tr>
-          <!-- <tr>
+          <tr>
             <td></td>
             <td>
-              Please work this is invalid input.
+              <!-- <label class="error_message" id="invalidLogin" style="display:block">Invalid email or password.  Please try again.</label> -->
+              <span id="invalidLoginError">Invalid email or password.  Please try again.</span>
             </td>
-          </tr> -->
+          </tr>
        	</table>
        	<div class="buttons">
        		<input class="loginButton" type="button" value="Login" onclick="signIn()">

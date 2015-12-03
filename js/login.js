@@ -10,6 +10,9 @@ function signIn() {
 	var password = document.getElementById('password').value;
 
 	// Parse.User.logOut();
+	document.getElementById('usermail').className = "textInput";
+	document.getElementById('password').className = "textInput";
+	document.getElementById('invalidLoginError').style.display = 'none';
 
 	Parse.User.logIn(userEmail, password, {
 		success: function(user) {
@@ -19,11 +22,10 @@ function signIn() {
 		},
 		error: function(user, error) {
 			// The login failed. Check error to see why.
-			alert("Error: " + error.code + " " + error.message);
-			document.getElementById('usermail').style.border = '1px solid';
-			document.getElementById('usermail').style.borderColor = '#b94a48';
-			document.getElementById('password').style.border = '1px solid';
-			document.getElementById('password').style.borderColor = '#b94a48';
+			// alert("Error: " + error.code + " " + error.message);
+			document.getElementById('usermail').className = document.getElementById('usermail').className + " inputError";
+			document.getElementById('password').className = document.getElementById('password').className + " inputError";
+			document.getElementById('invalidLoginError').style.display = 'block';
 		}
 	});
 }
