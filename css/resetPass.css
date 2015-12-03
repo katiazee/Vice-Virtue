@@ -146,3 +146,13 @@ label.error_message{
     margin-bottom: 20px;
     border-radius: 4px;
 }
+
+label.success_message{
+    color: #b94a48;
+    background-color: #90EE90;
+    border-color: #eed3d7;
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    opacity: 0.75;
+}

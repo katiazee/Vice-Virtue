@@ -29,6 +29,10 @@ function verifyPasswords() {
 
 function validateEmail() {
 	var emailAddress = document.getElementById("validEmail");
+
+	document.getElementById('emailTaken').style.display = 'none';
+	emailAddress.style.border = '2px inset';
+
 	// Validation for email addresss
 	if(emailAddress.value == ""){
 		emailAddress.style.border = '1px solid';
@@ -99,8 +103,16 @@ function registerAccount() {
 			location = "welcome.html";
 		},
 		error: function(user, error) {
-			// Show the error message somewhere and let the user try again.
-			alert("Error: " + error.code + " " + error.message);
+			// User already taken error
+			if (error.code == 202) {
+				document.getElementById("validEmail").style.border = '1px solid';
+				document.getElementById("validEmail").style.borderColor = '#b94a48';
+				document.getElementById('emailTaken').style.display = 'block';
+			}
+			else {
+				// Other error
+				alert("Error: " + error.code + " " + error.message);
+			}
 		}
 	});
 }

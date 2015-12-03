@@ -2,14 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Let's Reset Your Password</title>
-        <link rel="stylesheet" href="../css/resetPass.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reset Password - virtue/vice</title>
+    <link rel="stylesheet" href="../css/resetPass.css">
     <link rel="stylesheet" href="../css/animate.min.css">
+    <script type="text/javascript" src="https://www.parsecdn.com/js/parse-latest.js"></script>
 </head>
 <body>
     <div class="appTitle">
-        <h1 id="virtue">Virtue/<i id ="vice">vice</i></h1>
+        <h1 id="virtue">virtue/<i id ="vice">vice</i></h1>
 
     </div>
 
@@ -23,18 +24,20 @@
 
             <div class="inputs">
                 <p><label class="error_message" id="noEmail" style="display:none">Please input an email address.</label></p>
+                <p><label class="error_message" id="invalidEmail" style="display:none">Invalid email.</label></p>
+                <p><label class="success_message" id="yesEmail" style="display:none">Success! Please check your email.</label></p>
                 <input id="validEmail" type="email" placeholder="Email Address" autofocus />
 
             </div>
 
             <div class="button">
-                <input class="submitButton" type="button" value="Submit" onclick="validateForm();">
+                <input class="submitButton" type="button" value="Submit" onclick="onButtonClick();">
             </div>
 
         </form>
     </div>  
 
-    <script src="../js/signUpPage.js"></script>
+    <script src="../js/resetpass.js"></script>
 ​
 </body>
 </html>
