@@ -99,7 +99,6 @@ function registerAccount() {
 
 	user.signUp(null, {
 		success: function(user) {
-			alert('User successfully created!');
 			location = "welcome.html";
 		},
 		error: function(user, error) {

@@ -1,18 +1,20 @@
+Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
 
-  rg4js('apiKey', '5HU2mFdkS/e5Tur8l31gcA==');
-  rg4js('attach', true);
-  rg4js('enablePulse', true);
+if (Parse.User.current() == null) {
+    location = "login.html";
+}
 
+rg4js('apiKey', '5HU2mFdkS/e5Tur8l31gcA==');
+rg4js('attach', true);
+rg4js('enablePulse', true);
 
 rg4js('setUser', {
-  identifier: 'users_email_address_or_unique_id@domain.com',
+  identifier: Parse.User.current().get("email"),
   isAnonymous: false,
-  email: 'users_email_address@domain.com',
+  email: Parse.User.current().get("email"),
   firstName: 'Firstname',
   fullName: 'Firstname Lastname'
 });
-
-Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
 
 var Habit = Parse.Object.extend("Habit");
 var defaultImage = Parse.Object.extend("DefaultImages");
@@ -467,7 +469,6 @@ function updateHabit() {
 	query.get(getParameterByName("id"), {
 		success: function(habitToEdit) {
 			// The object was retrieved successfully.
-			habitToEdit.set("username", "smarties");
 			habitToEdit.set("name", document.getElementById("title").value);
 			habitToEdit.set("onSunday", document.getElementById('isSun').checked);
 			habitToEdit.set("onMonday", document.getElementById('isMon').checked);
