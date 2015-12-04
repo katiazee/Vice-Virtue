@@ -141,14 +141,20 @@ function subscribe() {
   });
 }
 
+function user() {
+    var currentUser = Parse.User.current();
+    var username = currentUser.get("username");
+    console.log("current user: " + username);
+}
+
 function sendSubscriptionToServer(subscription) {
     console.log(subscription)
     console.log('endpoint:', subscription.endpoint);
-    var user = user()
+    var curruser = user()
     $.ajax({
         url: "https://vice-virtue.herokuapp.com/subscribe",
         type: "POST",
-        data: { endpoint: subscription.endpoint, user:user },
+        data: { endpoint: subscription.endpoint, user:curruser },
         dataType: "json",
         success: function (result) {
             switch (result) {
@@ -162,10 +168,4 @@ function sendSubscriptionToServer(subscription) {
         error: function (xhr, ajaxOptions, thrownError) {
         }
     });
-}
-
-function user() {
-    var currentUser = Parse.User.current();
-    var username = currentUser.get("username");
-    console.log("current user: " + username);
 }
