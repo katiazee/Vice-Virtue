@@ -145,7 +145,7 @@ function subscribe() {
 function sendSubscriptionToServer(subscription) {
     console.log(subscription)
     console.log('endpoint:', subscription.endpoint);
-
+    user()
     $.ajax({
         url: "https://vice-virtue.herokuapp.com/subscribe",
         type: "POST",
@@ -163,4 +163,10 @@ function sendSubscriptionToServer(subscription) {
         error: function (xhr, ajaxOptions, thrownError) {
         }
     });
+}
+
+function user() {
+    var currentUser = Parse.User.current();
+    var username = currentUser.get("username");
+    console.log("current user: " + username);
 }
