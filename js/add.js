@@ -353,6 +353,10 @@ function addHabit() {
 		        habitToAdd.save(null, {
 					success: function(habitToAdd) {
 						// Execute any logic that should take place after the object is saved.
+						var dimensions = {
+						    frequency:frequency.toString()
+						};
+						Parse.Analytics.track('addhabit', dimensions);
 						location = "list.html"
 					},
 					error: function(habitToAdd, error) {
@@ -388,6 +392,10 @@ function addHabit() {
 		habitToAdd.save(null, {
 			success: function(habitToAdd) {
 				// Execute any logic that should take place after the object is saved.
+				var dimensions = {
+					frequency:frequency.toString()
+				};
+				Parse.Analytics.track('addhabit', dimensions);
 				location = "list.html"
 			},
 			error: function(habitToAdd, error) {
@@ -465,5 +473,3 @@ $(window).resize(function() {
         }
     }
 })
-
-

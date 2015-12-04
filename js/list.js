@@ -348,6 +348,13 @@ function completeHabit(element) {
 
                         // Update progress bar
                         updateStreakFromButton(updatedHabit, element.parentNode.parentNode);
+
+                        var dimensions = {
+                            count:thumbCtr.toString(),
+                            curr_streak:currStreak.toString(),
+                            best_streak:bestStreak.toString()
+                        };
+                        Parse.Analytics.track('completehabit', dimensions);
                     },
                     error: function(updatedHabit, error) {
                         // Execute any logic that should take place if the save fails.
@@ -398,6 +405,11 @@ function failHabit(element) {
 
                         // Update progress bar
                         updateStreakFromButton(updatedHabit, element.parentNode.parentNode);
+
+                        var dimensions = {
+                            count:thumbCtr.toString()
+                        };
+                        Parse.Analytics.track('failhabit', dimensions);
                     },
                     error: function(updatedHabit, error) {
                         // Execute any logic that should take place if the save fails.
@@ -466,8 +478,23 @@ function loadHabits() {
 function notSupported() {
     document.getElementById('notSupported').style.display = 'block';
     alert("This website doesn't support your browser. Only Chrome, Safari, and Firefox are supported.")
-    
+
 }
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var notif = getParameterByName('notif');
+var fromNotif = (notif == 'true')
+
+var dimensions = {
+    from_notif:fromNotif.toString()
+};
+Parse.Analytics.track('viewlist', dimensions);
 
 try {
     loadHabits()
