@@ -1,4 +1,12 @@
+rg4js('apiKey', '5HU2mFdkS/e5Tur8l31gcA==');
+rg4js('attach', true);
+rg4js('enablePulse', true);
+
 Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
+
+if (Parse.User.current() == null) {
+	location = "login.html";
+}
 
 var Habit = Parse.Object.extend("Habit");
 var defaultImage = Parse.Object.extend("DefaultImages");
@@ -12,7 +20,7 @@ function addAlarmToList(alarmNumber)
     clone.querySelector(".alarm-name").textContent = "Alarm " + alarmNumber;
 
     var res = list.appendChild(clone);
-	}
+}
 
 $("input[type='radio']").click(function()
 {
@@ -253,8 +261,9 @@ function hasClass(element, cls) {
 
 function addHabit() {
 	var habitToAdd = new Habit();
+	var currentUser = Parse.User.current();
 
-	habitToAdd.set("username", "smarties");
+	habitToAdd.set("username", currentUser.get("username"));
 	habitToAdd.set("name", document.getElementById("title").value);
 	habitToAdd.set("onSunday", document.getElementById('isSun').checked);
 	habitToAdd.set("onMonday", document.getElementById('isMon').checked);
@@ -344,6 +353,10 @@ function addHabit() {
 		        habitToAdd.save(null, {
 					success: function(habitToAdd) {
 						// Execute any logic that should take place after the object is saved.
+						var dimensions = {
+						    frequency:frequency.toString()
+						};
+						Parse.Analytics.track('addhabit', dimensions);
 						location = "list.html"
 					},
 					error: function(habitToAdd, error) {
@@ -379,6 +392,10 @@ function addHabit() {
 		habitToAdd.save(null, {
 			success: function(habitToAdd) {
 				// Execute any logic that should take place after the object is saved.
+				var dimensions = {
+					frequency:frequency.toString()
+				};
+				Parse.Analytics.track('addhabit', dimensions);
 				location = "list.html"
 			},
 			error: function(habitToAdd, error) {

@@ -1,4 +1,3 @@
-
 var isPushEnabled = false;
 
 window.addEventListener('load', function() {

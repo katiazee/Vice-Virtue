@@ -1,4 +1,21 @@
 Parse.initialize("Ih70t530LwJAnRJungwuPtE2nE3eakzmwVuZHb6O", "sE6Y6iMcoTTa9Z3pBCaAtwnD9F1L9SlWHBKlDQ7h");
+
+if (Parse.User.current() == null) {
+    location = "login.html";
+}
+
+rg4js('apiKey', '5HU2mFdkS/e5Tur8l31gcA==');
+rg4js('attach', true);
+rg4js('enablePulse', true);
+
+rg4js('setUser', {
+  identifier: Parse.User.current().get("email"),
+  isAnonymous: false,
+  email: Parse.User.current().get("email"),
+  firstName: 'Firstname',
+  fullName: 'Firstname Lastname'
+});
+
 var Habit = Parse.Object.extend("Habit");
 var daysArray = [0, 1, 2, 3, 4, 5, 6];
 var daysBoolArr = ['onSunday', 'onMonday', 'onTuesday', 'onWednesday', 'onThursday', 'onFriday', 'onSaturday'];
@@ -331,6 +348,13 @@ function completeHabit(element) {
 
                         // Update progress bar
                         updateStreakFromButton(updatedHabit, element.parentNode.parentNode);
+
+                        var dimensions = {
+                            count:thumbCtr.toString(),
+                            curr_streak:currStreak.toString(),
+                            best_streak:bestStreak.toString()
+                        };
+                        Parse.Analytics.track('completehabit', dimensions);
                     },
                     error: function(updatedHabit, error) {
                         // Execute any logic that should take place if the save fails.
@@ -381,6 +405,11 @@ function failHabit(element) {
 
                         // Update progress bar
                         updateStreakFromButton(updatedHabit, element.parentNode.parentNode);
+
+                        var dimensions = {
+                            count:thumbCtr.toString()
+                        };
+                        Parse.Analytics.track('failhabit', dimensions);
                     },
                     error: function(updatedHabit, error) {
                         // Execute any logic that should take place if the save fails.
@@ -415,9 +444,16 @@ $(window).resize(function() {
      });
 })
 
+function logOff() {
+    Parse.User.logOut();
+    location = "login.html";
+}
+
 function loadHabits() {
     // Script to run when page loads
     var query = new Parse.Query(Habit);
+    var currentUser = Parse.User.current();
+    query.equalTo("username", currentUser.get("username"));
     query.find({
       success: function(results) {
         // Do something with the returned Parse.Object values
@@ -442,8 +478,23 @@ function loadHabits() {
 function notSupported() {
     document.getElementById('notSupported').style.display = 'block';
     alert("This website doesn't support your browser. Only Chrome, Safari, and Firefox are supported.")
-    
+
 }
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var notif = getParameterByName('notif');
+var fromNotif = (notif == 'true')
+
+var dimensions = {
+    from_notif:fromNotif.toString()
+};
+Parse.Analytics.track('viewlist', dimensions);
 
 try {
     loadHabits()
