@@ -1,86 +1,116 @@
 Team: Smarties
 Members: Aaron Chuang, Amy Lin, Daniel Brim, Katerina Zorko, Seung (Brian) Kim
-Assignment: Homework #4
+Assignment: Homework #5
 
 Link to Github repo:  https://github.com/katiazee/Vice-Virtue
 
 How to access our web application
 
-Please use the following url to access our website: https://katiazee.github.io/Vice-Virtue/
-Notifications only work in Google Chrome, so please visit our website using the link above.  However, our site works in Safari and Firefox as well if you visit our site locally (i.e. through the files in our zip file); it’s just that notifications will not work in those browsers (This is due to restrictions discussed further in this writeup).
+Like HW4, please use the following url to access our website: https://katiazee.github.io/Vice-Virtue/
 
-Browser conformance
+A sample account you may use to login:
+Email: achuang94@yahoo.com
+PW: sameasyours
 
-Unfortunately, due to the lack of support for templates and progress bars, our application does not display correctly in any version of IE.  This is the only issue with browser conformance we have (our website displays fine on the latest versions of Google Chrome, Firefox, and Safari).
+The sign up/register an account, logging in, and resetting your password features are all functional in our web application, so please feel free to register your own account when testing our final web application, but we have provided a test account for you to use if you so wish.
 
-Design and Changes from Original Markup
+Similar to HW4, notifications still only work in Google Chrome and only through HTTPS (i.e. only on a live web URL) due to restrictions and security requirements of Chrome’s Push Notification API, so please visit our website using the link above.  However, our site works in Safari and Firefox as well if you visit our site locally (i.e. through the files in our zip file); it’s just that notifications will not work in those browsers (for the same restrictions discussed in the HW4 README).
 
-In developing and implementing the JavaScript for our application, we first decided we wanted to implement the use of a third party service to store our data, so we implemented the use of Parse to do this.  
+From HW4, we made a few modifications to our web application to make the entire application more complete.  Firstly, we added user authentication through Parse’s interface.  We created new markup pages for signing up and for resetting your password.  Also, we added form validation to the login.html page.  Now any end user using our website can easily register an account for our application and login to save and view their habits anytime.  We also modified the logic in the habit list page and the “add a habit” page, so that each habit is saved to a specific user.  This way, only each user will see their own habits (and none that are not their own) when they are logged into their account.  We have also added a “logout” button on the habit list page.
 
-As for the original markup for which this application is based on, we made a few design changes.  Firstly, we moved the delete button away from the main button group to the top right corner of the habit box for each habit on list.html, as we felt that the delete button is something that will not be used nearly as often as the other buttons.  We also added back the “thumbs down” button, to allow the user to indicate if they did not complete the habit for an instance on a given day.  We figured it’d be best to give users the option to tell the website that they forgot to complete a habit.  We also implemented the logic for if they forgot to record if they completed a habit or not; so no matter if the users decide to record their habits or if they forget, the logic for tracking streaks will still be functional.
+One note about the logic of our application: we now have the welcome.html, list.html, add.html, and edit.html all redirect the user to the login page if the end user tries to access those pages without logging into an account first, since now you should not be able to view habits, add habits, or edit habits if you are not logged into an account.
 
-A few notes on the logic flow of our application: on the habit listings page, we have grayed out the use of the “thumbs up” and “thumbs down” buttons if current day does not match the day for each habit.  For example, if you have a habit “Exercise 1 hour” set for Thursdays and Fridays, but the current day is Tuesday, you will not be able to “complete” or “fail” that habit for the day (the thumbs up and thumbs down buttons will both be grayed out/disabled).  In order to help make this clear, we added a small calendar on the bottom left of each habit box with the selected days for that habit bolded to make it clear to the user what days the habit is to be performed on.  Another thing is that users will have to set a frequency (or number of times per day) for each habit.  Users are only allowed to “complete” or “fail” a habit that number of times on a given day.  For example, if the user has a habit to “walk the dog” 3 times in a day, then the user will only be able to press the “thumbs up” and “thumbs down” button 3 times in total before those buttons will be grayed out.  So the user can press the “thumbs up” twice and the “thumbs down” button once, and the buttons will then be disabled.  Or the user can simply press the “thumbs up” button 3 times to indicate he completed the habit all 3 times that day, and the buttons then be disabled, and so on.  We have also tried to make this as clear as possible to user by including messages that display how many times the user has completed a given habit for a day, and another message display how many times the user did not complete a habit (pressed the “thumbs down” button).  Also, the progress bar has been implemented to be a percentage of how close you are to achieving your best streak for a habit (so if your current streak is 5 and your best streak is 10, the progress bar will be 50% full).
 
-Also, on the add a habit and edit a habit page, for setting frequency of the habit (specifically number of times per day), we allow the user to select 1, 2, 3, or enter a value higher than 3.  We restrict the uses to selecting/entering a number less than 10, as we felt that users will generally not have habits that they would perform more than 10 times a day.  Or even if they did, it would be very unlikely that the user would be willing to track it using an application like ours, so we felt that it was an unnecessary use case.
 
-Notifications
+Error Monitoring
 
-Ah, notifications. The bane of this homework’s existence. After much extensive research and exploring a number of notification options, we decided to settle on a single solution that works well for one platform. First, notifications are a widely unsupported feature and each browser on each platform implements them differently and may not even implement them at all. Instead of spreading resources thin and trying to create a solution that works everywhere but excels nowhere, we decided to focus on one specific platform in order to create a solution that we feel accomplishes the goal of the assignment. (We explored Goroost, Pushover, and Parse, but found them all unsuitable. Our thoughts on these sites are included later in this document.)
+https://app.raygun.io/dashboard/g0g957 (may be unable to view these due to lack of permissions)
 
-We decided to use Chrome’s Push Notification API to create our alarm notification solution. These push notifications work even when the website itself is closed. However, due to Chrome’s requirements, notifications only work in a very specific environment. 
-Namely as follows...
+We used Raygun’s crash reporting tool (https://raygun.io/) for our error monitoring. We were able to see when and where an error occurred, and also the time that it occurred.  After adding code to our application to track these errors, we were able to track any errors that occurred when users were using our site.  We have attached some screenshots of the data we were able to collect in the raygun_screenshots folder in our zip archive.
 
-Notifications work:
-Only in Chrome
-Only on Desktop (Might actually work in some Android Chrome browsers, but we were unable to test this without access to one.)
-Only over HTTPS. 
-And therefore, only when hosted over a live web URL. (https://katiazee.github.io/Vice-Virtue/ is a live url that is the only place push notifications will successfuly work. We kindly ask that when you test notifications, you use this link.)
 
-Why these limitations? Google’s Chrome emphasizes security and allows only secure websites to register Push Notification web workers (a pivotal piece of JavaScript that runs in the background of Chrome). TLS/SSL is difficult to set up locally, but Github provides it for us very easily.
+Data Analytics
 
-Caveats:
-Notifications won’t be sent at second 0 for a given time. If an alarm is specified at 10:40, it’ll be sent sometime between 10:40:00 and 10:40:59. (The reason for this is because it’s cheaper to run server code every minute instead of every second, and use less CPU usage.)
-Notifications won’t always arrive at the specified time. If our server sends a push notification at 10:40am, there may be an unspecified delay before it pops up in your browser. The reason is unclear, but probably because of network delays or maybe Chrome simply doesn’t guarantee that it will run the web worker the instant a push notification comes in. (Not a big deal though. Notifications usually arrive within a few minutes of the specified time, if they are late.)
+For User Analytics, we compared a few different 3rd party analytic providers and settles on using Parse’s analytic library. The next best analytic library we looked into was Mixpanel. 
 
-Why not Goroost, Parse, or Pushover?
-Goroost
-Does not support individual push notifications. All push notifications were sent to all users. We wanted a solution that was customizable for each user.
-Cost a lot. They required a credit card up front and for us, $30 is unacceptable for a solution we could create ourselves. 
-Pushover
-Only free for 7 days. 
-“Our browser client enables desktop notifications in newer versions of Chrome (including Chrome OS), Firefox, and Safari when you have a tab open to our desktop app website.” We wanted a solution that worked even when the tab wasn’t open. If the tab is open, what’s the point of notifications?
-Parse
-Only had a Push Notification API for native apps, not JavaScript in a web browser. The API simply didn’t exist. 
+Pros
+Easy to integrate. We decided to go with Parse because it was already integrated into our site in order to run our backend. It already kept track of a number of valuable metrics such as number of users, number of Habits created, number and type of API requests being made, among others. Adding custom metric points into Parse was quick and easy. 
+No extra JS needed. One advantage of using Parse over Mixpanel was that Mixpanel required its own JavaScript library to be linked to. This would have slowed down performance times on every page we wanted to track. 
 
-(Note, no web solution works for iOS due to physical restrictions imposed by Apple.)
+Cons
+Limited analytic functionality. One downside (and probably the biggest), was that we felt the functionality of Parse’s analytics was lacking in comparison to Mixpanel in terms of what you could actually do with the data. Parse shows you counts of events, and not much else. On the other hand, Mixpanel lets you manipulate the data in various ways in order to better understand it. For example, you can filter on events and values, graph correlations between metrics, and overall have finer control of the data. 
 
-Validation issues
+Metrics
 
-The only issues we had with validation were with our CSS.  Only list.css does not quite validate due to the use of “pointer-events.”  We used this attribute to disable mouse events (i.e. hover effects, as well as onclick functions) for the thumbs up and thumbs down buttons on habits where it was on the incorrect day or if you already completed that habit enough times on that day.  Researching pointer-events online, it seems like valid CSS to use, as this attribute is listed on Mozilla’s Developer Network, but perhaps it does not validate due to its lack of support on older versions of IE.  This is the only issue with validation we have.  All of our HTML files validate, and all CSS files (except for list.css due to use of pointer-events) validate as well.
+On top of what Parse tracks automatically, we decided to track the most meaningful metrics we could think of:
+user logging in, logging out
+user signing up
+creation of habit
+deletion of habit
+successfully completing habit
+unsuccessfully marking a habit 
+viewing your habit list
+clicking on a push notification
 
-Individual Team Member Contributions
+We included some screenshots (in analytics_screenshots) of the more meaningful metrics: clicking on a push notification, and successfully and unsuccessfully marking a habit. (Obviously, without real users the data looks terribly small and meaningless. But you get the idea.)
 
-Katerina
+The first graph (analytic1.png) shows the menu for viewing which metrics we want to graph as well as the number of times users completed habits over a week period. 
 
-I handled all of the form validation in the add habit and edit habit page, which makes sure that if the user leaves one of the fields empty or enters an improper value (such as characters instead of numbers in the others field for the daily frequency or a value that is 10 or greater for the daily frequency) then the form will not be submitted and a habit will not be created (or edited). The errors are listed so that the user knows what they need to fix.
-I also created an alarm template in the html for the add and edit pages so that based on the daily frequency that the user selects and whether they turn notifications on or off, the correct numbers of alarms can be created on the page. There are several methods for the creation of the alarms so that if the user selects a radio button for the daily frequency either 1, 2, or 3 alarms will be created. If they enter their own number that is more than 0 and less than 10, then that corresponding number of alarms will be created. If the user turns notifications off, the alarms disappear and if the user turns on notifications, a corresponding number of alarms will be created based on if a radio button is selected or a value is entered in the others textbox. If the user selects a radiobutton, then any value in the others textbox will be deleted whereas if the user enters a value in the textbox, any selected radiobutton will be deselected. 
-In the edit page I added some code to the function that loads all of the habits from Parse, so that the users’ saved alarms are loaded (the times that they specified when they added the habit). 
-Finally, I fixed some of the UI on the edit and add page by fixing spacing and adding style to the CSS. I moved all of the javascript functions in our html files into separate javascript files in a javascript folder.  
+The second graph (analytic2.png) shows the number of times users viewed their habits, after clicking on a push notification! This is important to note because notifications are an important trigger to get users into our app and maintain usages rates. 
 
-Amy 
 
-On the add a habit/ edit a habit page, I handled the new icon upload so when you click the new icon, it acts as a button and allows you to select an image from your folders. The image is hidden in the beginning, then after it’s selected and loaded, it image then appears to the right of the icon button. I also started working on the notifications by adding the buttons and the first three alarms. On list.html, I made it so if the current day isn’t a day that you originally selected for that habit, the check and thumbs down button are disabled because you should not be able to do those habits that day. To remind the user why they are disabled,  I displayed the days for which the habit was selected for. It bolds the days that were selected, and the ones that were not selected are just gray and not in bold. I also made the progress bar for each habit reflective of how many times in a row you’ve done that habit / your best streak. When you have reached your highest streak, the progress bar turns green to acknowledge that you’re doing a good job. If the thumbs down button is pressed, your streak for that habit is broken and it is reset to 0 and turns back to blue. The progress bar is also animated so the thumbs up and thumbs down transitions are smooth. Lastly, I moved the delete button to the top right hand corner for practical purposes. 
+HTML, CSS, JS Minification and Bundling
 
-Aaron
+We explored the use of several tools to minimize our HTML, CSS, and JS files.  Firstly, we tried using Grunt to automate the concatenation and minification of our CSS and JS files.  We were able to set up NPM and use grunt to create a task that would bundle and minify our files for us automatically; however, we ran into an issue after concatenating our files.  Our CSS files seemed to have conflicting rules that overlapped with various HTML elements on several pages, messing up the markup and styling of our application.  Likewise, for our JS files, bundling/concatenating each script file together lead to some issues as well, as we had a few functions in our JavaScript that were modifying specific element ID’s that appeared in multiple HTML pages.  Also, originally, we had a JS file for each page, and several of those pages have scripts that run when the page loads.  As a result, we experienced issues on a few pages of our application after bundling the JS together, as each page was running a script for window.onload for a different page.
 
-I created the Parse database for our application and implemented most of the CRUD functionality for the habit application.  I designed the schema for our Habit objects/table and how data for each habit should be stored.  I implemented adding a habit (creating objects and uploading them to Parse), editing a habit (which included querying for a habit, pre-filling in input boxes with old data, and updating a habit object on Parse), and several pieces of logic for listing habits as well.  I also implemented the functionality in the thumbs up and thumbs down buttons, as well as the logic for streaks by, taking into account number of times the user completed the habit on a given day and the current date itself (i.e. determining if the user completed a habit enough times for a given day, it they missed any days for habits, etc.).  While Amy handled getting the browser to allow the user to choose a file to upload (for icon uploads), I had to write the logic for uploading images into Parse, which was challenging as well.  I also contributed to UI javascript for our application as well.  After implementing most of the basic functionality for the habit application, we found that some elements we added didn’t scale well on browsers of smaller width or on phones; so I helped in resizing certain elements (for example, the resizing of the habit title based on the browser width), as well as the spacing of the icon images to get everything to fit on the screen.  I also added the extra message on the list.html page to indicate how many times a person “failed” a habit on a given day.  I also implemented a few animations, such as the fading of the HTML element on the delete of a habit, as well as some basic animations on the welcome page.
+Consequently, we decided to look into the use of another tool for minifying our files.  We ended up using YUI compressor (found here: http://yui.github.io/yuicompressor/) to minify our CSS and JS files individually.  We also found another resource online that helped us minify our HTML files as well (found here: http://www.willpeavy.com/minifier/).  The only issues we ran into with the minimization using these tools was the elimination of some whitespaces in our application in some places.  After careful inspection, we were able to add it back by adding a few extra spaces in a few spots to maintain the spacing and styling of our application.  But this way, we were able to maintain functionality of our application while still minimizing our files substantially.  
 
-Daniel
 
-I did notifications. (See above.) This involved writing the client-side JavaScript code to communicate with Chrome’s Push Notification API, register a web worker to handle incoming push notifications, a separate web server to receive Chrome IDs and store them for later use, and server-side python to continuously check the time and send out the actual push notification when appropriate. This also involved writing the appropriate JavaScript to handle any errors when communicating with the Push API and handle compatibility with other browsers.
+Proof of Concept for iOS and Android
 
-I also worked with Aaron to incorporate Parse into our app and created list.html which is the default place to view all of your habits. I used HTML templates to dynamically list all of the habits that exist in the database and helped write the JavaScript to populate each habit with its appropriate fields (name, image, habit streak, etc.)
+iOS 
 
-Brian
+There are a number of solutions for creating iOS app versions of projects that we looked at, including PhoneGap (https://build.phonegap.com/apps) and actually creating an Xcode project. We decided to use PhoneGap (Cordova) to create a simple PoC to prove the app scales and works. 
+PhoneGap Pros
+Quick & easy. For a proof-of-concept, PhoneGap made it easy to take our web code and get it on a phone. 
+PhoneGap Cons
+No notifications. iOS has a great notification system, but unless you create a truly native app, it’s next to impossible to take advantage of them. We created a wonderful push notification system for Chrome, but that doesn’t translate well to a mobile app. Given a lot more time, it would be cool to create a real mobile app that could have notifications as well as take advantage of other iOS specific features, but that is not possible in a web client class.
 
-My focus was on the user interface and animation functionality of the project. I started with color scheme changes on buttons and options. The buttons were similarly matched to a blue/gray/white/tan-green color scheme. Certain buttons also change color,opacity, and size based on whether the pointer is hovered over the button. The Login Page contains the animation of fading as well as resizing of the sign-up and login buttons. The Welcome Page has hover buttons as well as color changes to the buttons when the cursor is hovered over them. On the Add Habit/Edit Page the weekly/daily frequency button colors change when they are clicked on; additionally, the alarm options have been resized and recolored to better match the layout. Animation changes to the add/edit habit page include “pulse”. Lastly on the habit list page, the habits zoom in and the add button slides in. 
+Because iOS is heavily locked down by Apple, the included .ipa won’t be able to be run in the simulator or on a real device to be tested. (It can be run on a real iOS device and we verified that it works the same way the Android .apk works (see below), but we’d need your Apple iPhone unique id to validate and yada-yada… proprietary software sucks.) We included it to prove that it works – just trust us :P, but the Android .apk file works the exact same way and can be run on the simulator.  
+
+Android 
+
+When we used PhoneGap to build an apk file for Android development, the PhoneGap build did not include internet access and since the apk file is already packaged, there is no way to open the config files inside and enter the necessary code to establish an internet connection. So although the iOS PhoneGap build worked more or less seamlessly, PhoneGap couldn’t be used for an Android app. Therefore, we decided to take a look at Apache Cordova:
+ https://cordova.apache.org/#getstarted
+We installed Cordova (which is basically the most recent version of PhoneGap) and then created a new project, added the android platform to the project. We installed Android Studio:
+http://developer.android.com/sdk/index.html
+We created a new AVD (Android Virtual Device) and installed the necessary packages for the virtual device. We copied and pasted our github files into the new cordova app, such as all of the html, javascript, css, and image files. Since upon creation of the Cordova app, an index.html file is already created, we copied some of the material from our index.html into their index.html. Their index.html file calls index.js, which handles the initialization of the device, such as setting up the listeners, and index.html also calls cordova.js, which handles the whole creation of the app. At the end of index.js, we set the location to login.html which is the first html page that the user should see after the app loads. 
+We had to change some of the html and javascript files so that they point to the correct paths, such as going up a directory, going into another directory, etc, since now all of these files from our github were organized and being run in a different way in the cordova app. 
+The startup “logo.png”  image also had to be resized so that it would show up with correct dimensions when the app was running. 
+Finally, we could launch the Android emulator by running our cordova app on the Android platform. After all of the above changes, the app worked in the Android emulator. We can create a user, add and edit habits, logout, change our password, etc. Unfortunately, we cannot run notifications, because the app has to be hosted on a secure server that we have set up for Google Chrome only. For setting up notifications on Android, we would need to use Android-specific tools. 
+After running the Apache Cordova app on the Android platform, it builds an apk file, which we have submitted.   
+To run the apk file, you must have Android Studio installed with all necessary updates. You must also set up an AVD. After this, navigate into the Android/sdk/platform-tools directory. If you use a Mac, then you can run:
+./adb install -r path/to/ViceVirtueAndroid-debug.apk
+If you use Windows run:
+adb install -r path/to/ViceVirtueAndroid-debug.apk
+
+This will install the app on the emulator. You can then open the app to launch it in the emulator. 
+Overall, we think that PhoneGap can be used for iOS, but not for Android since PhoneGap had a problem with setting up an Internet connection. The apk file it builds is packaged and the config files inside cannot be altered to include the code needed for setting up an Internet connection. Apache Cordova, however can more easily create an Android app because you can directly edit the config files and after a few minor edits, you can have your app running on an Android device. Overall, the Apache Cordova apk build was more or less streamlined, but it still took quite a bit of tinkering with to get our app to run seamlessly. 
+
+
+Contributions
+
+Daniel:
+I implemented user analytics in Parse as well as worked to create and verify the iOS version with PhoneGap. I also update our notification system to take be user specific on both the client side and the server side. I also helped Katerina with the Android version with PhoneGap.
+
+Aaron:
+I worked on implementing user authentication for our application through Parse.  I added the functionality for user login, registering an account, resetting your password, as well as adding and viewing habits for each specific user.  I added some form validation for the login page as well.  Also, I minified all of our HTML, CSS, and JS files.
+
+Brian:
+I worked on creating the login and reset password pages. Created the html, css, and JavaScript for each respective page. I also worked on form validation for each respective page and linking of the pages to Parse. The form validation included blank input checks as well as sending out a success message for resetting your password. 
+
+Amy: 
+I set up Raygun for the error reporting, and added the HTML and CSS for the logout button.
+
+Katerina: 
+I got our app running on an Android virtual device in Android Studio through creating an Apache Cordova project. (Refer to Android section of POC). Additionally, I created a PhoneGap account to build an ipa and apk file from our github link. I helped a bit with getting a certificate and key to build the ipa file and I tried to get the PhoneGap apk file to work, before switching to Apache Cordova.
